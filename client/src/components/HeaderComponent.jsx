@@ -1,14 +1,20 @@
 import React from 'react';
 import './HeaderComponent.css';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const HeaderComponent = () => {
+
+    const navigate = useNavigate();
+
+    const handleSignup = () => { navigate('/signup'); };
+
     return (
         <div className="header-container">
             <div className="header-overlay">
                 <header className="header">
-                    <div className="header-logo">EstateHub</div>
+                    <div className="header-logo">Bunyaad</div>
                     <div className="header-buttons">
-                        <button className="login-btn">Login</button>
+                        <button onClick={handleSignup} className="login-btn">Login</button>
                         <button className="new-listing-btn">New Listing</button>
                     </div>
                 </header>

@@ -4,6 +4,9 @@ import Footer from './components/Footer';
 import Signup from './components/Signup';
 import HeaderComponent from './components/HeaderComponent';
 import RealEstateCard from './components/RealEstateCard';
+import About from './components/About';
+import Contact from './components/Contact';
+import Services from './components/Services';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -83,6 +86,28 @@ function App() {
         <Route path='/property:id' element={
           <>
             {/* ` */}
+          </>
+        } />
+
+        <Route path='/about' element={
+          <>
+            <Navbar/>
+            <About/>
+            <Footer/>
+          </>
+        } />
+        <Route path='/services' element={
+          <>
+            <Navbar/>
+            <Services/>
+            <Footer/>
+          </>
+        } />
+        <Route path='/contact' element={
+          <>
+            <Navbar/>
+            <Contact/>
+            <Footer/>
           </>
         } />
       </Routes>
