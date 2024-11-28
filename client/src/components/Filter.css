@@ -1,0 +1,101 @@
+.filter-container {
+    width: 300px;
+    background: #111;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .filter-header {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .filter-tab {
+    flex: 1;
+    text-align: center;
+    background: transparent;
+    border: 1px solid #fff;
+    padding: 10px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .filter-tab.active {
+    background: red;
+    border-color: red;
+  }
+  
+  .filter-body .filter-group {
+    margin-bottom: 20px;
+  }
+  
+  .filter-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .filter-options label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  
+  .filter-options input {
+    margin-right: 5px;
+  }
+  
+  .filter-range {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .filter-range input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #222;
+    color: #fff;
+  }
+  
+  .filter-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  .btn-search {
+    flex: 1;
+    background: red;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .btn-reset {
+    flex: 1;
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
