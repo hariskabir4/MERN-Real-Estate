@@ -6,7 +6,7 @@
   background-color: #1a1a1a;
   color: white;
   font-family: Arial, sans-serif;
-  margin: 20px;
+  margin: 10px 15px; /* Reduced margin spacing */
 }
 
 .card-image {
@@ -56,4 +56,14 @@
 .date {
   font-size: 12px;
   color: #999;
+}
+
+/* Flexbox container for cards to align them properly */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Ensures equal spacing between cards */
+  margin: 0 auto; /* Centers the cards on the page */
+  max-width: 1200px; /* Ensures proper alignment on larger screens */
+  padding: 20px 0; /* Adds top and bottom spacing for the cards section */
 }

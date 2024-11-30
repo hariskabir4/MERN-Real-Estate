@@ -54,14 +54,26 @@ footer {
     transform: rotate(360deg);
   }
 }
-
+/*
 .property-container {
   display: flex;
-  flex-wrap: wrap; /* Allows wrapping to the next line if needed */
-  justify-content: space-between; /* Ensures even spacing between boxes */
-  margin: 0 auto; /* Centers the container */
-  padding: 20px; /* Optional padding for better overall spacing */
-}     
+  flex-wrap: wrap;  Allows wrapping to the next line if needed *
+  justify-content: space-between; /* Ensures even spacing between boxes 
+  margin: 0 auto;
+  padding :20px} /* Centers the container */
+
  
+  .property-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to the next line if needed */
+    justify-content: space-evenly; /* Adds even spacing between the divs */
+    margin: 0 70px; /* Increases left and right margins */
+    padding: 5px 0; /* Adds vertical padding */
+    gap: 0.2px; /* Minimizes the gap between individual divs */
+  }
+  
+
+
+
 
 

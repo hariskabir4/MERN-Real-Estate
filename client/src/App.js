@@ -36,6 +36,14 @@ function App() {
                 location="DHA Phase VI, Karachi, Pakistan"
                 date="26.11.2024 - A DAY AGO"
               />
+                <RealEstateCard
+                imageSrc='./source1.jpg'
+                price="25256"
+                type="Office for Sale"
+                size="900"
+                location="DHA Phase VI, Karachi, Pakistan"
+                date="26.11.2024 - A DAY AGO"
+              />
               <RealEstateCard
                 imageSrc='./source1.jpg'
                 price="25256"
