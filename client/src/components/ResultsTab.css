@@ -1,0 +1,27 @@
+.results-tab {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #fff; /* White background */
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.search-input {
+  flex: 2;
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #333;
+}
+.sort-dropdown {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #333;
+}

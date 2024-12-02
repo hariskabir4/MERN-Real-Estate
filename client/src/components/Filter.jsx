@@ -1,4 +1,6 @@
 import React from "react";
+import "./Filter.css";
+
 const Filter = () => {
   return (
     <div className="filter-container">
@@ -11,13 +13,13 @@ const Filter = () => {
           <label>Type</label>
           <div className="filter-options">
             <label>
-              <input type="radio" name="type" value="workplace" /> Workplace
+              <input type="radio" name="type" /> Workplace
             </label>
             <label>
-              <input type="radio" name="type" value="housing" /> Housing
+              <input type="radio" name="type" /> Housing
             </label>
             <label>
-              <input type="radio" name="type" value="land" /> Land
+              <input type="radio" name="type" /> Land
             </label>
           </div>
         </div>
