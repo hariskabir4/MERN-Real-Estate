@@ -1,19 +1,18 @@
-import React from "react";
-import "./ResultsTab.css";
+import React from 'react';
+import './ResultsTab.css';
 
 const ResultsTab = () => {
   return (
-    <div className="results-tab">
-      <input
-        type="text"
-        placeholder="Search for a location or listing title..."
-        className="search-input"
-      />
-      <select className="sort-dropdown">
-        <option value="newest">Newest</option>
-        <option value="priceLowHigh">Price: Low to High</option>
-        <option value="priceHighLow">Price: High to Low</option>
-      </select>
+    <div className="results-container">
+      <span className="results-label">Results</span>
+      <div className="dropdown">
+        <button className="dropdown-button">Newest</button>
+        <div className="dropdown-content">
+          <div className="dropdown-item">Newest</div>
+          <div className="dropdown-item">Oldest</div>
+          <div className="dropdown-item">Most Relevant</div>
+        </div>
+      </div>
     </div>
   );
 };

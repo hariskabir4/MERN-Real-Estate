@@ -10,6 +10,7 @@ import Services from './components/Services';
 import Login from './components/Login';
 import Filter from './components/Filter';
 import ResultRow from './components/ResultRow';
+import ResultsTab from './components/ResultsTab';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -73,6 +74,7 @@ function App() {
             <Navbar />
             <Filter/>
             <ResultRow/>
+            <ResultsTab/>
             <Footer />
           </>
         } />
