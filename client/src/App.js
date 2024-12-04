@@ -73,9 +73,9 @@ function App() {
           <>
             <Navbar />
             <Filter/>
-            <ResultRow/>
-            <ResultsTab/>
-            <Footer />
+            {/* <ResultRow/>
+            <ResultsTab/> */}
+            {/* <Footer /> */}
           </>
         } />
 

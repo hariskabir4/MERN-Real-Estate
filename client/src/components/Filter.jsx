@@ -53,9 +53,9 @@ const Filter = () => {
           </div>
         </div>
       </div>
-      <div className="filter-footer">
-        <button className="btn-search">Search</button>
-        <button className="btn-reset">Reset</button>
+      <div className="filter-header">
+        <button className="filter-tab active">Search</button>
+        <button className="filter-tab">Reset</button>
       </div>
     </div>
   );

@@ -1,70 +1,114 @@
+/* Container for the filter component */
 .filter-container {
-  width: 300px;
-  background: #fff; /* White background */
-  color: #333; /* Dark text color for contrast */
+  width: 300px; /* Reduced width */
   padding: 20px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.filter-header {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
-}
-.filter-tab {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  color: #333;
-  background: #f5f5f5;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  font-weight: bold;
-  border-radius: 5px;
-}
-.filter-tab.active {
-  background: #e74c3c;
-  color: #fff;
-  border-color: #e74c3c;
-}
-.filter-group {
-  margin-bottom: 20px;
-}
-.filter-group label {
-  display: block;
+  flex-direction: column;
+  gap: 15px;
+  margin-left: 10px; /* Adds some left margin */
   margin-bottom: 5px;
-  font-weight: bold;
 }
-.filter-range input,
-select {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #fff;
-  color: #333;
-}
-.filter-footer {
+
+/* Tabs for Sale and Rent */
+.filter-header {
   display: flex;
   justify-content: space-between;
 }
+
+.filter-tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.filter-tab:last-child {
+  margin-right: 0;
+}
+
+.filter-tab.active {
+  background-color: #f44336;
+  color: white;
+  border-color: #f44336;
+}
+
+/* Group container for labels and inputs */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.filter-group label {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Inputs and Selects */
+.filter-group input[type="text"],
+.filter-group select {
+  width: 100%;
+  padding: 8px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Radio buttons */
+.filter-group input[type="radio"] {
+  margin-right: 5px;
+}
+
+.filter-group div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Buttons */
 .btn-search,
 .btn-reset {
-  flex: 1;
-  padding: 10px;
-  cursor: pointer;
+  padding: 10px 0;
+  font-size: 14px;
   font-weight: bold;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-.btn-search {
-  background: #e74c3c;
-  color: #fff;
+  text-align: center;
   border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
+
+.btn-search {
+  background-color: #f44336;
+  color: white;
+}
+
 .btn-reset {
-  background: #f5f5f5;
-  color: #e74c3c;
-  border: 1px solid #e74c3c;
+  background-color: #ddd;
+  color: #555;
 }
+
+/* Spacing for buttons */
+.btn-search {
+  margin-bottom: 5px;
+}
+
+/* Ensure responsive alignment */
+@media (max-width: 768px) {
+  .filter-container {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+
+
+
