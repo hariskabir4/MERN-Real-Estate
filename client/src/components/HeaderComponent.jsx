@@ -8,6 +8,8 @@ const HeaderComponent = () => {
 
     const handlelogin = () => { navigate('/login'); };
 
+    const handlePropertyListing = () => { navigate('/new-listing')};
+
     return (
         <div className="header-container">
             <div className="header-overlay">
@@ -15,7 +17,7 @@ const HeaderComponent = () => {
                     <div className="header-logo">Bunyaad</div>
                     <div className="header-buttons">
                         <button onClick={handlelogin} className="login-btn">Login</button>
-                        <button className="new-listing-btn">New Listing</button>
+                        <button onClick={handlePropertyListing} className="new-listing-btn">New Listing</button>
                     </div>
                 </header>
 

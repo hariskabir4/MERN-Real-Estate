@@ -12,6 +12,7 @@ import Filter from './components/Filter';
 import ResultCard from './components/ResultCard';
 import ResultsTab from './components/ResultsTab';
 import ParentLayout from './components/ParentLayout';
+import PropertyListingForm from './components/PropertyListingForm';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -119,6 +120,12 @@ function App() {
             <Navbar />
             <Contact />
             <Footer />
+          </>
+        } />
+
+        <Route path='/new-listing' element={
+          <>
+          <PropertyListingForm/>
           </>
         } />
       </Routes>
