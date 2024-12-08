@@ -13,6 +13,7 @@ import ResultCard from './components/ResultCard';
 import ResultsTab from './components/ResultsTab';
 import ParentLayout from './components/ParentLayout';
 import PropertyListingForm from './components/PropertyListingForm';
+import ChatPage_1 from './components/ChatPage_1';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -126,6 +127,14 @@ function App() {
         <Route path='/new-listing' element={
           <>
           <PropertyListingForm/>
+          </>
+        } />
+
+        <Route path='/chatpage' element={
+          <>
+          <Navbar/>
+          <ChatPage_1/>
+          <Footer/>
           </>
         } />
       </Routes>
