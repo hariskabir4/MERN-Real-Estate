@@ -1,0 +1,99 @@
+/* General Styles */
+.property-body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align at the top */
+  min-height: 100vh; /* Ensure the body takes up at least the full height of the viewport */
+  overflow-y: auto; /* Allow vertical scrolling for the body */
+  box-sizing: border-box;
+}
+
+/* Container */
+.property-form-div {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px; /* Space from the top */
+  margin-bottom: 20px; /* Space at the bottom */
+  overflow-y: auto; /* Enable scrolling for the form container */
+  height: 80vh; /* Allow the form container to take up 80% of the viewport height */
+  box-sizing: border-box; /* Ensures padding is part of the height calculation */
+}
+
+/* Heading */
+.property-form-h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px; /* Larger font for better visibility */
+}
+
+/* Form Styles */
+.property-form-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  padding-bottom: 20px; /* Ensure form is spaced out */
+  overflow-y: auto; /* Allow vertical scrolling within the form if needed */
+  max-height: 100%; /* Allow the form to scroll if it exceeds the form container height */
+  box-sizing: border-box; /* Ensures padding doesn't break layout */
+}
+
+/* Labels */
+.property-form-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Inputs, Selects, and Textarea */
+.property-form-input,
+.property-form-select,
+.property-form-textarea {
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+  outline: none;
+  width: 100%; /* Ensure form elements take up full width */
+}
+
+/* Focus State */
+.property-form-input:focus,
+.property-form-select:focus,
+.property-form-textarea:focus {
+  border-color: #007bff;
+}
+
+/* Textarea */
+.property-form-textarea {
+  resize: none;
+  height: 80px; /* Limit the height of the textarea */
+}
+
+/* Submit Button */
+.property-form-button {
+  background: #007bff;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.property-form-button:hover {
+  background: #0056b3;
+}

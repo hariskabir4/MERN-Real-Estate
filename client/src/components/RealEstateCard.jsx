@@ -3,18 +3,18 @@ import './RealEstateCard.css';
 
 const RealEstateCard = (props) => {
   return (
-    <div className="card">
-      <div className="card-image">
+    <div className="real-card">
+      <div className="real-card-image">
         <img src={props.imageSrc} alt="Real Estate" />
-        <button className="favorite-btn">&#x2661;</button>
+        <button className="real-favorite-btn">&#x2661;</button>
       </div>
-      <div className="card-content">
-        <h2 className="price">${props.price}</h2>
-        <p className="details">
+      <div className="real-card-content">
+        <h2 className="real-price">${props.price}</h2>
+        <p className="real-details">
           {props.type}, {props.size} Sqft
         </p>
-        <p className="location">{props.location}</p>
-        <p className="date">{props.date}</p>
+        <p className="real-location">{props.location}</p>
+        <p className="real-date">{props.date}</p>
       </div>
     </div>
   );

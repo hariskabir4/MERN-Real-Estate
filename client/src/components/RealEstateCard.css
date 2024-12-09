@@ -1,4 +1,4 @@
-.card {
+.real-card {
   width: 300px;
   border-radius: 8px;
   overflow: hidden;
@@ -6,20 +6,20 @@
   background-color: #1a1a1a;
   color: white;
   font-family: Arial, sans-serif;
-  margin: 10px 15px; /* Reduced margin spacing */
+  margin: 20px;
 }
 
-.card-image {
+.real-card-image {
   position: relative;
 }
 
-.card-image img {
+.real-card-image img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
-.favorite-btn {
+.real-favorite-btn {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -30,40 +30,31 @@
   cursor: pointer;
 }
 
-.favorite-btn:hover {
+.real-favorite-btn:hover {
   color: red;
 }
 
-.card-content {
+.real-card-content {
   padding: 15px;
+  display: block; 
 }
 
-.price {
+.real-price {
   font-size: 24px;
   font-weight: bold;
 }
 
-.details {
+.real-details {
   margin: 5px 0;
   font-size: 16px;
 }
 
-.location {
+.real-location {
   font-size: 14px;
   color: #ccc;
 }
 
-.date {
+.real-date {
   font-size: 12px;
   color: #999;
-}
-
-/* Flexbox container for cards to align them properly */
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* Ensures equal spacing between cards */
-  margin: 0 auto; /* Centers the cards on the page */
-  max-width: 1200px; /* Ensures proper alignment on larger screens */
-  padding: 20px 0; /* Adds top and bottom spacing for the cards section */
 }

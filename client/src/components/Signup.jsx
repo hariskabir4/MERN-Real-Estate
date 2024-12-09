@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "./Signup.css"; // Make sure the path to the CSS file is correct.
+import "./Signup.css"; // Ensure the CSS file is updated with the new class names.
 
 const Signup = () => {
     const [formData, setFormData] = useState({
@@ -29,10 +29,10 @@ const Signup = () => {
     };
 
     return (
-        <div className="signup-container">
-            <form className="signup-form" onSubmit={handleSubmit}>
+        <div className="sign-signup-container">
+            <form className="sign-signup-form" onSubmit={handleSubmit}>
                 <h2>Signup</h2>
-                <div className="form-group">
+                <div className="sign-form-group">
                     <label htmlFor="username">Username</label>
                     <input
                         type="text"
@@ -44,7 +44,7 @@ const Signup = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="sign-form-group">
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -56,7 +56,7 @@ const Signup = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="sign-form-group">
                     <label htmlFor="password">Password</label>
                     <input
                         type="password"
@@ -68,7 +68,7 @@ const Signup = () => {
                         required
                     />
                 </div>
-                <button className="btn" type="submit">Signup</button>
+                <button className="sign-btn" type="submit">Signup</button>
             </form>
         </div>
     );

@@ -1,74 +1,73 @@
 /* Full-page background styling */
-.signup-container {
-    height: 100vh;
-    background-image: url('../../public/signup.jpg');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* Centered form styling */
-  .signup-form {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
-  }
-  
-  /* Form heading */
-  .signup-form h2 {
-    margin-bottom: 20px;
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-  
-  /* Form field styling */
-  .form-group {
-    margin-bottom: 15px;
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    font-size: 14px;
-    color: #555;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s;
-  }
-  
-  .form-group input:focus {
-    outline: none;
-    border-color: #007bff; /* Blue border on focus */
-  }
-  
-  /* Button styling */
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 10px 0;
-    background: #007bff;
-    color: white;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .btn:hover {
-    background: #0056b3;
-  }
-  
+.sign-signup-container {
+  height: 100vh;
+  background-image: url('../../public/signup.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered form styling */
+.sign-signup-form {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Form heading */
+.sign-signup-form h2 {
+  margin-bottom: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Form field styling */
+.sign-form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.sign-form-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.sign-form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.sign-form-group input:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+}
+
+/* Button styling */
+.sign-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.sign-btn:hover {
+  background: #0056b3;
+}
