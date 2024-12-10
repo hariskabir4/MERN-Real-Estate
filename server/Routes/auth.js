@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 router.post("/signup", async (req, res) => {
     try {
         const { username, email, password } = req.body;
-
+        
         // Validation checks
         if (!username || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
