@@ -7,6 +7,7 @@ const HeaderComponent = () => {
     const navigate = useNavigate();
 
     const handlelogin = () => { navigate('/login'); };
+    const handleSale = () => { navigate('/properties'); };
 
     const handlePropertyListing = () => { navigate('/new-listing')};
 
@@ -35,11 +36,11 @@ const HeaderComponent = () => {
                     </div>
 
                     <div className="categories">
-                        <div className="category">Sale</div>
-                        <div className="category">Rent</div>
-                        <div className="category">House</div>
-                        <div className="category">Workplace</div>
-                        <div className="category">Land</div>
+                        <div onClick={handleSale} className="category">Sale</div>
+                        <div onClick={handleSale} className="category">Rent</div>
+                        <div onClick={handleSale} className="category">House</div>
+                        <div onClick={handleSale} className="category">Workplace</div>
+                        <div onClick={handleSale}className="category">Land</div>
                     </div>
                 </div>
             </div>
