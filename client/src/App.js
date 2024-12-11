@@ -15,6 +15,8 @@ import ParentLayout from './components/ParentLayout';
 import PropertyListingForm from './components/PropertyListingForm';
 import ChatPage_1 from './components/ChatPage_1';
 import MyListing from './components/MyListing';
+import OfferContainer from './components/OfferContainer';
+import MakeOffer from './components/MakeOffer';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -128,6 +130,22 @@ function App() {
         <Route path='/new-listing' element={
           <>
             <PropertyListingForm />
+          </>
+        } />
+        
+        <Route path='/veiw-offers' element={
+          <>
+            <Navbar/>
+            <OfferContainer/>
+            <Footer/>
+          </>
+        } />
+       
+        <Route path='/make-offer' element={
+          <>
+            <Navbar/>
+            <MakeOffer/>
+            <Footer/>
           </>
         } />
 
