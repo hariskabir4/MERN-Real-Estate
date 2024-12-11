@@ -7,6 +7,13 @@ import RealEstateCard from './components/RealEstateCard';
 import About from './components/About';
 import Contact from './components/Contact';
 import Services from './components/Services';
+import Login from './components/Login';
+import Filter from './components/Filter';
+import ResultCard from './components/ResultCard';
+import ResultsTab from './components/ResultsTab';
+import ParentLayout from './components/ParentLayout';
+import PropertyListingForm from './components/PropertyListingForm';
+import ChatPage_1 from './components/ChatPage_1';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -68,13 +75,19 @@ function App() {
         <Route path='/properties' element={
           <>
             <Navbar />
-            <Footer />
+            <ParentLayout/>   
           </>
         } />
 
         <Route path='/signup' element={
           <>
             <Signup />
+          </>
+        } />
+
+        <Route path='/login' element={
+          <>
+            <Login />
           </>
         } />
 
@@ -91,23 +104,37 @@ function App() {
 
         <Route path='/about' element={
           <>
-            <Navbar/>
-            <About/>
-            <Footer/>
+            <Navbar />
+            <About />
+            <Footer />
           </>
         } />
         <Route path='/services' element={
           <>
-            <Navbar/>
-            <Services/>
-            <Footer/>
+            <Navbar />
+            <Services />
+            <Footer />
           </>
         } />
         <Route path='/contact' element={
           <>
-            <Navbar/>
-            <Contact/>
-            <Footer/>
+            <Navbar />
+            <Contact />
+            <Footer />
+          </>
+        } />
+
+        <Route path='/new-listing' element={
+          <>
+          <PropertyListingForm/>
+          </>
+        } />
+
+        <Route path='/chatpage' element={
+          <>
+          <Navbar/>
+          <ChatPage_1/>
+          <Footer/>
           </>
         } />
       </Routes>
