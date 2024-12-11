@@ -10,6 +10,10 @@ const ResidentialSchema = new mongoose.Schema({
   bathrooms: { type: Number },
   purpose: { type: String, enum: ["Sell", "Rent"], required: true },
   features: { type: String },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  status: { type: String, enum: ["available", "sold", "rented"], required: true },
+  images: [{ type: String }], // Array of image filenames
   listedAt: { type: Date, default: Date.now },
 });
 
