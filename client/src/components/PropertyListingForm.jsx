@@ -113,15 +113,26 @@ const PropertyListingForm = () => {
             required
           />
 
-          <select
-            className="input-field-listing"
-            value={propertyType}
-            onChange={(e) => setPropertyType(e.target.value)}
-          >
-            <option value="Residential">Residential</option>
-            <option value="Commercial">Commercial</option>
-            <option value="rental">Rental</option>
-          </select>
+          <div className="input-row">
+            <select
+              className="input-field-listing small-input"
+              value={propertyType}
+              onChange={(e) => setPropertyType(e.target.value)}
+            >
+              <option value="Residential">Residential</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+
+            <select
+              className="input-field-listing small-input"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+            >
+              <option value="Sell">Sell</option>
+              <option value="Rent">Rent</option>
+            </select>
+          </div>
 
           <input
             type="text"

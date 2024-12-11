@@ -76,9 +76,6 @@ router.post("/new-listing", upload, async (req, res) => {
             });
         }
 
-        console.log("Prepared property data for saving:", property);
-        console.log("Prepared type:", propertyType);
-
         await property.save();
         res.status(201).json({ message: "Property listed successfully", property });
     } catch (error) {
