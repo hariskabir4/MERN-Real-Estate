@@ -14,6 +14,7 @@ import ResultsTab from './components/ResultsTab';
 import ParentLayout from './components/ParentLayout';
 import PropertyListingForm from './components/PropertyListingForm';
 import ChatPage_1 from './components/ChatPage_1';
+import MyListing from './components/MyListing';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -75,7 +76,7 @@ function App() {
         <Route path='/properties' element={
           <>
             <Navbar />
-            <ParentLayout/>   
+            <ParentLayout />
           </>
         } />
 
@@ -126,15 +127,46 @@ function App() {
 
         <Route path='/new-listing' element={
           <>
-          <PropertyListingForm/>
+            <PropertyListingForm />
+          </>
+        } />
+
+        <Route path='/my-listings' element={
+          <>
+            <Navbar />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <Footer />
           </>
         } />
 
         <Route path='/chatpage' element={
           <>
-          <Navbar/>
-          <ChatPage_1/>
-          <Footer/>
+            <Navbar />
+            <ChatPage_1 />
+            <Footer />
           </>
         } />
       </Routes>
