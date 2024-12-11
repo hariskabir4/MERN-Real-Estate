@@ -118,8 +118,8 @@ const PropertyListingForm = () => {
             value={propertyType}
             onChange={(e) => setPropertyType(e.target.value)}
           >
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial">Commercial</option>
             <option value="rental">Rental</option>
           </select>
 
