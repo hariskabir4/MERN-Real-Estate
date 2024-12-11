@@ -41,6 +41,7 @@
 .price {
   font-size: 24px;
   font-weight: bold;
+  color: white;
 }
 
 .details {
@@ -57,3 +58,4 @@
   font-size: 12px;
   color: #999;
 }
+
