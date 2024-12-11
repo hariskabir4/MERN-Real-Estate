@@ -74,12 +74,11 @@
   z-index: 1000;
   display: none; /* Initially hidden */
   flex-direction: column;
-  color: white
 }
 
 .dropdown-item {
-  color: #fff;
   padding: 10px 15px;
+  color: white !important; 
   text-align: left;
   text-decoration: none;
   cursor: pointer;
