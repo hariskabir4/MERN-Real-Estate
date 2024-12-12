@@ -15,6 +15,10 @@ const Navbar = ({ user }) => {
     navigate("/login");
   };
 
+  const handlehandleVeiwOffers = () => {
+    navigate("/veiw-offers");
+  }
+
   return (
     <div>
       <nav className="navbar">
@@ -49,6 +53,7 @@ const Navbar = ({ user }) => {
             {dropdownOpen && (
               <div className="dropdown-menu">
                 <Link to="/my-listings" className="dropdown-item">My Listings</Link>
+                <div className="dropdown-item" onClick={handlehandleVeiwOffers}>Veiw offers</div>
                 <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
               </div>
             )}
