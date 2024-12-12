@@ -17,7 +17,7 @@ import ChatPage_1 from './components/ChatPage_1';
 import MyListing from './components/MyListing';
 import OfferContainer from './components/OfferContainer';
 import MakeOffer from './components/MakeOffer';
-
+import PropertyDetail from './components/PropertyDetails';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -146,6 +146,14 @@ function App() {
           <>
             <Navbar/>
             <MakeOffer/>
+            <Footer/>
+          </>
+        } />
+        
+        <Route path='/PropertyDetails' element={
+          <>
+            <Navbar/>
+            <PropertyDetail/>
             <Footer/>
           </>
         } />

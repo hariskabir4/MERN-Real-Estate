@@ -1,12 +1,19 @@
 import React from 'react';
 import './ResultCard.css';
+import { Link, useNavigate } from "react-router-dom";
 
 const ResultCard = (props) => {
   // Fallback URL if imageUrl is empty
   const fallbackImage = 'https://via.placeholder.com/150';
 
+  const navigate = useNavigate();
+
+  const handlePropertyDetails = () => {
+    navigate("/PropertyDetails");
+  }
+
   return (
-    <div className="result-card-ResultCard">
+    <div onClick={handlePropertyDetails} className="result-card-ResultCard">
       <div className="image-container-ResultCard">
         <img
           src={props.imageUrl || fallbackImage} // Use fallback if imageUrl is empty
