@@ -1,0 +1,78 @@
+/* General container */
+.my-listing-horizontal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px; /* Slightly increased width */
+    height: 195px; /* Reduced height */
+    margin: 10px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+  
+  .my-listing-horizontal:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Image styling */
+  .listing-image-horizontal {
+    height: 100%; /* Match the height of the container */
+    max-width: 200px; /* Constrain width for a horizontal layout */
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  /* Details section */
+  .listing-details-horizontal {
+    flex: 1;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Title styling */
+  .listing-title-horizontal {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 5px;
+  }
+  
+  /* Description and other info */
+  .listing-description-horizontal,
+  .listing-size-horizontal,
+  .listing-price-horizontal,
+  .listing-date-horizontal {
+    font-size: 14px;
+    color: #555;
+    margin: 3px 0;
+  }
+  
+  .listing-price-horizontal{
+    color: #45a049 !important;
+  }
+  /* Update button styling */
+  .update-info-button-horizontal {
+    align-self: flex-start;
+    padding: 8px 15px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 36%;
+  }
+  
+  .update-info-button-horizontal:hover {
+    background-color: #45a049;
+  }
+  

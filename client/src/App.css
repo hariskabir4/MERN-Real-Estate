@@ -62,6 +62,44 @@ footer {
   margin: 0 auto; /* Centers the container */
   padding: 20px; /* Optional padding for better overall spacing */
 }     
- 
 
+/* Propery results page */
 
+/* Parent container for Filter and ResultCard components */
+/* Parent container for Filter and ResultCard components */
+.layout-container {
+  display: flex;
+  justify-content: space-between;  /* Aligns Filter and ResultCard components side by side */
+  align-items: flex-start;  /* Aligns the top of the components */
+  margin: 20px;  /* Adjust margin as needed */
+}
+
+/* Filter container styling */
+.filter-container {
+  width: 30%;  /* Adjust the width as per your design */
+  padding: 20px;
+  background-color: white;  /* Background color */
+  border-radius: 8px;  /* Optional: to add rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional: add shadow for a subtle 3D effect */
+}
+
+/* ResultCard container styling */
+.result-container {
+  width: 65%;  /* Adjust the width as per your design */
+  padding: 20px;
+  background-color: white;  /* Background color */
+  border-radius: 8px;  /* Optional: rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional: add shadow for visual appeal */
+}
+
+/* Responsive adjustments (if needed) */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;  /* Stacks the components vertically on small screens */
+    align-items: center;
+  }
+  .filter-container, .result-container {
+    width: 90%;  /* Adjust width for mobile */
+    margin-bottom: 20px;  /* Adds space between the components when stacked */
+  }
+}

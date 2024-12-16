@@ -7,6 +7,17 @@ import RealEstateCard from './components/RealEstateCard';
 import About from './components/About';
 import Contact from './components/Contact';
 import Services from './components/Services';
+import Login from './components/Login';
+import Filter from './components/Filter';
+import ResultCard from './components/ResultCard';
+import ResultsTab from './components/ResultsTab';
+import ParentLayout from './components/ParentLayout';
+import PropertyListingForm from './components/PropertyListingForm';
+import ChatPage_1 from './components/ChatPage_1';
+import MyListing from './components/MyListing';
+import OfferContainer from './components/OfferContainer';
+import MakeOffer from './components/MakeOffer';
+import PropertyDetail from './components/PropertyDetails';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -68,13 +79,19 @@ function App() {
         <Route path='/properties' element={
           <>
             <Navbar />
-            <Footer />
+            <ParentLayout />
           </>
         } />
 
         <Route path='/signup' element={
           <>
             <Signup />
+          </>
+        } />
+
+        <Route path='/login' element={
+          <>
+            <Login />
           </>
         } />
 
@@ -91,23 +108,92 @@ function App() {
 
         <Route path='/about' element={
           <>
-            <Navbar/>
-            <About/>
-            <Footer/>
+            <Navbar />
+            <About />
+            <Footer />
           </>
         } />
         <Route path='/services' element={
           <>
-            <Navbar/>
-            <Services/>
-            <Footer/>
+            <Navbar />
+            <Services />
+            <Footer />
           </>
         } />
         <Route path='/contact' element={
           <>
+            <Navbar />
+            <Contact />
+            <Footer />
+          </>
+        } />
+
+        <Route path='/new-listing' element={
+          <>
+            <PropertyListingForm />
+          </>
+        } />
+        
+        <Route path='/veiw-offers' element={
+          <>
             <Navbar/>
-            <Contact/>
+            <OfferContainer/>
             <Footer/>
+          </>
+        } />
+       
+        <Route path='/make-offer' element={
+          <>
+            <Navbar/>
+            <MakeOffer/>
+            <Footer/>
+          </>
+        } />
+        
+        <Route path='/PropertyDetails' element={
+          <>
+            <Navbar/>
+            <PropertyDetail/>
+            <Footer/>
+          </>
+        } />
+
+        <Route path='/my-listings' element={
+          <>
+            <Navbar />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <MyListing
+              imageSrc="./source1.jpg"
+              price="25256"
+              type="Office for Sale"
+              size="900"
+              location="DHA Phase VI, Karachi, Pakistan"
+              date="26.11.2024 - A DAY AGO"
+            />
+            <Footer />
+          </>
+        } />
+
+        <Route path='/chatpage' element={
+          <>
+            <Navbar />
+            <ChatPage_1 />
+            <Footer />
           </>
         } />
       </Routes>

@@ -1,0 +1,75 @@
+/* OfferCard - Horizontal Layout */
+.offer-card {
+  width: 97%;
+  max-width: 900px;
+  height: 180px; /* Reduced height */
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row; /* Change layout to horizontal */
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: space-between; /* Add spacing between elements */
+}
+
+/* Offer Image */
+.offer-image {
+  width: 120px; /* Width for the image */
+  height: 120px; /* Height for the image */
+  object-fit: cover; /* Ensures the image maintains its aspect ratio */
+  border-radius: 8px;
+}
+
+/* Offer Info */
+.offer-info {
+  flex-grow: 1; /* Makes the info section expand to use available space */
+  margin-left: 20px;
+}
+
+/* Offer Details */
+.offer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Increased gap between text */
+}
+
+/* Offer Actions */
+.offer-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Buttons */
+.offer-actions button {
+  width: 120px;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.accept-button {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+}
+
+.accept-button:hover {
+  background-color: #45a049;
+}
+
+.reject-button {
+  background-color: #f44336; /* Red color for reject */
+  color: #fff;
+  border: none;
+}
+
+.reject-button:hover {
+  background-color: #e53935;
+}

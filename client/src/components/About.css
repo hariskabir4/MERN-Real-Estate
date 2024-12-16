@@ -1,0 +1,148 @@
+/* General Page Styling */
+.about-page {
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #2c3e50;
+  }
+  
+  /* Header Section */
+  .about-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: #1abc9c;
+    color: #ffffff;
+    border-radius: 10px;
+  }
+  
+  .about-header h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+  }
+  
+  .about-header p {
+    font-size: 1.3em;
+    margin-top: 10px;
+  }
+  
+  /* Mission Section */
+  .about-mission,
+  .about-story,
+  .about-team,
+  .about-values,
+  .about-cta {
+    margin-bottom: 40px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-mission h2,
+  .about-story h2,
+  .about-team h2,
+  .about-values h2,
+  .about-cta h2 {
+    font-size: 2em;
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+  
+  .about-mission p,
+  .about-story p {
+    font-size: 1.2em;
+    color: #7f8c8d;
+  }
+  
+  /* Team Section */
+  .team-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .team-member {
+    text-align: center;
+    width: 220px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .team-member:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .team-member img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .team-member h3 {
+    font-size: 1.3em;
+    color: #2c3e50;
+    margin-bottom: 5px;
+  }
+  
+  .team-member p {
+    font-size: 1em;
+    color: #7f8c8d;
+  }
+  
+  /* Values Section */
+  .about-values ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .about-values li {
+    font-size: 1.2em;
+    color: #34495e;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+  }
+  
+  .about-values li::before {
+    content: "🏡";
+    position: absolute;
+    left: 0;
+    font-size: 1.3em;
+    color: #1abc9c;
+  }
+  
+  /* Call-to-Action Section */
+  .about-cta {
+    text-align: center;
+    background: #34495e;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .about-cta h2 {
+    margin-bottom: 10px;
+  }
+  
+  .about-cta p {
+    font-size: 1.2em;
+  }
+  
+  .about-cta a {
+    color: #1abc9c;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  
+  .about-cta a:hover {
+    text-decoration: none;
+    color: #16a085;
+  }
+  

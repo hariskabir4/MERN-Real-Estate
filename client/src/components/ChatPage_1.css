@@ -1,0 +1,250 @@
+/* General Chat Box Styling */
+.chat-box_chat {
+  padding: 20px;
+  background-color: #f9f9f9;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* General Chat Layout */
+.chat-container_chat {
+  display: flex;
+  height: calc(100vh - 100px); /* Adjusting for navbar height */
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.chat-sidebar_chat {
+  width: 30%;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+}
+
+.user-info_chat {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.user-info_chat h3 {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.user-status_chat {
+  font-size: 14px;
+  color: #777;
+}
+
+.search-bar_chat input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.chat-categories_chat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.category_chat {
+  padding: 8px 12px;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.category_chat.active_chat {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.chat-list_chat {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chat-item_chat {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar_chat {
+  width: 40px;
+  height: 40px;
+  background-color: #ddd;
+  border-radius: 50%;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-icon_chat {
+  width: 24px;
+  height: 24px;
+  color: #777;
+}
+
+.chat-details_chat {
+  flex: 1;
+}
+
+.chat-details_chat h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.chat-details_chat p {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.chat-time_chat {
+  font-size: 12px;
+  color: #999;
+}
+
+/* Main Chat Area */
+.chat-main_chat {
+  width: 70%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-header_chat {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.chat-header_chat h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.chat-header_chat .user-status_chat {
+  font-size: 14px;
+  color: #4caf50;
+}
+
+.chat-messages_chat {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.message_chat {
+  max-width: 60%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  word-wrap: break-word;
+  line-height: 1.4;
+}
+
+.message_chat.sent_chat {
+  align-self: flex-end;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: right;
+}
+
+.message_chat.received_chat {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+  color: #333;
+  text-align: left;
+}
+
+/* Chat Input */
+.chat-input_chat {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.input-actions_chat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.emoji-icon_chat,
+.attachment-icon_chat {
+  font-size: 20px;
+  color: #777;
+  cursor: pointer;
+}
+
+.chat-input_chat input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  margin-right: 10px;
+  margin-left: 6px;
+}
+
+.send-button_chat {
+  padding: 10px 15px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.send-button_chat:hover {
+  background-color: #45a049;
+}
+
+.emoji-picker_chat {
+  position: absolute;
+  bottom: 60px;
+  left: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.emoji-picker_chat span {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.emoji-picker_chat span:hover {
+  background-color: #f0f0f0;
+}
+
+/* User Avatar Alignment */
+.user-avatar_chat {
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}

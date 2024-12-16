@@ -6,7 +6,10 @@ const HeaderComponent = () => {
 
     const navigate = useNavigate();
 
-    const handleSignup = () => { navigate('/signup'); };
+    const handlelogin = () => { navigate('/login'); };
+    const handleSale = () => { navigate('/properties'); };
+
+    const handlePropertyListing = () => { navigate('/new-listing')};
 
     return (
         <div className="header-container">
@@ -14,8 +17,8 @@ const HeaderComponent = () => {
                 <header className="header">
                     <div className="header-logo">Bunyaad</div>
                     <div className="header-buttons">
-                        <button onClick={handleSignup} className="login-btn">Login</button>
-                        <button className="new-listing-btn">New Listing</button>
+                        <button onClick={handlelogin} className="login-btn">Login</button>
+                        <button onClick={handlePropertyListing} className="new-listing-btn">New Listing</button>
                     </div>
                 </header>
 
@@ -33,11 +36,11 @@ const HeaderComponent = () => {
                     </div>
 
                     <div className="categories">
-                        <div className="category">Sale</div>
-                        <div className="category">Rent</div>
-                        <div className="category">House</div>
-                        <div className="category">Workplace</div>
-                        <div className="category">Land</div>
+                        <div onClick={handleSale} className="category">Sale</div>
+                        <div onClick={handleSale} className="category">Rent</div>
+                        <div onClick={handleSale} className="category">House</div>
+                        <div onClick={handleSale} className="category">Workplace</div>
+                        <div onClick={handleSale}className="category">Land</div>
                     </div>
                 </div>
             </div>
