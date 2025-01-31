@@ -1,11 +1,12 @@
-.navbar {
+
+/*.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #333;
   /* background-color: #ff4d4d; */
   /* background-color: #1a1a2e; */
-  /* background-color: #ff6f61; */
+  /* background-color: #ff6f61; commented till here
   color: #fff;
   padding: 10px 20px; 
 }
@@ -35,4 +36,120 @@
 
 .nav-link:hover {
   color: #00bcd4;
+}
+*/
+
+
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-right: 5%;
+}
+
+.nav-item {
+  margin-left: 20px;
+  position: relative; /* For dropdown positioning */
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #00bcd4;
+}
+
+/* Chat SVG */
+.nav-item svg {
+  vertical-align: middle;
+  margin-right: 5px; /* Adjust for spacing */
+  padding-right: 0; /* Remove extra padding causing cutoff */
+  width: 24px; /* Ensure proper width */
+  height: 24px; /* Ensure proper height */
+}
+
+/* User Profile Section */
+.user-profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-info svg {
+  vertical-align: middle;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Positioning it below the parent */
+  right: 0; /* Aligns to the right of the navbar */
+  background-color: #444;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none; /* Initially hidden */
+  flex-direction: column;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  color: white !important; 
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background-color: #555;
+}
+
+/* Show dropdown on hover */
+.user-profile:hover .dropdown-menu {
+  display: flex;
+}
+
+
+.nav-item svg:hover,
+.nav-item .nav-link:hover {
+  color: #00bcd4; /* Text color when hovering over the icon and text */
+  fill: #00bcd4; /* SVG color when hovering */
+  cursor: pointer; /* Optional: Adds pointer cursor on hover */
+}
+
+/* User Profile hover effect (both text and SVG) */
+.user-profile:hover .user-info svg,
+.user-profile:hover .user-info span {
+  color: #00bcd4; /* Change this to the color you prefer */
+  fill: #00bcd4; /* SVG color change */
+  cursor: pointer; /* Optional: Adds pointer cursor on hover */
 }
