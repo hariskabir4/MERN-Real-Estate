@@ -18,6 +18,8 @@ import MyListing from './components/MyListing';
 import OfferContainer from './components/OfferContainer';
 import MakeOffer from './components/MakeOffer';
 import PropertyDetail from './components/PropertyDetails';
+import AgentLogin from './components/AgentLogin';
+import AgentReg from './components/AgentReg';
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 
@@ -146,6 +148,21 @@ function App() {
           <>
             <Navbar/>
             <MakeOffer/>
+            <Footer/>
+          </>
+        } />
+
+        <Route path='/AgentPortal' element={
+          <>
+            <Navbar/>
+           <AgentLogin/>  
+            <Footer/>
+          </>
+        } />
+        <Route path='/AgentPortal/Registration' element={
+          <>
+            <Navbar/>
+           <AgentReg/>
             <Footer/>
           </>
         } />
