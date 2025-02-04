@@ -120,3 +120,8 @@
   background-color: #ff4d4d;
   color: white;
 }
+
+.search-icon {
+  width: 20px; /* Adjust size as needed */
+  height: 20px;
+}

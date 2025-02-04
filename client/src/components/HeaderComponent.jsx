@@ -30,7 +30,8 @@ const HeaderComponent = () => {
                             placeholder="Search for a location or listing title..."
                             className="search-input"
                         />
-                        <button className="search-button">
+                        <button className="search-button" onClick={handleSale}>
+                            <img src="/icons8-search.svg" alt="Search" className="search-icon" />
                             <i className="fa fa-search"></i>
                         </button>
                     </div>

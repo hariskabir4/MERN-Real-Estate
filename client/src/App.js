@@ -20,8 +20,9 @@ import MakeOffer from './components/MakeOffer';
 import PropertyDetail from './components/PropertyDetails';
 import AgentLogin from './components/AgentLogin';
 import AgentReg from './components/AgentReg';
-
+import MyOfferContainer from './components/MyOfferContainer';
 import { Routes, Route, Navigate } from 'react-router-dom';
+
 
 
 function App() {
@@ -143,11 +144,18 @@ function App() {
             <Footer/>
           </>
         } />
-       
-        <Route path='/make-offer' element={
+        <Route path='/veiw-offers' element={
           <>
             <Navbar/>
-            <MakeOffer/>
+            <OfferContainer/>
+            <Footer/>
+          </>
+        } />
+       
+        <Route path='/my-offers' element={
+          <>
+            <Navbar/>
+            <MyOfferContainer/>
             <Footer/>
           </>
         } />
