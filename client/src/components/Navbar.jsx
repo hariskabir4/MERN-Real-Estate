@@ -19,6 +19,10 @@ const Navbar = ({ user }) => {
     navigate("/veiw-offers");
 
   };
+  
+  const handlehandleVeiwMyOffers = () => {
+    navigate("/my-offers");
+  };
 
   const HandleAgentLogin = () => {
     navigate("/AgentPortal");
@@ -59,6 +63,7 @@ const Navbar = ({ user }) => {
               <div className="dropdown-menu">
                 <Link to="/my-listings" className="dropdown-item">My Listings</Link>
                 <div className="dropdown-item" onClick={handlehandleVeiwOffers}>Veiw offers</div>
+                <div className="dropdown-item" onClick={handlehandleVeiwMyOffers}>Offers Placed</div>
                 <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
                 <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
               </div>

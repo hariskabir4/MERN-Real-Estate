@@ -106,7 +106,7 @@ const HeaderComponent = () => {
 
                     {/* Search Categories */}
                     <div className="categories">
-                        <div onClick={() => navigate('/search-results?category=Sale')} className="category">Sale</div>
+                        <div onClick={() => navigate('/search-results?category=Sell')} className="category">Sell</div>
                         <div onClick={() => navigate('/search-results?category=Rent')} className="category">Rent</div>
                         <div onClick={() => navigate('/search-results?category=House')} className="category">House</div>
                         <div onClick={() => navigate('/search-results?category=Workplace')} className="category">Workplace</div>

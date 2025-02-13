@@ -1,0 +1,143 @@
+/* .result-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .result-row:hover {
+    transform: scale(1.02);
+  }
+  
+  .result-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .result-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .result-details h3 {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+  }
+  
+  .result-details p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .result-details strong {
+    color: #000;
+    font-size: 16px;
+  }
+   */
+
+/* 
+
+
+
+
+
+   .result-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Set max width for compact rows 
+    padding: 10px;
+    margin: 10px auto;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .property-image {
+    width: 80px; /* Adjust image size 
+    height: 80px;
+    object-fit: cover;  Ensures proper image fit 
+    border-radius: 5px;
+    margin-right: 15px;
+  }
+  
+  .property-details {
+    flex: 1; /* Allows details to take remaining space 
+  }
+  
+  .property-purpose {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .property-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .property-location {
+    font-size: 12px;
+    color: #666;
+  }
+   */.result-row {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Set max width for compact rows */
+    padding: 10px;
+    margin: 10px auto;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover Effect */
+.result-row:hover {
+    background: #e9ecef; /* Slightly darker background */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+    cursor: pointer;
+}
+
+.property-image {
+    width: 80px; /* Adjust image size */
+    height: 80px;
+    object-fit: cover; /* Ensures proper image fit */
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.property-details {
+    flex: 1; /* Allows details to take remaining space */
+}
+
+.property-purpose {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.property-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.property-location {
+    font-size: 12px;
+    color: #666;
+}

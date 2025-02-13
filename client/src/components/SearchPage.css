@@ -1,15 +1,80 @@
-.search-page {
+/* .search-page {
     display: flex;
     gap: 20px;
     padding: 20px;
-    background: #f9f9f9; /* Light background for page */
+    background: #f9f9f9; /* Light background for page 
   }
   .results-section {
     flex: 1;
-    background: #fff; /* White background for results section */
+    background: #fff; /* White background for results section 
     padding: 20px;
     border-radius: 10px;
     border: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-  
+   */
+
+   /* Parent container for Search Page */
+.search-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #f9f9f9; /* Light background for page */
+  justify-content: center; /* Center content */
+}
+
+/* Filter Section */
+.filter-container {
+  width: 30%; /* Adjusted width for proper layout */
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Results Section */
+.results-section {
+  flex: 1; /* Take available space */
+  background: #fff; /* White background for results section */
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between result cards */
+}
+
+/* ResultCard styling */
+.result-card {
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Add the same single border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Property details */
+.property-info {
+  font-size: 16px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .search-page {
+    flex-direction: column;
+    align-items: center;
+  }
+  .filter-container, .results-section {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+}

@@ -1,4 +1,3 @@
-// components/SearchProperty.js
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -15,9 +14,23 @@ const SearchProperty = () => {
     useEffect(() => {
         const fetchProperties = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/properties/search", {
-                    params: { query: searchTerm, category }, // Send both query and category as params
-                });
+                let params = {};
+
+                // If category is 'Sale' or 'Rent', use 'purpose' field
+                if (category === "Sale" || category === "Rent") {
+                    params.purpose = category;
+                } 
+                // If category is 'House', 'Land', or 'Workplace', search in 'title'
+                else if (["House", "Land", "Workplace"].includes(category)) {
+                    params.title = category;
+                }
+
+                // Add search term if available
+                if (searchTerm) {
+                    params.query = searchTerm;
+                }
+
+                const response = await axios.get("http://localhost:5000/api/properties/search", { params });
                 setResults(response.data);
             } catch (error) {
                 console.error("Search failed:", error);
