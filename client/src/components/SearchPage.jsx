@@ -34,47 +34,49 @@
 // export default SearchPage;
 
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import FilterComponent from "./FilterComponent";
 import ResultsTab from "./ResultsTab";
 import ResultRow from "./ResultRow";
 import "./SearchPage.css";
 
 const SearchPage = () => {
-  const [properties, setProperties] = useState([]);
+  const [properties, setProperties] = useState([]); // State to store fetched properties
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/properties"); // Ensure this URL is correct
-        const data = await response.json();
-        console.log("Fetched Properties:", data); // Debugging: Log received data
-        setProperties(data);
+        const response = await axios.get("http://localhost:5000/api/properties"); // Adjust the URL if needed
+        setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error);
       }
     };
 
     fetchProperties();
-  }, []);
-
+  }, []); // Runs once on component mount
 
   return (
     <div className="search-page">
       <FilterComponent />
       <div className="results-section">
         <ResultsTab />
-        {properties.map((property, index) => (
-          <ResultRow
-            key={index}
-            image={property.images?.[0] || "https://via.placeholder.com/100"} // First image or fallback
-            price={`$${property.price}`}
-            title={property.title}
-            type={property.purpose}
-            size={`${property.size} m²`}
-            location={`${property.location}, ${property.city}`}
-            date={new Date(property.listedAt).toLocaleDateString()}
-          />
-        ))}
+        {properties.length > 0 ? (
+          properties.map((property, index) => (
+            <ResultRow
+              key={index}
+              image={property.images?.[0]} // Assuming images is an array
+              price={`$${property.price}`}
+              title={property.title}
+              type={property.purpose}
+              size={`${property.size} m²`}
+              location={`${property.location}, ${property.city}`}
+              date={property.listedAt}
+            />
+          ))
+        ) : (
+          <p>No results found</p>
+        )}
       </div>
     </div>
   );

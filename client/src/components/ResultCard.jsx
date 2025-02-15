@@ -1,23 +1,60 @@
+// import React from 'react';
+// import './ResultCard.css';
+// import { Link, useNavigate } from "react-router-dom";
+
+// const ResultCard = (props) => {
+//   // Fallback URL if imageUrl is empty
+//   const fallbackImage = 'https://via.placeholder.com/150';
+
+//   const navigate = useNavigate();
+
+//   const handlePropertyDetails = () => {
+//     navigate("/PropertyDetails");
+//   }
+
+//   return (
+//     <div onClick={handlePropertyDetails} className="result-card-ResultCard">
+//       <div className="image-container-ResultCard">
+//         <img
+//           src={props.imageUrl || fallbackImage} // Use fallback if imageUrl is empty
+//           alt={props.title || 'Property Image'} // Add meaningful alt text
+//           className="image-ResultCard"
+//         />
+//       </div>
+//       <div className="details-container-ResultCard">
+//         <div className="top-section-ResultCard">
+//           <span className="price-ResultCard">{props.price}</span>
+//           <span className="date-ResultCard">{props.date}</span>
+//         </div>
+//         <h3 className="title-ResultCard">{props.title}</h3>
+//         <p className="description-ResultCard">{props.description}</p>
+//         <p className="location-ResultCard">{props.location}</p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ResultCard;
+
+
 import React from 'react';
 import './ResultCard.css';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ResultCard = (props) => {
-  // Fallback URL if imageUrl is empty
   const fallbackImage = 'https://via.placeholder.com/150';
-
   const navigate = useNavigate();
 
   const handlePropertyDetails = () => {
-    navigate("/PropertyDetails");
-  }
+    navigate(`/property/${props.id}`); // Dynamically navigate to property details page
+  };
 
   return (
     <div onClick={handlePropertyDetails} className="result-card-ResultCard">
       <div className="image-container-ResultCard">
         <img
-          src={props.imageUrl || fallbackImage} // Use fallback if imageUrl is empty
-          alt={props.title || 'Property Image'} // Add meaningful alt text
+          src={props.imageUrl || fallbackImage}
+          alt={props.title || 'Property Image'}
           className="image-ResultCard"
         />
       </div>
@@ -27,7 +64,6 @@ const ResultCard = (props) => {
           <span className="date-ResultCard">{props.date}</span>
         </div>
         <h3 className="title-ResultCard">{props.title}</h3>
-        <p className="description-ResultCard">{props.description}</p>
         <p className="location-ResultCard">{props.location}</p>
       </div>
     </div>
