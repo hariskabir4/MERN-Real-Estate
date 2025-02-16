@@ -1,38 +1,3 @@
-// import React from "react";
-// import FilterComponent from "./FilterComponent";
-// import ResultsTab from "./ResultsTab";
-// import ResultRow from "./ResultRow";
-// import "./SearchPage.css";
-
-// const SearchPage = () => {
-//   const dummyData = [
-//     {
-//       image: "https://via.placeholder.com/100",
-//       price: "1,000 $",
-//       title: "140 Square Meters Shop for Rent",
-//       type: "Shop For Rent",
-//       size: "140 m²",
-//       location: "Yenimahalle, Ankara",
-//       date: "09.02.2024",
-//     },
-//     // Add more items here
-//   ];
-
-//   return (
-//     <div className="search-page">
-//       <FilterComponent />
-//       <div className="results-section">
-//         <ResultsTab />
-//         {dummyData.map((item, index) => (
-//           <ResultRow key={index} {...item} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default SearchPage;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import FilterComponent from "./FilterComponent";
@@ -56,6 +21,8 @@ const SearchPage = () => {
     fetchProperties();
   }, []); // Runs once on component mount
 
+  const baseUrl = "http://localhost:5000"; // Adjust if needed
+
   return (
     <div className="search-page">
       <FilterComponent />
@@ -63,16 +30,28 @@ const SearchPage = () => {
         <ResultsTab />
         {properties.length > 0 ? (
           properties.map((property, index) => (
+            // <ResultRow
+            //   key={index}
+            //   image={property.images?.[0]}
+            //   price={`$${property.price}`}
+            //   title={property.title}
+            //   type={property.purpose}
+            //   size={`${property.size} m²`}
+            //   location={`${property.location}, ${property.city}`}
+            //   date={property.listedAt}
+            // />
+
             <ResultRow
               key={index}
-              image={property.images?.[0]} // Assuming images is an array
+              image={property.images?.[0] ? `${baseUrl}/uploads/${property.images[0]}` : "https://via.placeholder.com/150"}
               price={`$${property.price}`}
               title={property.title}
               type={property.purpose}
               size={`${property.size} m²`}
               location={`${property.location}, ${property.city}`}
-              date={property.listedAt}
+              date={new Date(property.listedAt).toLocaleDateString()}
             />
+
           ))
         ) : (
           <p>No results found</p>

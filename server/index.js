@@ -12,6 +12,7 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/uploads', express.static('uploads'));
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/Proj", {
