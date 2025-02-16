@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; 
 import "./AgentReg.css";
-// import axios from "axios"; // Backend request commented
 
 const AgentReg = () => {
     const [formData, setFormData] = useState({
@@ -20,49 +20,67 @@ const AgentReg = () => {
         profilePicture: null,
         licenseCopy: null,
         businessLogo: null,
-        certifications: null
+        certifications: null,
     });
 
-    const navigate = useNavigate(); 
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
+
         if (type === "file") {
-            setFormData({
-                ...formData,
+            setFormData((prevData) => ({
+                ...prevData,
                 [name]: files[0],
-            });
+            }));
         } else if (type === "checkbox") {
-            setFormData({
-                ...formData,
+            setFormData((prevData) => ({
+                ...prevData,
                 specialization: checked
-                    ? [...formData.specialization, value]
-                    : formData.specialization.filter((spec) => spec !== value),
-            });
+                    ? [...prevData.specialization, value]
+                    : prevData.specialization.filter((spec) => spec !== value),
+            }));
         } else {
-            setFormData({
-                ...formData,
+            setFormData((prevData) => ({
+                ...prevData,
                 [name]: value,
-            });
+            }));
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        //  backend request
-        /*
+        setLoading(true);
+
+        // Ensure passwords match before submitting
+        if (formData.password !== formData.confirmPassword) {
+            alert("Passwords do not match!");
+            setLoading(false);
+            return;
+        }
+
+        const formDataToSend = new FormData();
+        Object.keys(formData).forEach((key) => {
+            if (Array.isArray(formData[key])) {
+                formData[key].forEach((value) => formDataToSend.append(key, value));
+            } else {
+                formDataToSend.append(key, formData[key]);
+            }
+        });
+
         try {
-            const response = await axios.post("http://localhost:5000/signup", formData);
+            const response = await axios.post("http://localhost:5000/api/agent/signup", formDataToSend, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
+
             alert(response.data.message);
             navigate("/login");
         } catch (error) {
             alert(error.response?.data?.message || "An error occurred");
+        } finally {
+            setLoading(false);
         }
-        */
-
-        console.log("Form submitted with:", formData); // Debugging log
-        navigate("/login"); // Redirecting for now
     };
 
     return (
@@ -73,8 +91,7 @@ const AgentReg = () => {
             </div>
             <div className="agent_reg_form_box">
                 <h2>Agent Registration Form</h2>
-                <form onSubmit={handleSubmit}>
-                    {/* First Row */}
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Full Name</label>
@@ -92,18 +109,13 @@ const AgentReg = () => {
                             <label>Password</label>
                             <input type="password" name="password" placeholder="Enter your password" onChange={handleChange} required />
                         </div>
-                    </div>
-
-                    {/* Second Row */}
-                    <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Confirm Password</label>
                             <input type="password" name="confirmPassword" placeholder="Confirm your password" onChange={handleChange} required />
                         </div>
-                        <div className="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phoneNumber" placeholder="Enter your phone number" onChange={handleChange} required />
-                        </div>
+                    </div>
+
+                    <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Real Estate License Number</label>
                             <input type="text" name="licenseNumber" placeholder="Enter your license number" onChange={handleChange} required />
@@ -112,10 +124,6 @@ const AgentReg = () => {
                             <label>Issuing Authority</label>
                             <input type="text" name="issuingAuthority" placeholder="Enter the issuing authority" onChange={handleChange} required />
                         </div>
-                    </div>
-
-                    {/* Third Row */}
-                    <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Years of Experience</label>
                             <select name="experience" onChange={handleChange} required>
@@ -126,21 +134,8 @@ const AgentReg = () => {
                                 <option value="5+">5+ years</option>
                             </select>
                         </div>
-                        <div className="form-group">
-                            <label>Company Name</label>
-                            <input type="text" name="companyName" placeholder="Enter your company name" onChange={handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label>Office Address</label>
-                            <input type="text" name="officeAddress" placeholder="Enter your office address" onChange={handleChange} />
-                        </div>
-                        <div className="form-group">
-                            <label>Website</label>
-                            <input type="url" name="website" placeholder="Enter your website (optional)" onChange={handleChange} />
-                        </div>
                     </div>
 
-                    {/* Specialization Section */}
                     <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Specialization</label>
@@ -153,7 +148,6 @@ const AgentReg = () => {
                         </div>
                     </div>
 
-                    {/* Attachments Section */}
                     <div className="agent_reg_form_row">
                         <div className="form-group">
                             <label>Profile Picture</label>
@@ -173,7 +167,9 @@ const AgentReg = () => {
                         </div>
                     </div>
 
-                    <button type="submit" className="agent_reg_form_btn">Register</button>
+                    <button type="submit" className="agent_reg_form_btn" disabled={loading}>
+                        {loading ? "Registering..." : "Register"}
+                    </button>
                 </form>
             </div>
         </div>

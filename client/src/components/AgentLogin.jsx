@@ -1,19 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./AgentLogin.css";
 
 const AgentLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("User logged in with:", { email, password });
+        setLoading(true);
+        setError("");
+
+        try {
+            const response = await axios.post("http://localhost:5000/api/agent/login", {
+                email: email.trim().toLowerCase(),
+                password,
+            });
+
+            alert(response.data.message); // Show success message
+            localStorage.setItem("agentToken", response.data.token); // Store token
+            navigate("/AgentDashboard"); // Redirect after login
+        } catch (error) {
+            setError(error.response?.data?.message || "Login failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <div className="login-container-agentlogin">
-
             <div className="agent-portal-header-agentlogin">
                 <img src="/icons8-home.svg" alt="Real Estate" className="agent-portal-icon-agentlogin" />
                 <span className="agent-portal-title-agentlogin">Bunyaad Agent Portal</span>
@@ -21,6 +40,7 @@ const AgentLogin = () => {
 
             <div className="login-box-agentlogin">
                 <h2>Agent Login</h2>
+                {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-group-agentlogin">
                         <label>Email</label>
@@ -42,7 +62,9 @@ const AgentLogin = () => {
                             required
                         />
                     </div>
-                    <button type="submit" className="submit-btn-agentlogin">Login</button>
+                    <button type="submit" className="submit-btn-agentlogin" disabled={loading}>
+                        {loading ? "Logging in..." : "Login"}
+                    </button>
                 </form>
                 <p>
                     Join our trusted network of real estate professionals{" "}
