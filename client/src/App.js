@@ -79,7 +79,7 @@ function App() {
           </>
         } />
 
-        <Route path='/properties/search' element={
+        <Route path='/search-results' element={
           <>
             <Navbar />
             <ParentLayout />
