@@ -6,7 +6,6 @@ const router = express.Router();
 
 // Search and Filter API
 router.get("/", async (req, res) => {
-    console.log("Search API called with query:", req.query);
     const { query, category, location, purpose, features, city, state, status, price, bedrooms, bathrooms } = req.query;
 
     try {

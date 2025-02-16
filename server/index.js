@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 
 const authRoutes = require("./Routes/auth"); // Import auth routes
 const propertyRoutes = require("./Routes/propertylist"); // Import property routes
+const searchRoutes = require("./Routes/searchproperty");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/", authRoutes);
 
 // Use property listing routes
 app.use("/api/properties", propertyRoutes); // Prefix API property routes with `/api/properties`
+app.use("/api/properties/search", searchRoutes);
 
 // Start the server
 const PORT = 5000;
