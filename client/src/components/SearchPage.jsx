@@ -7,11 +7,11 @@ import "./SearchPage.css";
 
 const SearchPage = () => {
   const [properties, setProperties] = useState([]); // State to store fetched properties
-
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/properties"); // Adjust the URL if needed
+        const response = await axios.get("http://localhost:5000/api/properties");
+        console.log("Fetched properties:", response.data); // Debugging log
         setProperties(response.data);
       } catch (error) {
         console.error("Error fetching properties:", error);
@@ -19,7 +19,7 @@ const SearchPage = () => {
     };
 
     fetchProperties();
-  }, []); // Runs once on component mount
+  }, []);
 
   const baseUrl = "http://localhost:5000"; // Adjust if needed
 
@@ -30,20 +30,13 @@ const SearchPage = () => {
         <ResultsTab />
         {properties.length > 0 ? (
           properties.map((property, index) => (
-            // <ResultRow
-            //   key={index}
-            //   image={property.images?.[0]}
-            //   price={`$${property.price}`}
-            //   title={property.title}
-            //   type={property.purpose}
-            //   size={`${property.size} m²`}
-            //   location={`${property.location}, ${property.city}`}
-            //   date={property.listedAt}
-            // />
-
             <ResultRow
               key={index}
-              image={property.images?.[0] ? `${baseUrl}/uploads/${property.images[0]}` : "https://via.placeholder.com/150"}
+              image={
+                property.images?.[0]
+                  ? `http://localhost:5000/uploads/${property.images[0]}`
+                  : "https://placehold.jp/150x150.png"
+              }
               price={`$${property.price}`}
               title={property.title}
               type={property.purpose}
@@ -51,7 +44,6 @@ const SearchPage = () => {
               location={`${property.location}, ${property.city}`}
               date={new Date(property.listedAt).toLocaleDateString()}
             />
-
           ))
         ) : (
           <p>No results found</p>
@@ -62,3 +54,4 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
+

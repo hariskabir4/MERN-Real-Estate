@@ -17,3 +17,5 @@ const ResultRow = ({ image, price, title, type, size, location, date }) => {
 };
 
 export default ResultRow;
+ 
+
