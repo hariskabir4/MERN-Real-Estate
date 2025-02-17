@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserContext } from "../Usercontext"; // Import UserContext
 import "./Navbar.css";
 
-const Navbar = ({ user }) => {
+const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const { user, logout } = useUserContext(); // Access user info & logout function
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
 
   const handleLogout = () => {
-    console.log("User logged out");
-    navigate("/login");
+    localStorage.removeItem("authToken"); // Clear token from local storage
+    logout(); // Reset user state
   };
 
   const handlehandleVeiwOffers = () => {
     navigate("/veiw-offers");
 
   };
-  
+
   const handlehandleVeiwMyOffers = () => {
     navigate("/my-offers");
   };
@@ -54,10 +56,28 @@ const Navbar = ({ user }) => {
           </li>
           <li className="nav-item user-profile" onClick={toggleDropdown}>
             <div className="user-info">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px">
-                <path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 14c-5.523 0-10 4.477-10 10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1c0-5.523-4.477-10-10-10z" />
-              </svg>
-              <span>{user ? user.name : "User"}</span>
+              {user ? (
+                <>
+                  <span className="username">Welcome, {user.name}!</span>
+                  {/* <button onClick={handleLogout} className="logout-btn">Logout</button> */}
+                  {dropdownOpen && (
+                    <div className="dropdown-menu">
+                      <Link to="/my-listings" className="dropdown-item">My Listings</Link>
+                      <div className="dropdown-item" onClick={handlehandleVeiwOffers}>Veiw offers</div>
+                      <div className="dropdown-item" onClick={handlehandleVeiwMyOffers}>Offers Placed</div>
+                      <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
+                      <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <>
+                  <span >User</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px">
+                    <path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 14c-5.523 0-10 4.477-10 10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1c0-5.523-4.477-10-10-10z" />
+                  </svg>
+                </>
+              )}
             </div>
             {dropdownOpen && (
               <div className="dropdown-menu">

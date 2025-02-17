@@ -1,15 +1,54 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom"; 
+import {Link, useNavigate} from "react-router-dom"; 
+import { useUserContext } from "../Usercontext";
+import { jwtDecode } from "jwt-decode";
 import "./Login.css"; 
 
 const Login = () => {
+  const { login } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("User logged in with:", { email, password });
-    // Add your login logic here (e.g., API integration)
+
+    try {
+      const response = await fetch("http://localhost:5000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Login failed');
+      }
+
+      const data = await response.json();
+      const token = data.token;
+
+      // Store token in localStorage
+      localStorage.setItem("authToken", token);
+
+      // Decode JWT token and extract user info
+      const decodedUser = jwtDecode(token);
+
+      // Update user context with logged-in user details
+      login({ name: decodedUser.name, email: decodedUser.email });
+
+      alert("Login successful!");
+
+      // Redirect user to home page
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+      alert(err.message);
+      console.error("Login error:", err);
+    }
   };
 
   return (

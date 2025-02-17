@@ -21,12 +21,14 @@ import PropertyDetail from './components/PropertyDetails';
 import AgentLogin from './components/AgentLogin';
 import AgentReg from './components/AgentReg';
 import MyOfferContainer from './components/MyOfferContainer';
+import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 import { Routes, Route, Navigate } from 'react-router-dom';
-
+import { UserProvider } from './Usercontext'; // Import UserProvider
 
 
 function App() {
   return (
+    <UserProvider> {/* Wrap everything with UserProvider */} 
     <div className="App">
       <Routes>
         <Route path='/' element={
@@ -131,11 +133,13 @@ function App() {
           </>
         } />
 
+        <Route element={<ProtectedRoute />}>
         <Route path='/new-listing' element={
           <>
             <PropertyListingForm />
           </>
         } />
+        </Route>
         
         <Route path='/veiw-offers' element={
           <>
@@ -224,6 +228,7 @@ function App() {
       </Routes>
 
     </div>
+  </UserProvider>
   );
 }
 
