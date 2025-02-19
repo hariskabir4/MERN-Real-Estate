@@ -21,6 +21,8 @@ import PropertyDetail from './components/PropertyDetails';
 import AgentLogin from './components/AgentLogin';
 import AgentReg from './components/AgentReg';
 import MyOfferContainer from './components/MyOfferContainer';
+import Inspection_Agent from './components/Inspection_Agent';
+import OnsiteInspectorForm from './components/OnsiteInspectorForm'
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './Usercontext'; // Import UserProvider
@@ -171,10 +173,25 @@ function App() {
             <Footer/>
           </>
         } />
-        <Route path='/AgentPortal/Registration' element={
+        <Route path='/AgentPortal' element={
           <>
             <Navbar/>
-           <AgentReg/>
+           <AgentLogin/>  
+            <Footer/>
+          </>
+        } />
+        
+        <Route path='/AgentPortal/onsite-inspection' element={
+          <>
+            <Navbar/>
+           <Inspection_Agent/>
+            <Footer/>
+          </>
+        } />
+        <Route path='/AgentPortal/onsite-inspector' element={
+          <>
+            <Navbar/>
+           <OnsiteInspectorForm />
             <Footer/>
           </>
         } />

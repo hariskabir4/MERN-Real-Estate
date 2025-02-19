@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const ResultCard = (props) => {
    console.log("Rendering Image URL:", props.imageUrl); // Debugging log
   const fallbackImage = "https://placehold.jp/150x150.png";
+  // const fallbackImage = "http://localhost:5000/uploads/1733915795365.png";
   const navigate = useNavigate();
 
 
@@ -14,6 +15,7 @@ const ResultCard = (props) => {
     }
   };
 
+  // console.log('pros.imageUrl',props.imageUrl);
   return (
     <div onClick={handlePropertyDetails} className="result-card-ResultCard">
       <div className="image-container-ResultCard">
