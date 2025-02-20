@@ -5,9 +5,17 @@ import { useNavigate } from "react-router-dom";
 const ResultCard = (props) => {
    console.log("Rendering Image URL:", props.imageUrl); // Debugging log
   const fallbackImage = "https://placehold.jp/150x150.png";
-  // const fallbackImage = "http://localhost:5000/uploads/1733915795365.png";
+  const baseUrl = "http://localhost:5000/uploads/";
   const navigate = useNavigate();
 
+  const getImageUrl = (imageUrl) => {
+    // If imageUrl is already a full URL, use it directly
+    if (imageUrl && imageUrl.startsWith('http')) {
+      return imageUrl;
+    }
+    // If imageUrl is just the filename, prepend the base URL
+    return imageUrl ? `${baseUrl}${imageUrl}` : fallbackImage;
+  };
 
   const handlePropertyDetails = () => {
     if (props.id) {
@@ -26,7 +34,7 @@ const ResultCard = (props) => {
           onError={(e) => (e.target.src = fallbackImage)}
         /> */}
         <img
-          src={props.imageUrl || fallbackImage}
+          src={getImageUrl(props.imageUrl)}
           alt={props.title || "Property Image"}
           className="image-ResultCard"
           onError={(e) => {
