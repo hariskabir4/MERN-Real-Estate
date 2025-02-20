@@ -88,6 +88,7 @@
     background-color: #3498db;
     color: white;
     margin-left: 30%;
+    margin-left:21%
   }
   
   .make-offer {
@@ -98,4 +99,17 @@
   button:hover {
     opacity: 0.9;
   }
-  
+  .price-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #000; /* Changed to black */
+    margin-left: 30%;
+    margin-bottom: 3%;
+}

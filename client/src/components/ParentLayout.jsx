@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./ParentLayout.css";
 import Filter from "./Filter";
 import ResultCard from "./ResultCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ParentLayout = () => {
   const [results, setResults] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -56,6 +57,10 @@ const ParentLayout = () => {
     fetchResults();
   }, [location.search]);
 
+  const handleCardClick = (propertyId) => {
+    navigate(`/property/${propertyId}`);
+  };
+
   return (
     <div className="layout-container">
       {/* Filter Component */}
@@ -67,16 +72,20 @@ const ParentLayout = () => {
       <div className="result-container">
         {results.length > 0 ? (
           results.map((result, index) => (
-            <ResultCard
-              key={index}
-              imageUrl={result.images?.[0] || "https://via.placeholder.com/150"}
-              title={result.title}
-              description={`Size: ${result.size} | Bedrooms: ${result.bedrooms || "N/A"} | Bathrooms: ${result.bathrooms || "N/A"}`}
-              location={`${result.city}, ${result.state}`}
-              price={`$${result.price}`}
-              // date={new Date(result.listedAt).toLocaleDateString()}
-              date={new Date(result.listedAt).toLocaleDateString("en-GB")}
-            />
+            <div 
+              key={result._id || index} 
+              onClick={() => handleCardClick(result._id)}
+              style={{ cursor: 'pointer' }}
+            >
+              <ResultCard
+                imageUrl={result.images?.[0] || "https://via.placeholder.com/150"}
+                title={result.title}
+                description={`Size: ${result.size} | Bedrooms: ${result.bedrooms || "N/A"} | Bathrooms: ${result.bathrooms || "N/A"}`}
+                location={`${result.city}, ${result.state}`}
+                price={`$${result.price}`}
+                date={result.listedAt}
+              />
+            </div>
           ))
         ) : (
           <p>Loading properties...</p>

@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./PropertyDetail.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PropertyDetail = () => {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const [property, setProperty] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchPropertyDetails = async () => {
+            try {
+                const response = await fetch(`http://localhost:5000/api/property/${id}`);
+                if (!response.ok) {
+                    throw new Error('Property not found');
+                }
+                const data = await response.json();
+                setProperty(data);
+            } catch (error) {
+                console.error('Error fetching property details:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPropertyDetails();
+    }, [id]);
 
     const handlechat = () => {
         navigate("/chatpage");
@@ -12,34 +34,72 @@ const PropertyDetail = () => {
         navigate("/make-offer");
     }
 
+    // Function to get image URL
+    const getImageUrl = (imageName) => {
+        if (!imageName) {
+            // Return placeholder if no image (800x600 is a common property image ratio)
+            return "https://placehold.jp/800x600.png";
+        }
+        return `http://localhost:5000/uploads/${imageName}`;
+    };
+
+    if (loading) {
+        return <div className="property-detail loading">Loading...</div>;
+    }
+
+    if (!property) {
+        return <div className="property-detail error">Property not found</div>;
+    }
+
+    // Function to render property features based on property type
+    const renderPropertyFeatures = () => {
+        if (property.propertyType === 'Residential') {
+            return (
+                <>
+                    {property.bedrooms && <span>{property.bedrooms} beds</span>}
+                    {property.bathrooms && <span>{property.bathrooms} baths</span>}
+                    {property.features?.includes('parking') && <span>Parking spot</span>}
+                    {property.features?.includes('furnished') && <span>Furnished</span>}
+                </>
+            );
+        } else {
+            return (
+                <>
+                    {property.features?.split(',').map((feature, index) => (
+                        <span key={index}>{feature.trim()}</span>
+                    ))}
+                </>
+            );
+        }
+    };
 
     return (
         <div className="property-detail">
             <img
-                src="/source1.jpg"
-                alt="Property"
+                src={getImageUrl(property.images?.[0])}
+                alt={property.title}
                 className="property-image"
             />
             <div className="property-info">
-                <h2>500 yards bungalow for sale in DHA karachi</h2>
+                <h2>{property.title}</h2>
                 <p className="location">
                     <span role="img" aria-label="location">
                         📍
                     </span>{" "}
-                    Saba Avenue, Phase VIII DHA, Karachi, Pakistan
+                    {property.location || `${property.city}, ${property.state}`}
                 </p>
-                {/* <span className="status for-rent">For Rent</span> */}
                 <p className="description">
-                    <strong>Description: </strong>1000 Yards bungalow available for rent
+                    <strong>Description: </strong>{property.description || property.features}
                 </p>
                 <div className="property-features">
-                    <span>9 beds</span>
-                    <span>6 baths</span>
-                    <span>Parking spot</span>
-                    <span>Furnished</span>
+                    {renderPropertyFeatures()}
+                    {property.size && <span>{property.size} sq yards</span>}
+                </div>
+                <div className="price-info">
+                    <span className="price">${property.price?.toLocaleString()}</span>
+                    <span className="status">{property.purpose === "Rent" ? "For Rent" : "For Sale"}</span>
                 </div>
                 <div className="actions">
-                    {/* <button className="contact-agent">Contact Agent</button> */}
                     <button onClick={handlechat} className="chat-button">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

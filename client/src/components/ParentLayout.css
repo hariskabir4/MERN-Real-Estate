@@ -15,7 +15,9 @@
   background-color: white;
   border-radius: 8px;
   border: 1px solid #ddd; /* Add a subtle single border */
-  margin-left: 45%  ;
+  /* margin-left: 45%  ; */
+  margin-left: 35%  ;
+  
 }
 
 /* ResultCard container styling */

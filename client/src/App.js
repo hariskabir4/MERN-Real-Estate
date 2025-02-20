@@ -196,11 +196,11 @@ function App() {
           </>
         } />
         
-        <Route path='/PropertyDetails' element={
+        <Route path='/property/:id' element={
           <>
-            <Navbar/>
-            <PropertyDetail/>
-            <Footer/>
+            <Navbar />
+            <PropertyDetail />
+            <Footer />
           </>
         } />
 

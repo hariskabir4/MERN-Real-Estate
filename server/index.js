@@ -7,6 +7,7 @@ require("dotenv").config();
 const authRoutes = require("./Routes/auth"); // Import auth routes
 const propertyRoutes = require("./Routes/propertylist"); // Import property routes
 const searchRoutes = require("./Routes/searchproperty");
+const propertyDetailsRoutes = require("./Routes/propertyDetails");
 
 const app = express();
 
@@ -29,6 +30,9 @@ app.use("/", authRoutes);
 // Use property listing routes
 app.use("/api/properties", propertyRoutes); // Prefix API property routes with `/api/properties`
 app.use("/api/properties/search", searchRoutes);
+
+// Add this new route
+app.use("/api/property", propertyDetailsRoutes);
 
 // Start the server
 const PORT = 5000;

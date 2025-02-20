@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-left: 10px; /* Adds some left margin */
+  margin-left: 10px; 
   margin-bottom: 5px;
 }
 
