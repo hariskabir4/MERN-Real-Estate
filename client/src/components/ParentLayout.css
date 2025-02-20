@@ -10,13 +10,15 @@
 
 /* Filter container styling */
 .filter-container {
-  width: 85%; /* Adjust width for Filter */
+  /* width: 85%; Adjust width for Filter */
   padding: 20px;
   background-color: white;
   border-radius: 8px;
   border: 1px solid #ddd; /* Add a subtle single border */
   /* margin-left: 45%  ; */
   margin-left: 35%  ;
+  width: 64%;  /* 50% of the parent element’s width */
+  height: 50%;
   
 }
 

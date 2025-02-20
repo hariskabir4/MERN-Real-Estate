@@ -6,61 +6,85 @@ const router = express.Router();
 
 // Search and Filter API
 router.get("/", async (req, res) => {
-    const { query, category, location, purpose, features, city, state, status, price, bedrooms, bathrooms } = req.query;
+    const { 
+        query,      // Add this for search bar functionality
+        category, 
+        type, 
+        state, 
+        city, 
+        minPrice, 
+        maxPrice, 
+        minSize, 
+        maxSize 
+    } = req.query;
 
     try {
         let queryObject = {};
 
-        // Handle purpose filtering (Sell/Rent)
-        if (category === "Sale" || category === "Rent") {
-            queryObject.purpose = category;
-        }
-
-        // Handle keyword search (House, Land, Workplace in title)
-        if (["House", "Land", "Workplace"].includes(category)) {
-            queryObject.title = { $regex: category, $options: "i" };
-        }
-
-        // General keyword search
+        // Handle search query (restore previous search functionality)
         if (query) {
             queryObject.$or = [
                 { title: { $regex: query, $options: "i" } },
                 { city: { $regex: query, $options: "i" } },
                 { location: { $regex: query, $options: "i" } },
                 { features: { $regex: query, $options: "i" } },
-                { purpose: { $regex: query, $options: "i" } },
-                { state: { $regex: query, $options: "i" } },
-                { status: { $regex: query, $options: "i" } }
+                { state: { $regex: query, $options: "i" } }
             ];
         }
 
-        // Additional Filters
-        if (location) queryObject.location = { $regex: location, $options: "i" };
-        if (features) queryObject.features = { $regex: features, $options: "i" };
-        if (city) queryObject.city = { $regex: city, $options: "i" };
-        if (state) queryObject.state = { $regex: state, $options: "i" };
-        if (status) queryObject.status = { $regex: status, $options: "i" };
+        // Handle purpose (Sale/Rent)
+        if (category === "Sale" || category === "Rent") {
+            queryObject.purpose = category === "Sale" ? "Sell" : "Rent";
+        }
 
-        // Numeric Filters
-        if (price) queryObject.price = { $lte: Number(price) };
-        if (bedrooms) queryObject.bedrooms = Number(bedrooms);
-        if (bathrooms) queryObject.bathrooms = Number(bathrooms);
+        // Location filters
+        if (state) queryObject.state = state;
+        if (city) queryObject.city = city;
 
-        // Fetch properties with only required fields + owner name
-        const residentialProperties = await Residential.find(queryObject)
-            .select("title location price size bedrooms bathrooms city state images listedAt");
-           
+        // Price range
+        if (minPrice || maxPrice) {
+            queryObject.price = {};
+            if (minPrice) queryObject.price.$gte = Number(minPrice);
+            if (maxPrice) queryObject.price.$lte = Number(maxPrice);
+        }
 
-        const commercialProperties = await Commercial.find(queryObject)
-            .populate("owner", "name")
-            .select("title location price size bedrooms bathrooms city state images listedAt")
+        // Size range
+        if (minSize || maxSize) {
+            queryObject.size = {};
+            if (minSize) queryObject.size.$gte = Number(minSize);
+            if (maxSize) queryObject.size.$lte = Number(maxSize);
+        }
 
-        // Combine results
-        const properties = [...residentialProperties, ...commercialProperties];
+        // Status should be available
+        queryObject.status = "available";
+
+        let properties = [];
+        
+        // Handle property type with Land type consideration
+        if (type) {
+            if (type === "Workplace") {
+                properties = await Commercial.find(queryObject)
+                    .select("title location price size city state images listedAt");
+            } else if (type === "Housing") {
+                properties = await Residential.find(queryObject)
+                    .select("title location price size bedrooms bathrooms city state images listedAt");
+            } else if (type === "Land") {
+                // Return empty array for Land type as it's not in DB
+                properties = [];
+            }
+        } else {
+            // If no type specified, search both collections
+            const residentialProperties = await Residential.find(queryObject)
+                .select("title location price size bedrooms bathrooms city state images listedAt");
+            const commercialProperties = await Commercial.find(queryObject)
+                .select("title location price size city state images listedAt");
+            properties = [...residentialProperties, ...commercialProperties];
+        }
+
         res.json(properties);
 
     } catch (error) {
-        console.error("Error fetching properties:", error);
+        console.error("Error in filter search:", error);
         res.status(500).json({ message: "Server Error", error: error.message });
     }
 });

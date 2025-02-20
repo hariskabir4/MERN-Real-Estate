@@ -12,29 +12,17 @@ const ParentLayout = () => {
   useEffect(() => {
     const fetchResults = async () => {
       const params = new URLSearchParams(location.search);
-      const query = params.get("query") || null;
-      const category = params.get("category") || null;
-
-      console.log("Fetching results for:", { query, category });
-
+      
       try {
-        let searchParams = new URLSearchParams();
-        if (query) searchParams.append("query", query);
-        if (category) searchParams.append("category", category);
-
-        const url = `http://localhost:5000/api/properties/search?${searchParams.toString()}`;
-        console.log("Final API URL:", url);
-
+        const url = `http://localhost:5000/api/properties/search?${params.toString()}`;
         const response = await fetch(url);
-        console.log("API Response Status:", response.status);
-
+        
         if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
+          throw new Error(`Failed to fetch data: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("Final results stored in state:", data);
-
+        
         if (!Array.isArray(data)) {
           console.error("Unexpected API response format:", data);
           setResults([]);
@@ -42,15 +30,14 @@ const ParentLayout = () => {
           const formattedData = data.map(property => ({
             ...property,
             listedAt: property.listedAt 
-              ? new Date(property.listedAt).toLocaleDateString("en-GB") // Formats as DD/MM/YYYY
+              ? new Date(property.listedAt).toLocaleDateString("en-GB")
               : "N/A"
           }));
-          
           setResults(formattedData);
-          // setResults(data);
         }
       } catch (error) {
         console.error("Error fetching search results:", error);
+        setResults([]);
       }
     };
 
