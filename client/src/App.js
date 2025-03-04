@@ -23,6 +23,7 @@ import AgentReg from './components/AgentReg';
 import MyOfferContainer from './components/MyOfferContainer';
 import Inspection_Agent from './components/Inspection_Agent';
 import OnsiteInspectorForm from './components/OnsiteInspectorForm'
+import TopProperties from './components/TopProperties';
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './Usercontext'; // Import UserProvider
@@ -37,7 +38,7 @@ function App() {
           <>
             <Navbar />
             <HeaderComponent />
-            <div className='property-container'>
+            {/* <div className='property-container'>
               <RealEstateCard
                 imageSrc='./source1.jpg'
                 price="25256"
@@ -78,7 +79,8 @@ function App() {
                 location="DHA Phase VI, Karachi, Pakistan"
                 date="26.11.2024 - A DAY AGO"
               />
-            </div>
+            </div> */}
+            <TopProperties/>
             <Footer />
           </>
         } />
@@ -93,6 +95,12 @@ function App() {
         <Route path='/signup' element={
           <>
             <Signup />
+          </>
+        } />
+        
+        <Route path='/AgentPortal/Registration' element={
+          <>
+            <AgentReg/>
           </>
         } />
 

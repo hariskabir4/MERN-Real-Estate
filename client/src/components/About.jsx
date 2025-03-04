@@ -29,19 +29,21 @@ const About = () => {
         <h2>Meet the Team</h2>
         <div className="team-container">
           <div className="team-member">
-            <img src="/images/team-member1.jpg" alt="John Doe" />
-            <h3>tayaba</h3>
-            <p>Founder & CEO</p>
+            <img src="/areeb.jpg" alt="Areeb Ul Haq" />
+            <h3>Areeb Ul Haq</h3>
+            <p>Chief Operating Officer</p>
+            <p>& Co-Founder</p>
           </div>
           <div className="team-member">
-            <img src="/images/team-member2.jpg" alt="Jane Smith" />
-            <h3>Areeb</h3>
-            <p>Chief Operating Officer</p>
+            <img src="/Haris.jpg" alt="Haris Kabir" />
+            <h3>Haris Kabir</h3>
+            <p>Chief Ececutive Officer & Founder</p>
           </div>
           <div className="team-member">
-            <img src="/images/team-member2.jpg" alt="Jane Smith" />
-            <h3>Haris</h3>
-            <p>Chief Operating Officer</p>
+            <img src="/Tayaba.jpg" alt="Tayaba Jameel" />
+            <h3>Tayaba Jameel</h3>
+            <p>Chief Technology Officer</p>
+            <p>& Co-Founder</p>
           </div>
           {/* Add more team members as needed */}
         </div>

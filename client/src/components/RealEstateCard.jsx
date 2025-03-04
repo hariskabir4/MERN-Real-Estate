@@ -1,13 +1,13 @@
 import React from 'react';
 import './RealEstateCard.css';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RealEstateCard = (props) => {
 
   const navigate = useNavigate();
 
   const handlePropertyDetails = () => {
-    navigate("/PropertyDetails");
+    navigate(`/property/${props.id}`);
   }
 
   return (

@@ -8,6 +8,8 @@ const authRoutes = require("./Routes/auth"); // Import auth routes
 const propertyRoutes = require("./Routes/propertylist"); // Import property routes
 const searchRoutes = require("./Routes/searchproperty");
 const propertyDetailsRoutes = require("./Routes/propertyDetails");
+const topPropertiesRoutes = require("./Routes/topProperties");
+const agentRoutes = require("./Routes/Agentroute");
 
 const app = express();
 
@@ -15,6 +17,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
+app.use("/api/agent", agentRoutes);
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/Proj", {
@@ -33,6 +36,9 @@ app.use("/api/properties/search", searchRoutes);
 
 // Add this new route
 app.use("/api/property", propertyDetailsRoutes);
+
+// Add this new route
+app.use("/api/properties/top", topPropertiesRoutes);
 
 // Start the server
 const PORT = 5000;
