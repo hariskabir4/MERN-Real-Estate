@@ -37,7 +37,7 @@ const About = () => {
           <div className="team-member">
             <img src="/Haris.jpg" alt="Haris Kabir" />
             <h3>Haris Kabir</h3>
-            <p>Chief Ececutive Officer & Founder</p>
+            <p>Chief Executive Officer & Founder</p>
           </div>
           <div className="team-member">
             <img src="/Tayaba.jpg" alt="Tayaba Jameel" />
