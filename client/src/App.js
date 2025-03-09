@@ -24,21 +24,28 @@ import MyOfferContainer from './components/MyOfferContainer';
 import Inspection_Agent from './components/Inspection_Agent';
 import OnsiteInspectorForm from './components/OnsiteInspectorForm'
 import TopProperties from './components/TopProperties';
+import Dashboard from './components/Dashboard';
+import AgentNavbar from './components/AgentNavbar';
+import OnsiteInspectionReport from './components/OnsiteInspectionReport';
+import sampleInspectionData from './components/sampleInspectionData';
+import AIPropertyInspection from './components/AIPropertyEstimation';
+import OnsiteInspectionRequestForm from './components/OnsiteInspectionRequestForm';
 import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './Usercontext'; // Import UserProvider
+import AIPropertyEstimation from './components/AIPropertyEstimation';
 
 
 function App() {
   return (
-    <UserProvider> {/* Wrap everything with UserProvider */} 
-    <div className="App">
-      <Routes>
-        <Route path='/' element={
-          <>
-            <Navbar />
-            <HeaderComponent />
-            {/* <div className='property-container'>
+    <UserProvider> {/* Wrap everything with UserProvider */}
+      <div className="App">
+        <Routes>
+          <Route path='/' element={
+            <>
+              <Navbar />
+              <HeaderComponent />
+              {/* <div className='property-container'>
               <RealEstateCard
                 imageSrc='./source1.jpg'
                 price="25256"
@@ -80,180 +87,240 @@ function App() {
                 date="26.11.2024 - A DAY AGO"
               />
             </div> */}
-            <TopProperties/>
-            <Footer />
-          </>
-        } />
+              <TopProperties />
+              <Footer />
+            </>
+          } />
 
-        <Route path='/search-results' element={
-          <>
-            <Navbar />
-            <ParentLayout />
-          </>
-        } />
+          <Route path='/search-results' element={
+            <>
+              <Navbar />
+              <ParentLayout />
+            </>
+          } />
 
-        <Route path='/signup' element={
-          <>
-            <Signup />
-          </>
-        } />
-        
-        <Route path='/AgentPortal/Registration' element={
-          <>
-            <AgentReg/>
-          </>
-        } />
+          <Route path='/signup' element={
+            <>
+              <Signup />
+            </>
+          } />
 
-        <Route path='/login' element={
-          <>
-            <Login />
-          </>
-        } />
+          <Route path='/AgentPortal/Registration' element={
+            <>
+              <AgentReg />
+            </>
+          } />
+          <Route path='/AgentPortal/Home' element={
+            <>
+              <AgentNavbar />
+              <Dashboard />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal/about' element={
+            <>
+              <AgentNavbar />
+              <About />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal/services' element={
+            <>
+              <AgentNavbar />
+              <Services />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal/contact' element={
+            <>
+              <AgentNavbar />
+              <Contact />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal/chatpage' element={
+            <>
+              <AgentNavbar />
+              <ChatPage_1 />
+              <Footer />
+            </>
+          } />
 
-        <Route path='/accounts' element={
-          <>
-            {/* <Accounts/> */}
-          </>
-        } />
-        <Route path='/property:id' element={
-          <>
-            {/* ` */}
-          </>
-        } />
+          <Route path='/login' element={
+            <>
+              <Login />
+            </>
+          } />
 
-        <Route path='/about' element={
-          <>
-            <Navbar />
-            <About />
-            <Footer />
-          </>
-        } />
-        <Route path='/services' element={
-          <>
-            <Navbar />
-            <Services />
-            <Footer />
-          </>
-        } />
-        <Route path='/contact' element={
-          <>
-            <Navbar />
-            <Contact />
-            <Footer />
-          </>
-        } />
+          <Route path='/accounts' element={
+            <>
+              {/* <Accounts/> */}
+            </>
+          } />
+          <Route path='/property:id' element={
+            <>
+              {/* ` */}
+            </>
+          } />
 
-        <Route element={<ProtectedRoute />}>
-        <Route path='/new-listing' element={
-          <>
-            <PropertyListingForm />
-          </>
-        } />
-        </Route>
-        
-        <Route path='/veiw-offers' element={
-          <>
-            <Navbar/>
-            <OfferContainer/>
-            <Footer/>
-          </>
-        } />
-        <Route path='/veiw-offers' element={
-          <>
-            <Navbar/>
-            <OfferContainer/>
-            <Footer/>
-          </>
-        } />
-       
-        <Route path='/my-offers' element={
-          <>
-            <Navbar/>
-            <MyOfferContainer/>
-            <Footer/>
-          </>
-        } />
+          <Route path='/about' element={
+            <>
+              <Navbar />
+              <About />
+              <Footer />
+            </>
+          } />
+          <Route path='/AIPropertyValuation' element={
+            <>
+              <Navbar />
+             <AIPropertyEstimation/>
+              <Footer />
+            </>
+          } />
+          <Route path='/onsiteInspectionRequestForm' element={
+            <>
+              <Navbar />
+              <OnsiteInspectionRequestForm/>
+              <Footer />
+            </>
+          } />
+          <Route path='/onsiteInspectionResult' element={
+            <>
+              <Navbar />
+              <div>
+                {sampleInspectionData.map((data, index) => (
+                  <OnsiteInspectionReport key={index} {...data} />
+                ))}
+              </div>
+              <Footer />
+            </>
+          } />
+          <Route path='/services' element={
+            <>
+              <Navbar />
+              <Services />
+              <Footer />
+            </>
+          } />
+          <Route path='/contact' element={
+            <>
+              <Navbar />
+              <Contact />
+              <Footer />
+            </>
+          } />
 
-        <Route path='/AgentPortal' element={
-          <>
-            <Navbar/>
-           <AgentLogin/>  
-            <Footer/>
-          </>
-        } />
-        <Route path='/AgentPortal' element={
-          <>
-            <Navbar/>
-           <AgentLogin/>  
-            <Footer/>
-          </>
-        } />
-        
-        <Route path='/AgentPortal/onsite-inspection' element={
-          <>
-            <Navbar/>
-           <Inspection_Agent/>
-            <Footer/>
-          </>
-        } />
-        <Route path='/AgentPortal/onsite-inspector' element={
-          <>
-            <Navbar/>
-           <OnsiteInspectorForm />
-            <Footer/>
-          </>
-        } />
-        
-        <Route path='/property/:id' element={
-          <>
-            <Navbar />
-            <PropertyDetail />
-            <Footer />
-          </>
-        } />
+          <Route element={<ProtectedRoute />}>
+            <Route path='/new-listing' element={
+              <>
+                <PropertyListingForm />
+              </>
+            } />
+          </Route>
 
-        <Route path='/my-listings' element={
-          <>
-            <Navbar />
-            <MyListing
-              imageSrc="./source1.jpg"
-              price="25256"
-              type="Office for Sale"
-              size="900"
-              location="DHA Phase VI, Karachi, Pakistan"
-              date="26.11.2024 - A DAY AGO"
-            />
-            <MyListing
-              imageSrc="./source1.jpg"
-              price="25256"
-              type="Office for Sale"
-              size="900"
-              location="DHA Phase VI, Karachi, Pakistan"
-              date="26.11.2024 - A DAY AGO"
-            />
-            <MyListing
-              imageSrc="./source1.jpg"
-              price="25256"
-              type="Office for Sale"
-              size="900"
-              location="DHA Phase VI, Karachi, Pakistan"
-              date="26.11.2024 - A DAY AGO"
-            />
-            <Footer />
-          </>
-        } />
+          <Route path='/veiw-offers' element={
+            <>
+              <Navbar />
+              <OfferContainer />
+              <Footer />
+            </>
+          } />
+          <Route path='/veiw-offers' element={
+            <>
+              <Navbar />
+              <OfferContainer />
+              <Footer />
+            </>
+          } />
 
-        <Route path='/chatpage' element={
-          <>
-            <Navbar />
-            <ChatPage_1 />
-            <Footer />
-          </>
-        } />
-      </Routes>
+          <Route path='/my-offers' element={
+            <>
+              <Navbar />
+              <MyOfferContainer />
+              <Footer />
+            </>
+          } />
 
-    </div>
-  </UserProvider>
+          <Route path='/AgentPortal' element={
+            <>
+              <Navbar />
+              <AgentLogin />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal' element={
+            <>
+              <Navbar />
+              <AgentLogin />
+              <Footer />
+            </>
+          } />
+
+          <Route path='/AgentPortal/onsite-inspection' element={
+            <>
+              <Navbar />
+              <Inspection_Agent />
+              <Footer />
+            </>
+          } />
+          <Route path='/AgentPortal/onsite-inspector' element={
+            <>
+              <AgentNavbar />
+              <OnsiteInspectorForm />
+              <Footer />
+            </>
+          } />
+
+          <Route path='/property/:id' element={
+            <>
+              <Navbar />
+              <PropertyDetail />
+              <Footer />
+            </>
+          } />
+
+          <Route path='/my-listings' element={
+            <>
+              <Navbar />
+              <MyListing
+                imageSrc="./source1.jpg"
+                price="25256"
+                type="Office for Sale"
+                size="900"
+                location="DHA Phase VI, Karachi, Pakistan"
+                date="26.11.2024 - A DAY AGO"
+              />
+              <MyListing
+                imageSrc="./source1.jpg"
+                price="25256"
+                type="Office for Sale"
+                size="900"
+                location="DHA Phase VI, Karachi, Pakistan"
+                date="26.11.2024 - A DAY AGO"
+              />
+              <MyListing
+                imageSrc="./source1.jpg"
+                price="25256"
+                type="Office for Sale"
+                size="900"
+                location="DHA Phase VI, Karachi, Pakistan"
+                date="26.11.2024 - A DAY AGO"
+              />
+              <Footer />
+            </>
+          } />
+
+          <Route path='/chatpage' element={
+            <>
+              <Navbar />
+              <ChatPage_1 />
+              <Footer />
+            </>
+          } />
+        </Routes>
+
+      </div>
+    </UserProvider>
   );
 }
 

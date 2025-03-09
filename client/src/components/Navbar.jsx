@@ -65,6 +65,9 @@ const Navbar = () => {
                       <Link to="/my-listings" className="dropdown-item">My Listings</Link>
                       <div className="dropdown-item" onClick={handlehandleVeiwOffers}>Veiw offers</div>
                       <div className="dropdown-item" onClick={handlehandleVeiwMyOffers}>Offers Placed</div>
+                      <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionRequestForm')}>Onsite Property <br /> Valuation</div>
+                      <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionResult')}> View Onsite <br />Inspection<br />Result</div>
+                      <div className="dropdown-item" onClick={() => navigate('/AIPropertyValuation')}>AI Property <br /> Valuation</div>
                       <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
                       <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
                     </div>
@@ -84,6 +87,9 @@ const Navbar = () => {
                 <Link to="/my-listings" className="dropdown-item">My Listings</Link>
                 <div className="dropdown-item" onClick={handlehandleVeiwOffers}>Veiw offers</div>
                 <div className="dropdown-item" onClick={handlehandleVeiwMyOffers}>Offers Placed</div>
+                <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionRequestForm')}>Onsite Property <br /> Valuation</div>
+                <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionResult')}> View Onsite <br />Inspection<br />Result</div>
+                <div className="dropdown-item" onClick={() => navigate('/AIPropertyValuation')}>AI Property <br /> Valuation</div>
                 <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
                 <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
               </div>

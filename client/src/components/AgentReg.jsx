@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AgentReg.css";
-// import axios from "axios"; // Backend request commented
+import axios from "axios"; // Backend request commented
 
 const AgentReg = () => {
     const [formData, setFormData] = useState({
@@ -51,18 +51,17 @@ const AgentReg = () => {
         e.preventDefault();
         
         //  backend request
-        /*
+
         try {
-            const response = await axios.post("http://localhost:5000/signup", formData);
+            const response = await axios.post("http://localhost:5000/api/agent/signup", formData);
             alert(response.data.message);
             navigate("/login");
         } catch (error) {
             alert(error.response?.data?.message || "An error occurred");
         }
-        */
 
         console.log("Form submitted with:", formData); // Debugging log
-        navigate("/login"); // Redirecting for now
+        navigate("/AgentPortal"); // Redirecting for now
     };
 
     return (

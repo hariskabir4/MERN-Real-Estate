@@ -1,0 +1,93 @@
+.background_AI_appraisal {
+    background: url("../../public/req\ tr-3.jpg") no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .header_AI_appraisal {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+  
+  .container_AI_appraisal {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .title_AI_appraisal {
+    margin-bottom: 20px;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .form_AI_appraisal {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .form_row_AI_appraisal {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .form_row_AI_appraisal input, 
+  .form_row_AI_appraisal select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .checkboxes_AI_appraisal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+  
+  .btn_AI_appraisal {
+    width: 100%;
+    padding: 12px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn_AI_appraisal:hover {
+    background-color: #4caf50;
+  }
+  
+  .result_card_AI_appraisal {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .price_highlight_AI {
+    color: #45a049;
+    font-weight: bold;
+  }
+  
