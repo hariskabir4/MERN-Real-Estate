@@ -1,0 +1,119 @@
+.agent-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222; /* Slightly darker for differentiation */
+    color: #fff;
+    padding: 10px 20px;
+  }
+  
+  .agent-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .agent-nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-right: 5%;
+  }
+  
+  .agent-nav-item {
+    margin-left: 20px;
+    position: relative; /* For dropdown positioning */
+  }
+  
+  .agent-nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  
+  .agent-nav-link:hover {
+    color: #ff9800; /* Orange for agents */
+  }
+  
+  /* Chat SVG */
+  .agent-nav-item svg {
+    vertical-align: middle;
+    margin-right: 5px;
+    padding-right: 0;
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* User Profile Section */
+  .agent-user-profile {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .agent-user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .agent-user-info svg {
+    vertical-align: middle;
+  }
+  
+  /* Dropdown Menu Styles */
+  .agent-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+  }
+  
+  .agent-dropdown-item {
+    padding: 10px 15px;
+    color: white !important;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .agent-dropdown-item:hover {
+    background-color: #444;
+  }
+  
+  /* Show dropdown on hover */
+  .agent-user-profile:hover .agent-dropdown-menu {
+    display: flex;
+  }
+  
+  /* Appraisal Requests - Special Highlight */
+  .agent-nav-item .appraisal-link {
+    font-weight: bold;
+    color: #ff9800;
+  }
+  
+  .agent-nav-item .appraisal-link:hover {
+    color: #ff5722; /* Darker orange */
+  }
+  
+  /* Hover effects */
+  .agent-nav-item svg:hover,
+  .agent-nav-item .agent-nav-link:hover {
+    color: #ff9800;
+    fill: #ff9800;
+    cursor: pointer;
+  }
+  
+  .agent-user-profile:hover .agent-user-info svg,
+  .agent-user-profile:hover .agent-user-info span {
+    color: #ff9800;
+    fill: #ff9800;
+    cursor: pointer;
+  }
+  
