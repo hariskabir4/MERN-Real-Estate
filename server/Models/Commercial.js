@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const CommercialSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   title: { type: String, required: true },
   owner: { type: String, required: true },
   location: { type: String, required: true },

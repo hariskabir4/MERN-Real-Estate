@@ -1,22 +1,43 @@
 //token with name
 const jwt = require("jsonwebtoken");
-
-const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
+const JWT_SECRET = "your_super_secret_key";  // Use exact same secret
 
 const authenticateToken = (req, res, next) => {
-    const token = req.headers["authorization"]; // Get token from Authorization header
-
-    if (!token) {
-        return res.status(403).json({ message: "Access denied. No token provided." });
-    }
-
     try {
-        const decoded = jwt.verify(token, JWT_SECRET); // Verify the token
-        req.user = decoded; // Attach user info to the request object
-        next(); // Proceed to the next middleware or route handler
+        const authHeader = req.headers["authorization"];
+        
+        // Debug logging
+        console.log("Auth header received:", authHeader);
+
+        if (!authHeader) {
+            return res.status(403).json({ message: "No authorization header" });
+        }
+
+        // Check for Bearer scheme
+        if (!authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ message: "Invalid authorization scheme" });
+        }
+
+        const token = authHeader.split(' ')[1];
+        
+        if (!token) {
+            return res.status(403).json({ message: "No token provided" });
+        }
+
+        // Verify token
+        const decoded = jwt.verify(token, JWT_SECRET);
+        
+        // Debug logging
+        console.log("Decoded token:", decoded);
+
+        req.user = decoded;
+        next();
     } catch (error) {
-        console.error("Invalid or expired token:", error);
-        res.status(401).json({ message: "Invalid or expired token" });
+        console.error("Auth error:", error.message);
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({ message: "Token has expired" });
+        }
+        return res.status(401).json({ message: "Invalid token" });
     }
 };
 

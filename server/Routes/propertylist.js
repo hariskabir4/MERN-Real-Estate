@@ -4,6 +4,7 @@ const Residential = require("../Models/Residential");
 const Commercial = require("../Models/Commercial");
 const multer = require("multer");
 const path = require("path");
+const authenticateToken = require("../middleware/jwtAuth");
 
 // Set storage engine for multer
 const storage = multer.diskStorage({
@@ -18,9 +19,17 @@ const storage = multer.diskStorage({
 // Initialize multer with the storage engine
 const upload = multer({ storage: storage }).array("images", 5); // Allow multiple file uploads, max 5 images
 
-// Property Listing Route (updated to /new-listing)
-router.post("/new-listing", upload, async (req, res) => {
+// Property Listing Route
+router.post("/new-listing", authenticateToken, upload, async (req, res) => {
     try {
+        // Debug logging
+        console.log("Authenticated user in route:", req.user);
+        
+        const userId = req.user.id;
+        if (!userId) {
+            return res.status(400).json({ message: "User ID not found in token" });
+        }
+
         const { propertyType, title, owner, location, price, size, bedrooms, bathrooms, purpose, features, city, state, status } = req.body;
 
         // Validation checks
@@ -46,6 +55,7 @@ router.post("/new-listing", upload, async (req, res) => {
         let property;
         if (propertyType === "Residential") {
             property = new Residential({
+                userId,
                 title: title.trim(),
                 owner: owner.trim(),
                 location: location.trim(),
@@ -62,6 +72,7 @@ router.post("/new-listing", upload, async (req, res) => {
             });
         } else {
             property = new Commercial({
+                userId,
                 title: title.trim(),
                 owner: owner.trim(),
                 location: location.trim(),
@@ -79,8 +90,11 @@ router.post("/new-listing", upload, async (req, res) => {
         await property.save();
         res.status(201).json({ message: "Property listed successfully", property });
     } catch (error) {
-        console.error("Error in property listing:", error);
-        res.status(500).json({ message: "Internal server error" });
+        console.error("Property listing error:", error);
+        res.status(500).json({ 
+            message: "Error creating property listing",
+            error: error.message 
+        });
     }
 });
 

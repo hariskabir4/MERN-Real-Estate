@@ -15,6 +15,7 @@ const ResidentialSchema = new mongoose.Schema({
   status: { type: String, enum: ["available", "sold", "rented"], required: true },
   images: [{ type: String }], // Array of image filenames
   listedAt: { type: Date, default: Date.now },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 module.exports = mongoose.model("Residential", ResidentialSchema);

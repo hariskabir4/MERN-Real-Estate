@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const authenticateToken = require("../middleware/jwtAuth"); // Import middleware
 
 // JWT Secret
-const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
+const JWT_SECRET = "your_super_secret_key";  // Use exact same secret
 
 // Signup Route
 router.post("/signup", async (req, res) => {
@@ -79,14 +79,31 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Generate JWT including username
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.username }, JWT_SECRET, {
-      expiresIn: "1h", // Token expires in 1 hour
-    });
+    // Generate JWT
+    const token = jwt.sign(
+      { 
+        id: user._id,
+        email: user.email,
+        name: user.username
+      },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
-    res.status(200).json({ message: "Login successful", token });
+    // Debug logging
+    console.log("Generated token:", token);
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.username
+      }
+    });
   } catch (error) {
-    console.error("Error in login:", error);
+    console.error("Login error:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
