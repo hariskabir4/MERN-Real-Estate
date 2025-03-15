@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const ResidentialSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   title: { type: String, required: true },
   owner: { type: String, required: true },
   location: { type: String, required: true },
@@ -15,7 +16,6 @@ const ResidentialSchema = new mongoose.Schema({
   status: { type: String, enum: ["available", "sold", "rented"], required: true },
   images: [{ type: String }], // Array of image filenames
   listedAt: { type: Date, default: Date.now },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 });
 
 module.exports = mongoose.model("Residential", ResidentialSchema);
