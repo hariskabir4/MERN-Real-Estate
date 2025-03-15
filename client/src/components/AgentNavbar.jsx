@@ -15,6 +15,7 @@ const AgentNavbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // Clear token from local storage
     logout(); // Reset user state
+    navigate('/'); // Navigate to home page
   };
 
   const handlehandleVeiwOffers = () => {

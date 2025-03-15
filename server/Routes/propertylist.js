@@ -98,4 +98,31 @@ router.post("/new-listing", authenticateToken, upload, async (req, res) => {
     }
 });
 
+// Get user's listings
+router.get("/my-listings", authenticateToken, async (req, res) => {
+  try {
+    // Fetch both residential and commercial properties
+    const residentialListings = await Residential.find({ userId: req.user.id });
+    const commercialListings = await Commercial.find({ userId: req.user.id });
+
+    // Combine and format the listings
+    const allListings = [...residentialListings, ...commercialListings].map(listing => ({
+      id: listing._id,
+      type: listing.title,
+      location: listing.location,
+      size: listing.size,
+      price: listing.price,
+      date: listing.listedAt,
+      imageSrc: listing.images && listing.images.length > 0 
+        ? `/uploads/${listing.images[0]}` 
+        : 'https://placehold.jp/800x600.png'
+    }));
+
+    res.json(allListings);
+  } catch (error) {
+    console.error('Error fetching listings:', error);
+    res.status(500).json({ message: 'Error fetching listings' });
+  }
+});
+
 module.exports = router;

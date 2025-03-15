@@ -216,6 +216,13 @@ function App() {
                 <PropertyListingForm />
               </>
             } />
+            <Route path='/my-listings' element={
+              <>
+                <Navbar />
+                <MyListing />
+                <Footer />
+              </>
+            } />
           </Route>
 
           <Route path='/veiw-offers' element={
@@ -275,37 +282,6 @@ function App() {
             <>
               <Navbar />
               <PropertyDetail />
-              <Footer />
-            </>
-          } />
-
-          <Route path='/my-listings' element={
-            <>
-              <Navbar />
-              <MyListing
-                imageSrc="./source1.jpg"
-                price="25256"
-                type="Office for Sale"
-                size="900"
-                location="DHA Phase VI, Karachi, Pakistan"
-                date="26.11.2024 - A DAY AGO"
-              />
-              <MyListing
-                imageSrc="./source1.jpg"
-                price="25256"
-                type="Office for Sale"
-                size="900"
-                location="DHA Phase VI, Karachi, Pakistan"
-                date="26.11.2024 - A DAY AGO"
-              />
-              <MyListing
-                imageSrc="./source1.jpg"
-                price="25256"
-                type="Office for Sale"
-                size="900"
-                location="DHA Phase VI, Karachi, Pakistan"
-                date="26.11.2024 - A DAY AGO"
-              />
               <Footer />
             </>
           } />
