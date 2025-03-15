@@ -30,13 +30,13 @@ const OnsiteInspectorForm = () => {
     };
 
     return (
-        <>
+        <div className="onsite-inspector-form-wrapper">
             {/* Form */}
-            <div className="form-container_eval_form">
-                <form className="form-box_eval_form" onSubmit={handleSubmit}>
+            <div className="form-container">
+                <form className="form-box" onSubmit={handleSubmit}>
                     <h2>Onsite Property Evaluation</h2>
 
-                    <div className="form-grid_eval_form">
+                    <div className="form-grid">
                         <input type="date" name="inspectionDate" value={formData.inspectionDate} onChange={handleChange} required />
                         <input type="text" name="locationPrice" placeholder="Estimated Price" value={formData.locationPrice} onChange={handleChange} />
                         <select name="propertyType" value={formData.propertyType} onChange={handleChange} required>
@@ -67,10 +67,10 @@ const OnsiteInspectorForm = () => {
                         <textarea name="finalRemarks" placeholder="Final Remarks" value={formData.finalRemarks} onChange={handleChange} />
                     </div>
 
-                    <button type="submit" className="submit-btn_eval_form">Submit Evaluation</button>
+                    <button type="submit" className="submit-btn">Submit Evaluation</button>
                 </form>
             </div>
-        </>
+        </div>
     );
 };
 
