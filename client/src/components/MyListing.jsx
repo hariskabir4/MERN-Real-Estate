@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import propertyService from '../services/propertyService';
 import './MyListing.css';
+import { useNavigate } from 'react-router-dom';
 
 const MyListing = () => {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let mounted = true;
@@ -41,6 +43,10 @@ const MyListing = () => {
     e.target.src = 'https://placehold.jp/800x600.png';
   };
 
+  const handleUpdateClick = (propertyId) => {
+    navigate(`/property-update/${propertyId}`);
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -68,7 +74,7 @@ const MyListing = () => {
   return (
     <div className="listings-container">
       {listings.map((listing) => (
-        <div key={listing.id} className="my-listing-horizontal">
+        <div key={listing._id} className="my-listing-horizontal">
           <img 
             src={listing.imageSrc}
             alt={listing.type} 
@@ -90,7 +96,12 @@ const MyListing = () => {
               <strong>Date: </strong>
               {new Date(listing.date).toLocaleDateString()}
             </p>
-            <button className="update-info-button-horizontal">Update Information</button>
+            <button 
+              className="update-info-button-horizontal"
+              onClick={() => handleUpdateClick(listing._id)}
+            >
+              Update Information
+            </button>
           </div>
         </div>
       ))}

@@ -34,6 +34,7 @@ import ProtectedRoute from './components/ProtectedRoute'; // Import the Protecte
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './Usercontext'; // Import UserProvider
 import AIPropertyEstimation from './components/AIPropertyEstimation';
+import PropertyUpdateForm from './components/PropertyUpdateForm';
 
 
 function App() {
@@ -213,13 +214,22 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path='/new-listing' element={
               <>
+                <Navbar />
                 <PropertyListingForm />
+                <Footer />
               </>
             } />
             <Route path='/my-listings' element={
               <>
                 <Navbar />
                 <MyListing />
+                <Footer />
+              </>
+            } />
+            <Route path='/property-update/:id' element={
+              <>
+                <Navbar />
+                <PropertyUpdateForm />
                 <Footer />
               </>
             } />

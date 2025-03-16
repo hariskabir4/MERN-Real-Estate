@@ -14,7 +14,12 @@ const agentRoutes = require("./Routes/Agentroute");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // React app's URL
+  credentials: true, // Allow credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 app.use("/api/agent", agentRoutes);

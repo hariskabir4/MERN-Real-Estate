@@ -101,28 +101,143 @@ router.post("/new-listing", authenticateToken, upload, async (req, res) => {
 // Get user's listings
 router.get("/my-listings", authenticateToken, async (req, res) => {
   try {
-    // Fetch both residential and commercial properties
-    const residentialListings = await Residential.find({ userId: req.user.id });
-    const commercialListings = await Commercial.find({ userId: req.user.id });
-
-    // Combine and format the listings
-    const allListings = [...residentialListings, ...commercialListings].map(listing => ({
-      id: listing._id,
-      type: listing.title,
-      location: listing.location,
-      size: listing.size,
-      price: listing.price,
-      date: listing.listedAt,
-      imageSrc: listing.images && listing.images.length > 0 
-        ? `/uploads/${listing.images[0]}` 
-        : 'https://placehold.jp/800x600.png'
+    const userId = req.user.id;
+    
+    // Find properties in both collections
+    const residentialProperties = await Residential.find({ userId: userId });
+    const commercialProperties = await Commercial.find({ userId: userId });
+    
+    // Combine and format the properties
+    const allProperties = [...residentialProperties, ...commercialProperties].map(property => ({
+      _id: property._id.toString(),
+      type: property.title,
+      location: property.location,
+      price: property.price,
+      size: property.size,
+      date: property.listedAt,
+      // Keep the original imageSrc format that was working before
+      imageSrc: property.images && property.images.length > 0 
+        ? `/uploads/${property.images[0]}` // Adjust this path according to your server setup
+        : null,
+      // Include any other fields that were working before
+      owner: property.owner,
+      features: property.features,
+      city: property.city,
+      state: property.state,
+      status: property.status
     }));
 
-    res.json(allListings);
+    console.log('Sending properties:', allProperties); // Debug log
+    res.json(allProperties);
   } catch (error) {
     console.error('Error fetching listings:', error);
-    res.status(500).json({ message: 'Error fetching listings' });
+    res.status(500).json({ message: "Error fetching listings" });
   }
+});
+
+// Add this new route to your existing propertylist.js
+router.put("/update/:id", async (req, res) => {
+  try {
+    const propertyId = req.params.id;
+    const updates = req.body;
+
+    // Try to find and update in Residential collection first
+    let property = await Residential.findById(propertyId);
+    let isResidential = true;
+
+    // If not found in Residential, try Commercial
+    if (!property) {
+      property = await Commercial.findById(propertyId);
+      isResidential = false;
+    }
+
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+
+    // Update the property in the appropriate collection
+    const updatedProperty = await (isResidential ? Residential : Commercial).findByIdAndUpdate(
+      propertyId,
+      { $set: updates },
+      { new: true }
+    );
+
+    res.json(updatedProperty);
+  } catch (error) {
+    console.error('Error updating property:', error);
+    res.status(500).json({ message: 'Error updating property' });
+  }
+});
+
+// Debug middleware to log all requests
+router.use((req, res, next) => {
+  console.log('Property Route Request:', {
+    method: req.method,
+    path: req.path,
+    params: req.params,
+    query: req.query
+  });
+  next();
+});
+
+// Add this console log to verify route registration
+console.log('Registering property routes...');
+
+router.get('/property/:id', async (req, res) => {
+  try {
+    const propertyId = req.params.id;
+
+    // Try to find in Residential collection
+    let property = await Residential.findById(propertyId);
+    let isResidential = true;
+
+    // If not in Residential, try Commercial
+    if (!property) {
+      property = await Commercial.findById(propertyId);
+      isResidential = false;
+    }
+
+    if (!property) {
+      return res.status(404).json({ message: 'Property not found' });
+    }
+
+    const propertyDetails = {
+      _id: property._id,
+      title: property.title,
+      owner: property.owner,
+      location: property.location,
+      price: property.price,
+      size: property.size,
+      purpose: property.purpose,
+      features: property.features,
+      city: property.city,
+      state: property.state,
+      status: property.status,
+      images: property.images,
+      ...(isResidential ? {
+        bedrooms: property.bedrooms,
+        bathrooms: property.bathrooms,
+      } : {})
+    };
+
+    res.json(propertyDetails);
+  } catch (error) {
+    console.error('Error fetching property:', error);
+    res.status(500).json({ message: 'Error fetching property details' });
+  }
+});
+
+// Add this test route to verify the router is mounted correctly
+router.get('/test', (req, res) => {
+  res.json({ message: 'Property routes are working' });
+});
+
+// Add this test route at the top of your routes
+router.get('/test-auth', authenticateToken, (req, res) => {
+  res.json({
+    message: 'Authentication working',
+    user: req.user
+  });
 });
 
 module.exports = router;
