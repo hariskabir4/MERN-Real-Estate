@@ -64,25 +64,25 @@ const Filter = () => {
   };
 
   return (
-    <div className="filter-container">
-      <div className="filter-header">
+    <div className="bunyaad-filter-container">
+      <div className="bunyaad-filter-header">
         <button 
-          className={`filter-tab ${filters.purpose === "Sale" ? "active" : ""}`}
+          className={`bunyaad-filter-tab ${filters.purpose === "Sale" ? "active" : ""}`}
           onClick={() => handlePurposeChange("Sale")}
         >
           Sale
         </button>
         <button 
-          className={`filter-tab ${filters.purpose === "Rent" ? "active" : ""}`}
+          className={`bunyaad-filter-tab ${filters.purpose === "Rent" ? "active" : ""}`}
           onClick={() => handlePurposeChange("Rent")}
         >
           Rent
         </button>
       </div>
-      <div className="filter-body">
-        <div className="filter-group">
+      <div className="bunyaad-filter-body">
+        <div className="bunyaad-filter-group">
           <label>Type</label>
-          <div className="filter-options">
+          <div className="bunyaad-filter-options">
             <label>
               <input 
                 type="radio" 
@@ -112,7 +112,7 @@ const Filter = () => {
             </label>
           </div>
         </div>
-        <div className="filter-group">
+        <div className="bunyaad-filter-group">
           <label>Location</label>
           <select 
             name="province"
@@ -137,15 +137,16 @@ const Filter = () => {
             <option value="Peshawar">Peshawar</option>
           </select>
         </div>
-        <div className="filter-group">
+        <div className="bunyaad-filter-group">
           <label>Price ($)</label>
-          <div className="filter-range">
+          <div className="bunyaad-filter-price-inputs">
             <input 
               type="number"
               name="minPrice"
               placeholder="Min Price ($)"
               value={filters.minPrice}
               onChange={handleInputChange}
+              className="bunyaad-price-input"
             />
             <input 
               type="number"
@@ -153,18 +154,20 @@ const Filter = () => {
               placeholder="Max Price ($)"
               value={filters.maxPrice}
               onChange={handleInputChange}
+              className="bunyaad-price-input"
             />
           </div>
         </div>
-        <div className="filter-group">
+        <div className="bunyaad-filter-group">
           <label>Size (m²)</label>
-          <div className="filter-range">
+          <div className="bunyaad-filter-size-inputs">
             <input 
               type="number"
               name="minSize"
               placeholder="Min Size (m²)"
               value={filters.minSize}
               onChange={handleInputChange}
+              className="bunyaad-size-input"
             />
             <input 
               type="number"
@@ -172,13 +175,14 @@ const Filter = () => {
               placeholder="Max Size (m²)"
               value={filters.maxSize}
               onChange={handleInputChange}
+              className="bunyaad-size-input"
             />
           </div>
         </div>
       </div>
-      <div className="filter-header">
-        <button className="filter-tab active" onClick={handleSearch}>Search</button>
-        <button className="filter-tab" onClick={handleReset}>Reset</button>
+      <div className="bunyaad-filter-header">
+        <button className="bunyaad-filter-tab active" onClick={handleSearch}>Search</button>
+        <button className="bunyaad-filter-tab" onClick={handleReset}>Reset</button>
       </div>
     </div>
   );

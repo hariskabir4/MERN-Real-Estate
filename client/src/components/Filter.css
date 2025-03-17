@@ -1,6 +1,6 @@
 /* Container for the filter component */
-.filter-container {
-  width: 300px; /* Reduced width */
+.bunyaad-filter-container {
+  width: 310px; /* Reduced width */
   padding: 20px;
   background-color: white;
   border-radius: 8px;
@@ -8,17 +8,17 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-left: 10px; 
+  margin-left: 154px; 
   margin-bottom: 5px;
 }
 
 /* Tabs for Sale and Rent */
-.filter-header {
+.bunyaad-filter-header {
   display: flex;
   justify-content: space-between;
 }
 
-.filter-tab {
+.bunyaad-filter-tab {
   flex: 1;
   text-align: center;
   padding: 10px 0;
@@ -29,50 +29,84 @@
   margin-right: 5px;
 }
 
-.filter-tab:last-child {
+.bunyaad-filter-tab:last-child {
   margin-right: 0;
 }
 
-.filter-tab.active {
+.bunyaad-filter-tab.active {
   background-color: #f44336;
   color: white;
   border-color: #f44336;
 }
 
 /* Group container for labels and inputs */
-.filter-group {
+.bunyaad-filter-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.filter-group label {
+.bunyaad-filter-group label {
   font-size: 12px;
   font-weight: bold;
   color: #555;
 }
 
 /* Inputs and Selects */
-.filter-group input[type="text"],
-.filter-group select {
+.bunyaad-filter-group input[type="text"],
+.bunyaad-filter-group select {
   width: 100%;
   padding: 8px;
   font-size: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
-  
 }
 
 /* Radio buttons */
-.filter-group input[type="radio"] {
+.bunyaad-filter-group input[type="radio"] {
   margin-right: 5px;
 }
 
-.filter-group div {
+/* Radio buttons container */
+.bunyaad-filter-options {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* Price input specific styles */
+.bunyaad-filter-price-inputs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.bunyaad-price-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(50% - 5px);
+  box-sizing: border-box;
+}
+
+/* Size input specific styles */
+.bunyaad-filter-size-inputs {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.bunyaad-size-input {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: calc(50% - 5px);
+  box-sizing: border-box;
 }
 
 /* Buttons */
@@ -104,7 +138,7 @@
 
 /* Ensure responsive alignment */
 @media (max-width: 768px) {
-  .filter-container {
+  .bunyaad-filter-container {
     width: 100%;
     margin: 0 auto;
   }

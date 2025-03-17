@@ -33,7 +33,6 @@ const PropertyUpdateForm = () => {
         const data = await propertyService.getPropertyById(id);
         setPropertyData(data);
         
-        // Set initial image if exists
         if (data.images && data.images.length > 0) {
           setCurrentImage(data.images[0]);
           setImagePreview(`/uploads/${data.images[0]}`);
@@ -70,20 +69,17 @@ const PropertyUpdateForm = () => {
 
       const formData = new FormData();
 
-      // Append all property data
       Object.keys(propertyData).forEach(key => {
         if (key !== 'images') {
           formData.append(key, propertyData[key]);
         }
       });
 
-      // Handle image update
       if (newImage) {
         formData.append('images', newImage);
       }
-      
-      // If current image is removed
-      if (!newImage && !currentImage && propertyData.images) {
+
+      if (!newImage && !currentImage && propertyData.images && propertyData.images[0]) {
         formData.append('removedImages', JSON.stringify([propertyData.images[0]]));
       }
 
@@ -91,7 +87,6 @@ const PropertyUpdateForm = () => {
       alert('Property updated successfully!');
       navigate('/my-listings');
     } catch (err) {
-      console.error('Update error:', err);
       setError('Failed to update property. Please try again.');
     } finally {
       setLoading(false);
@@ -245,7 +240,7 @@ const PropertyUpdateForm = () => {
 
           <div className="image-section-property-update">
             <label className="image-label-property-update">
-              Property Image
+              Property Image (Optional)
               <input
                 type="file"
                 accept="image/*"

@@ -142,9 +142,7 @@ router.put("/update/:id", upload, async (req, res) => {
     const propertyId = req.params.id;
     const updates = req.body;
     const newImages = req.files;
-    const removedImages = JSON.parse(req.body.removedImages || '[]');
 
-    // Find property in either collection
     let property = await Residential.findById(propertyId);
     let isResidential = true;
 
@@ -157,20 +155,21 @@ router.put("/update/:id", upload, async (req, res) => {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    // Remove deleted images from storage
-    for (const imageName of removedImages) {
-      const imagePath = path.join(__dirname, '../uploads', imageName);
-      if (fs.existsSync(imagePath)) {
-        fs.unlinkSync(imagePath);
+    if (req.body.removedImages) {
+      const removedImages = JSON.parse(req.body.removedImages);
+      for (const imageName of removedImages) {
+        if (imageName) {
+          const imagePath = path.join(__dirname, '../uploads', imageName);
+          if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
+          }
+        }
       }
+      updates.images = [];
+    } else if (newImages && newImages.length > 0) {
+      updates.images = [newImages[0].filename];
     }
 
-    // Update images array
-    const currentImages = property.images.filter(img => !removedImages.includes(img));
-    const newImageNames = newImages ? newImages.map(file => file.filename) : [];
-    updates.images = [...currentImages, ...newImageNames];
-
-    // Update the property
     const updatedProperty = await (isResidential ? Residential : Commercial)
       .findByIdAndUpdate(
         propertyId,
@@ -180,7 +179,6 @@ router.put("/update/:id", upload, async (req, res) => {
 
     res.json(updatedProperty);
   } catch (error) {
-    console.error('Error updating property:', error);
     res.status(500).json({ message: 'Error updating property' });
   }
 });
