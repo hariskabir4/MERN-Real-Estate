@@ -178,24 +178,6 @@ function App() {
               <Footer />
             </>
           } />
-          <Route path='/onsiteInspectionRequestForm' element={
-            <>
-              <Navbar />
-              <OnsiteInspectionRequestForm/>
-              <Footer />
-            </>
-          } />
-          <Route path='/onsiteInspectionResult' element={
-            <>
-              <Navbar />
-              <div>
-                {sampleInspectionData.map((data, index) => (
-                  <OnsiteInspectionReport key={index} {...data} />
-                ))}
-              </div>
-              <Footer />
-            </>
-          } />
           <Route path='/services' element={
             <>
               <Navbar />
@@ -233,30 +215,53 @@ function App() {
                 <Footer />
               </>
             } />
+            <Route path='/chatpage' element={
+              <>
+                <Navbar />
+                <ChatPage_1 />
+                <Footer />
+              </>
+            } />
+            <Route path='/AgentPortal/chatpage' element={
+              <>
+                <AgentNavbar />
+                <ChatPage_1 />
+                <Footer />
+              </>
+            } />
+            <Route path='/veiw-offers' element={
+              <>
+                <Navbar />
+                <OfferContainer />
+                <Footer />
+              </>
+            } />
+            <Route path='/my-offers' element={
+              <>
+                <Navbar />
+                <MyOfferContainer />
+                <Footer />
+              </>
+            } />
+            <Route path='/onsiteInspectionRequestForm' element={
+              <>
+                <Navbar />
+                <OnsiteInspectionRequestForm />
+                <Footer />
+              </>
+            } />
+            <Route path='/onsiteInspectionResult' element={
+              <>
+                <Navbar />
+                <div>
+                  {sampleInspectionData.map((data, index) => (
+                    <OnsiteInspectionReport key={index} {...data} />
+                  ))}
+                </div>
+                <Footer />
+              </>
+            } />
           </Route>
-
-          <Route path='/veiw-offers' element={
-            <>
-              <Navbar />
-              <OfferContainer />
-              <Footer />
-            </>
-          } />
-          <Route path='/veiw-offers' element={
-            <>
-              <Navbar />
-              <OfferContainer />
-              <Footer />
-            </>
-          } />
-
-          <Route path='/my-offers' element={
-            <>
-              <Navbar />
-              <MyOfferContainer />
-              <Footer />
-            </>
-          } />
 
           <Route path='/AgentPortal' element={
             <>
@@ -292,14 +297,6 @@ function App() {
             <>
               <Navbar />
               <PropertyDetail />
-              <Footer />
-            </>
-          } />
-
-          <Route path='/chatpage' element={
-            <>
-              <Navbar />
-              <ChatPage_1 />
               <Footer />
             </>
           } />
