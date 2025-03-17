@@ -35,7 +35,7 @@ const PropertyUpdateForm = () => {
         
         if (data.images && data.images.length > 0) {
           setCurrentImage(data.images[0]);
-          setImagePreview(`/uploads/${data.images[0]}`);
+          setImagePreview(`http://localhost:5000/uploads/${data.images[0]}`);
         }
       } catch (err) {
         setError('Failed to fetch property details');
@@ -53,6 +53,10 @@ const PropertyUpdateForm = () => {
       setNewImage(file);
       setImagePreview(URL.createObjectURL(file));
     }
+  };
+
+  const handleImageError = () => {
+    setImagePreview('https://placehold.jp/400x300.png');
   };
 
   const handleRemoveImage = () => {
@@ -249,12 +253,13 @@ const PropertyUpdateForm = () => {
               />
             </label>
 
-            {imagePreview && (
+            {(imagePreview || currentImage) && (
               <div className="image-preview-wrapper-property-update">
                 <img
-                  src={imagePreview}
+                  src={imagePreview || 'https://placehold.jp/400x300.png'}
                   alt="Property"
                   className="image-preview-property-update"
+                  onError={handleImageError}
                 />
                 <button
                   type="button"

@@ -12,27 +12,31 @@ const getToken = () => {
 
 const propertyService = {
   getMyListings: async () => {
-    // Prevent multiple simultaneous requests
-    if (isRequestInProgress) {
-      console.warn('Request already in progress, skipping duplicate request');
-      return [];
-    }
-
     try {
-      isRequestInProgress = true;
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        throw new Error('No auth token found');
-      }
-
-      const response = await axios.get(`${API_URL}/my-listings`, {
+      const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+      
+      const response = await fetch('http://localhost:5000/api/properties/my-listings', {
         headers: {
-          Authorization: `Bearer ${token}`
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
       });
+
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
+        window.location.href = '/login';
+        throw new Error('Session expired. Please login again.');
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch listings');
+      }
+
+      const data = await response.json();
       
       // Transform the data to include full image URLs
-      const listings = response.data.map(listing => ({
+      const listings = data.map(listing => ({
         ...listing,
         imageSrc: listing.imageSrc && listing.imageSrc.startsWith('/uploads/')
           ? `${BASE_URL}${listing.imageSrc}`
@@ -43,16 +47,26 @@ const propertyService = {
     } catch (error) {
       console.error('Error fetching my listings:', error);
       throw error;
-    } finally {
-      isRequestInProgress = false;
     }
   },
   updateProperty: async (id, formData) => {
     try {
+      const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+      
       const response = await fetch(`http://localhost:5000/api/properties/update/${id}`, {
         method: 'PUT',
-        body: formData // FormData will set the correct Content-Type header
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
       });
+
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
+        window.location.href = '/login';
+        throw new Error('Session expired. Please login again.');
+      }
 
       if (!response.ok) {
         throw new Error('Failed to update property');
@@ -66,12 +80,21 @@ const propertyService = {
   },
   getPropertyById: async (id) => {
     try {
+      const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+      
       const response = await fetch(`http://localhost:5000/api/properties/property/${id}`, {
-        method: 'GET',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
+
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('authToken');
+        window.location.href = '/login';
+        throw new Error('Session expired. Please login again.');
+      }
 
       if (!response.ok) {
         throw new Error('Failed to fetch property details');

@@ -22,8 +22,12 @@ const MyListing = () => {
         }
       } catch (err) {
         if (mounted) {
-          setError(err.message || 'Failed to fetch listings');
-          setListings([]);
+          if (err.message.includes('Session expired')) {
+            navigate('/login');
+          } else {
+            setError(err.message || 'Failed to fetch listings');
+            setListings([]);
+          }
         }
       } finally {
         if (mounted) {
@@ -32,12 +36,17 @@ const MyListing = () => {
       }
     };
 
-    fetchListings();
+    const token = localStorage.getItem('token') || localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/login');
+    } else {
+      fetchListings();
+    }
 
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [navigate]);
 
   const handleImageError = (e) => {
     e.target.src = 'https://placehold.jp/800x600.png';
