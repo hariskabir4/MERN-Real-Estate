@@ -47,15 +47,11 @@ const propertyService = {
       isRequestInProgress = false;
     }
   },
-  updateProperty: async (id, propertyData) => {
+  updateProperty: async (id, formData) => {
     try {
-      const response = await fetch(`${API_URL}/update/${id}`, {
+      const response = await fetch(`http://localhost:5000/api/properties/update/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
-        },
-        body: JSON.stringify(propertyData)
+        body: formData // FormData will set the correct Content-Type header
       });
 
       if (!response.ok) {
@@ -64,6 +60,7 @@ const propertyService = {
 
       return await response.json();
     } catch (error) {
+      console.error('Update Error:', error);
       throw error;
     }
   },
@@ -91,26 +88,6 @@ const propertyService = {
     const token = localStorage.getItem('token');
     console.log('Current token in localStorage:', token);
     return token;
-  },
-  updateProperty: async (id, propertyData) => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/properties/update/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(propertyData)
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update property');
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error('Update Error:', error);
-      throw error;
-    }
   }
 };
 

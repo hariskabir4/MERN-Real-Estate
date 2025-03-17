@@ -5,6 +5,7 @@ const Commercial = require("../Models/Commercial");
 const multer = require("multer");
 const path = require("path");
 const authenticateToken = require("../middleware/jwtAuth");
+const fs = require('fs');
 
 // Set storage engine for multer
 const storage = multer.diskStorage({
@@ -135,17 +136,18 @@ router.get("/my-listings", authenticateToken, async (req, res) => {
   }
 });
 
-// Add this new route to your existing propertylist.js
-router.put("/update/:id", async (req, res) => {
+// Update route with correct multer configuration
+router.put("/update/:id", upload, async (req, res) => {
   try {
     const propertyId = req.params.id;
     const updates = req.body;
+    const newImages = req.files;
+    const removedImages = JSON.parse(req.body.removedImages || '[]');
 
-    // Try to find and update in Residential collection first
+    // Find property in either collection
     let property = await Residential.findById(propertyId);
     let isResidential = true;
 
-    // If not found in Residential, try Commercial
     if (!property) {
       property = await Commercial.findById(propertyId);
       isResidential = false;
@@ -155,12 +157,26 @@ router.put("/update/:id", async (req, res) => {
       return res.status(404).json({ message: 'Property not found' });
     }
 
-    // Update the property in the appropriate collection
-    const updatedProperty = await (isResidential ? Residential : Commercial).findByIdAndUpdate(
-      propertyId,
-      { $set: updates },
-      { new: true }
-    );
+    // Remove deleted images from storage
+    for (const imageName of removedImages) {
+      const imagePath = path.join(__dirname, '../uploads', imageName);
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+      }
+    }
+
+    // Update images array
+    const currentImages = property.images.filter(img => !removedImages.includes(img));
+    const newImageNames = newImages ? newImages.map(file => file.filename) : [];
+    updates.images = [...currentImages, ...newImageNames];
+
+    // Update the property
+    const updatedProperty = await (isResidential ? Residential : Commercial)
+      .findByIdAndUpdate(
+        propertyId,
+        { $set: updates },
+        { new: true }
+      );
 
     res.json(updatedProperty);
   } catch (error) {

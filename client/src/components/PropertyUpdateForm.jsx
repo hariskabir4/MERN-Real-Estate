@@ -8,7 +8,6 @@ const PropertyUpdateForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [propertyData, setPropertyData] = useState({
     title: '',
     owner: '',
@@ -23,6 +22,9 @@ const PropertyUpdateForm = () => {
     bedrooms: '',
     bathrooms: ''
   });
+  const [currentImage, setCurrentImage] = useState(null);
+  const [newImage, setNewImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
 
   useEffect(() => {
     const fetchPropertyDetails = async () => {
@@ -30,6 +32,12 @@ const PropertyUpdateForm = () => {
         setLoading(true);
         const data = await propertyService.getPropertyById(id);
         setPropertyData(data);
+        
+        // Set initial image if exists
+        if (data.images && data.images.length > 0) {
+          setCurrentImage(data.images[0]);
+          setImagePreview(`/uploads/${data.images[0]}`);
+        }
       } catch (err) {
         setError('Failed to fetch property details');
       } finally {
@@ -40,21 +48,18 @@ const PropertyUpdateForm = () => {
     fetchPropertyDetails();
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    
-    // Validate numeric fields
-    if (["price", "size", "bedrooms", "bathrooms"].includes(name)) {
-      if (value && value < 0) {
-        alert(`${name.charAt(0).toUpperCase() + name.slice(1)} cannot be negative`);
-        return;
-      }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
+  };
 
-    setPropertyData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const handleRemoveImage = () => {
+    setNewImage(null);
+    setCurrentImage(null);
+    setImagePreview(null);
   };
 
   const handleSubmit = async (e) => {
@@ -63,19 +68,26 @@ const PropertyUpdateForm = () => {
       setLoading(true);
       setError(null);
 
-      // Format the data before sending
-      const formattedData = {
-        ...propertyData,
-        price: Number(propertyData.price),
-        size: Number(propertyData.size),
-        bedrooms: propertyData.bedrooms ? Number(propertyData.bedrooms) : undefined,
-        bathrooms: propertyData.bathrooms ? Number(propertyData.bathrooms) : undefined
-      };
+      const formData = new FormData();
 
-      await propertyService.updateProperty(id, formattedData);
-      setUpdateSuccess(true);
+      // Append all property data
+      Object.keys(propertyData).forEach(key => {
+        if (key !== 'images') {
+          formData.append(key, propertyData[key]);
+        }
+      });
+
+      // Handle image update
+      if (newImage) {
+        formData.append('images', newImage);
+      }
       
-      // Show success message and redirect
+      // If current image is removed
+      if (!newImage && !currentImage && propertyData.images) {
+        formData.append('removedImages', JSON.stringify([propertyData.images[0]]));
+      }
+
+      await propertyService.updateProperty(id, formData);
       alert('Property updated successfully!');
       navigate('/my-listings');
     } catch (err) {
@@ -86,22 +98,20 @@ const PropertyUpdateForm = () => {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPropertyData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   if (loading) {
     return <div className="loading-property-update">Loading property details...</div>;
   }
 
   if (error) {
-    return (
-      <div className="error-property-update">
-        <p>{error}</p>
-        <button 
-          onClick={() => navigate('/my-listings')}
-          className="btn-property-update btn-cancel-property-update"
-        >
-          Return to My Listings
-        </button>
-      </div>
-    );
+    return <div className="error-property-update">{error}</div>;
   }
 
   return (
@@ -233,25 +243,43 @@ const PropertyUpdateForm = () => {
             onChange={handleChange}
           />
 
-          {updateSuccess && (
-            <div className="success-message-property-update">
-              Property updated successfully!
-            </div>
-          )}
+          <div className="image-section-property-update">
+            <label className="image-label-property-update">
+              Property Image
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="image-input-property-update"
+              />
+            </label>
+
+            {imagePreview && (
+              <div className="image-preview-wrapper-property-update">
+                <img
+                  src={imagePreview}
+                  alt="Property"
+                  className="image-preview-property-update"
+                />
+                <button
+                  type="button"
+                  onClick={handleRemoveImage}
+                  className="remove-image-button-property-update"
+                >
+                  ×
+                </button>
+              </div>
+            )}
+          </div>
 
           <div className="button-group-property-update">
-            <button 
-              type="submit" 
-              className="btn-property-update btn-submit-property-update"
-              disabled={loading}
-            >
-              {loading ? 'Updating...' : 'Update Property'}
+            <button type="submit" className="btn-property-update btn-submit-property-update">
+              Update Property
             </button>
             <button 
               type="button" 
               onClick={() => navigate('/my-listings')} 
               className="btn-property-update btn-cancel-property-update"
-              disabled={loading}
             >
               Cancel
             </button>
