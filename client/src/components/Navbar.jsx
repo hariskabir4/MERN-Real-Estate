@@ -1,12 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../Usercontext"; // Import UserContext
 import "./Navbar.css";
+import axios from "axios";
 
 const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useUserContext(); // Access user info & logout function
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    const fetchUnreadCount = async () => {
+      if (user && user.id) {
+        try {
+          const response = await axios.get(`http://localhost:5000/api/chat/unread/${user.id}`);
+          setUnreadCount(response.data.count);
+        } catch (error) {
+          console.error('Error fetching unread count:', error);
+        }
+      }
+    };
+
+    fetchUnreadCount();
+    // Set up interval to check for new messages
+    const interval = setInterval(fetchUnreadCount, 10000);
+    return () => clearInterval(interval);
+  }, [user]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -71,11 +91,27 @@ const Navbar = () => {
             <div 
               onClick={handleChatClick} 
               className="nav-link" 
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', position: 'relative' }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px">
                 <path d="M12 0C5.373 0 0 4.373 0 9.75c0 3.97 3.089 7.367 7.358 8.683v3.717a.75.75 0 0 0 1.207.622l4.107-3.075c.434.03.872.048 1.328.048 6.627 0 12-4.373 12-9.75S18.627 0 12 0zm.022 14.25H6.657a.657.657 0 1 1 0-1.315h5.365a.657.657 0 1 1 0 1.315zm4.82-3.785H6.657a.657.657 0 1 1 0-1.315h10.186a.657.657 0 1 1 0 1.315z" />
               </svg>
+              {unreadCount > 0 && (
+                <span className="unread-badge" style={{
+                  position: 'absolute',
+                  top: '-8px',
+                  right: '-8px',
+                  background: '#ff4444',
+                  color: 'white',
+                  borderRadius: '50%',
+                  padding: '2px 6px',
+                  fontSize: '12px',
+                  minWidth: '20px',
+                  textAlign: 'center'
+                }}>
+                  {unreadCount}
+                </span>
+              )}
             </div>
           </li>
           <li className="nav-item user-profile" onClick={toggleDropdown}>

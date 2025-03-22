@@ -305,7 +305,7 @@ const ChatPage_1 = () => {
       return (
         <li
           key={chat.otherUser}
-          className={`chat-item_chat ${chat.otherUser === user2Id ? 'active_chat' : ''}`}
+          className={`chat-item_chat ${chat.otherUser === user2Id ? 'active_chat' : ''} ${chat.unreadCount > 0 ? 'unread' : ''}`}
           onClick={() => handleChatClick(chat.otherUser)}
           style={{ cursor: 'pointer' }}
         >
@@ -316,7 +316,12 @@ const ChatPage_1 = () => {
             </svg>
           </div>
           <div className="chat-details_chat">
-            <h4>{chat.otherUserName}</h4>
+            <h4>
+              {chat.otherUserName}
+              {chat.unreadCount > 0 && (
+                <span className="unread-indicator">{chat.unreadCount}</span>
+              )}
+            </h4>
             <p>{formatLastMessage(chat)}</p>
           </div>
           <span className="chat-time_chat">
@@ -326,6 +331,13 @@ const ChatPage_1 = () => {
       );
     });
   };
+
+  // Add this effect to mark messages as read when opening a chat
+  useEffect(() => {
+    if (user1Id && user2Id && !isChatsOverview) {
+      axios.put(`http://localhost:5000/api/chat/messages/read/${user2Id}/${user1Id}`);
+    }
+  }, [user1Id, user2Id, isChatsOverview]);
 
   return (
     <div className="chat-box_chat">

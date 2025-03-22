@@ -26,12 +26,20 @@ router.get('/users/:userId/chats', async (req, res) => {
                     console.error('Error fetching partner user:', err);
                 }
 
+                // Get unread count for this conversation
+                const unreadCount = await Chat.countDocuments({
+                    sender: partnerId,
+                    receiver: userId,
+                    read: false
+                });
+
                 conversations.push({
                     otherUser: partnerId,
                     otherUserName: partnerUser ? partnerUser.username : 'Unknown User',
                     lastMessage: msg.content,
                     lastMessageTime: msg.timestamp,
-                    lastMessageSender: msg.sender
+                    lastMessageSender: msg.sender,
+                    unreadCount
                 });
             }
         }
@@ -121,6 +129,38 @@ router.get('/user/:userId', async (req, res) => {
     } catch (error) {
         console.error('Error fetching user:', error);
         res.status(500).json({ error: 'Failed to fetch user' });
+    }
+});
+
+// Get unread message count for a user
+router.get('/unread/:userId', async (req, res) => {
+    try {
+        const count = await Chat.countDocuments({
+            receiver: req.params.userId,
+            read: false
+        });
+        res.json({ count });
+    } catch (error) {
+        console.error('Error fetching unread count:', error);
+        res.status(500).json({ error: 'Failed to fetch unread count' });
+    }
+});
+
+// Mark messages as read
+router.put('/messages/read/:senderId/:receiverId', async (req, res) => {
+    try {
+        await Chat.updateMany(
+            { 
+                sender: req.params.senderId,
+                receiver: req.params.receiverId,
+                read: false
+            },
+            { read: true }
+        );
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error marking messages as read:', error);
+        res.status(500).json({ error: 'Failed to mark messages as read' });
     }
 });
 
