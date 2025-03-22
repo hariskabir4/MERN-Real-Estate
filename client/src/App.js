@@ -215,7 +215,14 @@ function App() {
                 <Footer />
               </>
             } />
-            <Route path='/chatpage' element={
+            <Route path='/chat/:user1Id/chats' element={
+              <>
+                <Navbar />
+                <ChatPage_1 />
+                <Footer />
+              </>
+            } />
+            <Route path='/chat/:user1Id/:user2Id' element={
               <>
                 <Navbar />
                 <ChatPage_1 />

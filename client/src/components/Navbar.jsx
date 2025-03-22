@@ -31,6 +31,25 @@ const Navbar = () => {
     navigate("/AgentPortal");
   };
 
+  const handleChatClick = (e) => {
+    e.preventDefault();
+    
+    if (!user || !user.id) {
+      console.log("User not authenticated, redirecting to login");
+      navigate('/login', { 
+        state: { 
+          from: '/chat',
+          intent: 'chat'
+        } 
+      });
+      return;
+    }
+
+    // Navigate to the chat page with the user's ID
+    console.log("Navigating to chat with user:", user); // Debug log
+    navigate(`/chat/${user.id}/chats`);
+  };
+
   return (
     <div>
       <nav className="navbar">
@@ -49,11 +68,15 @@ const Navbar = () => {
             <Link to="/contact" className="nav-link">Contact</Link>
           </li>
           <li className="nav-item">
-            <Link to="/chatpage" className="nav-link">
+            <div 
+              onClick={handleChatClick} 
+              className="nav-link" 
+              style={{ cursor: 'pointer' }}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="24px" height="24px">
                 <path d="M12 0C5.373 0 0 4.373 0 9.75c0 3.97 3.089 7.367 7.358 8.683v3.717a.75.75 0 0 0 1.207.622l4.107-3.075c.434.03.872.048 1.328.048 6.627 0 12-4.373 12-9.75S18.627 0 12 0zm.022 14.25H6.657a.657.657 0 1 1 0-1.315h5.365a.657.657 0 1 1 0 1.315zm4.82-3.785H6.657a.657.657 0 1 1 0-1.315h10.186a.657.657 0 1 1 0 1.315z" />
               </svg>
-            </Link>
+            </div>
           </li>
           <li className="nav-item user-profile" onClick={toggleDropdown}>
             <div className="user-info">

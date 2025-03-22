@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import {Link, useNavigate} from "react-router-dom"; 
+import {Link, useNavigate, useLocation} from "react-router-dom"; 
 import { useUserContext } from "../Usercontext";
 import { jwtDecode } from "jwt-decode";
 import "./Login.css"; 
 
 const Login = () => {
-  const { login } = useUserContext();
+  const { login, user } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,16 +35,45 @@ const Login = () => {
       // Store token in localStorage
       localStorage.setItem("authToken", token);
 
-      // Decode JWT token and extract user info
-      const decodedUser = jwtDecode(token);
-
-      // Update user context with logged-in user details
-      login({ name: decodedUser.name, email: decodedUser.email });
+      // Update user context with the token
+      login(token);
 
       alert("Login successful!");
 
-      // Redirect user to home page
-      navigate("/");
+      // Handle redirect based on intent
+      const from = location.state?.from || '/';
+      const intent = location.state?.intent;
+      const propertyId = location.state?.propertyId;
+      
+      if (intent === 'chat') {
+        // Decode the token to get user ID immediately
+        const decodedUser = jwtDecode(token);
+        
+        if (propertyId) {
+          // If we have a propertyId, fetch the property details first
+          fetch(`http://localhost:5000/api/property/${propertyId}`)
+            .then(res => res.json())
+            .then(property => {
+              if (property && property.userId) {
+                // Navigate to chat with both user IDs
+                navigate(`/chat/${decodedUser.id}/${property.userId}`);
+              } else {
+                console.error('Property owner information not available');
+                navigate(from);
+              }
+            })
+            .catch(err => {
+              console.error('Error fetching property details:', err);
+              navigate(from);
+            });
+        } else {
+          // If no propertyId, just go to the general chat page
+          navigate(`/chat/${decodedUser.id}/chats`);
+        }
+      } else {
+        // Otherwise, go to the original destination
+        navigate(from);
+      }
     } catch (err) {
       setError(err.message);
       alert(err.message);
