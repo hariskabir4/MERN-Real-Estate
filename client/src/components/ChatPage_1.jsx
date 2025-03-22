@@ -167,14 +167,14 @@ const ChatPage_1 = () => {
   };
 
   const filteredChats = chatHistory.filter(chat =>
-    chat.otherUser.toLowerCase().includes(searchQuery.toLowerCase())
+    chat.otherUserName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const formatLastMessage = (chat) => {
     if (chat.lastMessageSender === user1Id) {
-      return `You: ${chat.lastMessage}`;  // Show "You:" for messages from current user
+      return `You: ${chat.lastMessage}`;
     } else {
-      return `${chat.otherUser}: ${chat.lastMessage}`;  // Show "UserID:" for messages from other users
+      return `${chat.otherUserName}: ${chat.lastMessage}`;
     }
   };
 
@@ -302,7 +302,6 @@ const ChatPage_1 = () => {
 
   const renderChatList = () => {
     return filteredChats.map((chat) => {
-      const otherUserName = userNames[chat.otherUser] || chat.otherUser;
       return (
         <li
           key={chat.otherUser}
@@ -317,10 +316,8 @@ const ChatPage_1 = () => {
             </svg>
           </div>
           <div className="chat-details_chat">
-            <h4>{otherUserName}</h4>
-            <p>{chat.lastMessageSender === user1Id ?
-              `You: ${chat.lastMessage}` :
-              `${otherUserName}: ${chat.lastMessage}`}</p>
+            <h4>{chat.otherUserName}</h4>
+            <p>{formatLastMessage(chat)}</p>
           </div>
           <span className="chat-time_chat">
             {new Date(chat.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
