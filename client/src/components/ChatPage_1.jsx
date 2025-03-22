@@ -16,6 +16,9 @@ const ChatPage_1 = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const messagesEndRef = useRef(null);
   const socketRef = useRef(null);
+  const [user1Name, setUser1Name] = useState('');
+  const [user2Name, setUser2Name] = useState('');
+  const [userNames, setUserNames] = useState({});
 
   // Check if we're on the chats overview page
   const isChatsOverview = user2Id === 'chats' || !user2Id;
@@ -268,6 +271,65 @@ const ChatPage_1 = () => {
     }
   };
 
+  const fetchUserName = async (userId) => {
+    if (userNames[userId]) {
+      return userNames[userId];
+    }
+    try {
+      const response = await axios.get(`http://localhost:5000/api/chat/user/${userId}`);
+      const name = response.data.name;
+      setUserNames(prev => ({ ...prev, [userId]: name }));
+      return name;
+    } catch (error) {
+      console.error('Error fetching user name:', error);
+      return userId; // Fallback to ID if name fetch fails
+    }
+  };
+
+  useEffect(() => {
+    const fetchNames = async () => {
+      if (user1Id) {
+        const name1 = await fetchUserName(user1Id);
+        setUser1Name(name1);
+      }
+      if (user2Id && !isChatsOverview) {
+        const name2 = await fetchUserName(user2Id);
+        setUser2Name(name2);
+      }
+    };
+    fetchNames();
+  }, [user1Id, user2Id, isChatsOverview]);
+
+  const renderChatList = () => {
+    return filteredChats.map((chat) => {
+      const otherUserName = userNames[chat.otherUser] || chat.otherUser;
+      return (
+        <li
+          key={chat.otherUser}
+          className={`chat-item_chat ${chat.otherUser === user2Id ? 'active_chat' : ''}`}
+          onClick={() => handleChatClick(chat.otherUser)}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="user-avatar_chat">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="placeholder-icon_chat">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M12 14c-5 0-9 2-9 4.5V20h18v-1.5c0-2.5-4-4.5-9-4.5z" />
+            </svg>
+          </div>
+          <div className="chat-details_chat">
+            <h4>{otherUserName}</h4>
+            <p>{chat.lastMessageSender === user1Id ?
+              `You: ${chat.lastMessage}` :
+              `${otherUserName}: ${chat.lastMessage}`}</p>
+          </div>
+          <span className="chat-time_chat">
+            {new Date(chat.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </span>
+        </li>
+      );
+    });
+  };
+
   return (
     <div className="chat-box_chat">
       <div className="chat-container_chat">
@@ -280,7 +342,7 @@ const ChatPage_1 = () => {
                 <path d="M12 14c-5 0-9 2-9 4.5V20h18v-1.5c0-2.5-4-4.5-9-4.5z" />
               </svg>
             </div>
-            <h3>{user1Id}</h3>
+            <h3>{user1Name || 'Loading...'}</h3>
             <span className="user-status_chat">Active Now</span>
           </div>
           <div className="search-bar_chat">
@@ -295,30 +357,7 @@ const ChatPage_1 = () => {
             <button className="category_chat active_chat">All</button>
           </div>
           <ul className="chat-list_chat">
-            {filteredChats.map((chat) => (
-              <li
-                key={chat.otherUser}
-                className={`chat-item_chat ${chat.otherUser === user2Id ? 'active_chat' : ''}`}
-                onClick={() => handleChatClick(chat.otherUser)}
-                style={{ cursor: 'pointer' }}
-              >
-                <div className="user-avatar_chat">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="placeholder-icon_chat">
-                    <circle cx="12" cy="8" r="4" />
-                    <path d="M12 14c-5 0-9 2-9 4.5V20h18v-1.5c0-2.5-4-4.5-9-4.5z" />
-                  </svg>
-                </div>
-                <div className="chat-details_chat">
-                  <h4>{chat.otherUser}</h4>
-                  <p>{chat.lastMessageSender === user1Id ?
-                    `You: ${chat.lastMessage}` :
-                    `${chat.otherUser}: ${chat.lastMessage}`}</p>
-                </div>
-                <span className="chat-time_chat">
-                  {new Date(chat.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                </span>
-              </li>
-            ))}
+            {renderChatList()}
           </ul>
         </div>
 
@@ -384,7 +423,7 @@ const ChatPage_1 = () => {
                   <path d="M12 14c-5 0-9 2-9 4.5V20h18v-1.5c0-2.5-4-4.5-9-4.5z" />
                 </svg>
               </div>
-              <h3>{user2Id}</h3>
+              <h3>{user2Name || 'Loading...'}</h3>
               <span className="user-status_chat">Active Now</span>
             </div>
             {renderMessages()}
