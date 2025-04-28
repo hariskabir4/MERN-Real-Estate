@@ -35,6 +35,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './Usercontext'; // Import UserProvider
 import AIPropertyEstimation from './components/AIPropertyEstimation';
 import PropertyUpdateForm from './components/PropertyUpdateForm';
+import MakeOfferGateway from './components/MakeOfferGateway';
 
 
 function App() {
@@ -174,7 +175,7 @@ function App() {
           <Route path='/AIPropertyValuation' element={
             <>
               <Navbar />
-             <AIPropertyEstimation/>
+              <AIPropertyEstimation />
               <Footer />
             </>
           } />
@@ -304,6 +305,22 @@ function App() {
             <>
               <Navbar />
               <PropertyDetail />
+              <Footer />
+            </>
+          } />
+
+          {/* <Route path='/make-offer/:propertyId' element={
+            <>
+              <Navbar />
+              <MakeOfferGateway />
+              <Footer />
+            </>
+          } /> */}
+
+          <Route path='/make-offer/:propertyId' element={
+            <>
+              <Navbar />
+              <MakeOfferGateway />
               <Footer />
             </>
           } />

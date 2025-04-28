@@ -53,7 +53,7 @@ const PropertyDetail = () => {
     };
 
     const handleMakeOffer = () => {
-        navigate("/make-offer");
+        navigate(`/make-offer/${id}`);
     }
 
     // Function to get image URL
