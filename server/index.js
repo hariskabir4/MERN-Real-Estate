@@ -12,6 +12,7 @@ const propertyDetailsRoutes = require("./Routes/propertyDetails");
 const topPropertiesRoutes = require("./Routes/topProperties");
 const agentRoutes = require("./Routes/Agentroute");
 const chatRoutes = require("./Routes/chatRoutes");
+const offerRoutes = require('./Routes/offerRoutes');
 const { Server } = require('socket.io');
 
 const app = express();
@@ -46,6 +47,7 @@ app.use('/api/properties', propertyRoutes);
 app.use('/api/properties/search', searchRoutes);
 app.use('/api/property', propertyDetailsRoutes);
 app.use('/api/properties/top', topPropertiesRoutes);
+app.use('/api/offers', offerRoutes);
 
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/Proj", {

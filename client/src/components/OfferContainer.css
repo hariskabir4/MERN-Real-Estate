@@ -1,17 +1,17 @@
 /* Outer Square Container */
 .offer-container {
-  width: 90%;
-  max-width: 856px;
+  width: 98%;
+  max-width: 1200px;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 8px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 24px 12px 24px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: visible;
+  overflow-x: auto;
   /* Allow the container to expand vertically without scrolling */
   height: auto;
   /* Let the height adjust according to content */
@@ -20,25 +20,68 @@
 }
 
 .heading-offer{
-  margin-right: 72%;
+  margin-right: 60%;
+  font-size: 1.2rem;
+  margin-bottom: 18px;
 }
 
 /* Container Reject Button */
 .container-reject-button {
   width: auto; 
-  padding: 8px 16px; /* Reduced padding for smaller button */
-  background-color: #f44336; /* Red background for reject */
+  padding: 8px 16px;
+  background-color: #f44336;
   color: #fff;
   border: none;
   border-radius: 25px;
-  font-size: 14px; /* Smaller font size */
+  font-size: 14px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 10px 0; /* Adjusted margin */
-  margin-left: 78%;
-  margin-top: -4%;
+  margin: 10px 0 18px 80%;
 }
 
 .container-reject-button:hover {
-  background-color: #e53935; /* Darker red on hover */
+  background-color: #e53935;
+}
+
+/* Only wrap long IDs, keep other fields inline */
+.offer-card-property-id, .offer-card-buyer-id {
+  word-break: break-all;
+  white-space: pre-line;
+}
+
+/* Restore original card width and padding */
+.offer-card {
+  width: 97%;
+  max-width: 934px;
+  height: 180px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 900px) {
+  .offer-container {
+    max-width: 99vw;
+    padding: 10px 2vw;
+  }
+  .heading-offer {
+    margin-right: 0;
+    text-align: left;
+  }
+  .container-reject-button {
+    margin-left: 0;
+    width: 100%;
+  }
+  .offer-card {
+    max-width: 99vw;
+    padding: 12px 4vw;
+  }
 }

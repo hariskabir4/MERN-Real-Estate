@@ -4,8 +4,8 @@ import './OfferCard.css';
 const OfferCard = (props) => {
   return (
     <div className="offer-card">
-      <p><strong>Property ID:</strong> {props.propertyId}</p>
-      <p><strong>Buyer ID:</strong> {props.buyerId}</p>
+      <p className="offer-card-property-id"><strong>Property ID:</strong> {props.propertyId}</p>
+      <p className="offer-card-buyer-id"><strong>Buyer ID:</strong> {props.buyerId}</p>
       <p><strong>Buyer Name:</strong> {props.buyerName}</p>
       <p><strong>Offer Amount:</strong> {props.offerAmount}</p>
       <p><strong>Status:</strong> {props.status}</p>

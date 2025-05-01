@@ -244,6 +244,13 @@ function App() {
                 <Footer />
               </>
             } />
+            <Route path='/veiw-offers/:propertyId' element={
+              <>
+                <Navbar />
+                <OfferContainer />
+                <Footer />
+              </>
+            } />
             <Route path='/my-offers' element={
               <>
                 <Navbar />
