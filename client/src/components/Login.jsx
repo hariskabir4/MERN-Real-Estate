@@ -14,9 +14,10 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear any previous errors
 
     try {
-      const response = await fetch("http://localhost:5000/login", {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,6 +86,7 @@ const Login = () => {
     <div className="login-container">
       <div className="login-box">
         <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label>Email</label>
@@ -116,6 +118,5 @@ const Login = () => {
     </div>
   );
 };
-
 
 export default Login;

@@ -1,8 +1,8 @@
 /* MyOffers - Horizontal Layout */
-.offer-card_My_Offers {
+.offer-card_MyOffer {
     width: 97%;
     max-width: 900px;
-    height: 180px; /* Reduced height */
+    height: auto; /* Let height fit content */
     background-color: #f9f9f9;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -16,7 +16,7 @@
   }
   
   /* Offer Image */
-  .offer-image_My_Offers {
+  .offer-image_MyOffer {
     width: 120px; /* Width for the image */
     height: 120px; /* Height for the image */
     object-fit: cover; /* Ensures the image maintains its aspect ratio */
@@ -24,20 +24,20 @@
   }
   
   /* Offer Info */
-  .offer-info_My_Offers {
+  .offer-info_MyOffer {
     flex-grow: 1; /* Makes the info section expand to use available space */
     margin-left: 20px;
   }
   
   /* Offer Details */
-  .offer-details_My_Offers {
+  .offer-details_MyOffer {
     display: flex;
     flex-direction: column;
     gap: 10px; /* Increased gap between text */
   }
   
   /* Offer Actions */
-  .offer-actions_My_Offers {
+  .offer-actions_MyOffer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,7 @@
   }
   
   /* Buttons */
-  .offer-actions_My_Offers button {
+  .offer-actions_MyOffer button {
     width: 120px;
     padding: 8px 15px;
     border-radius: 20px;
@@ -54,23 +54,206 @@
     transition: background-color 0.3s ease;
   }
   
-  .accept-button_My_Offers {
+  .accept-button_MyOffer {
     background-color: #4caf50;
     color: #fff;
     border: none;
   }
   
-  .accept-button_My_Offers:hover {
+  .accept-button_MyOffer:hover {
     background-color: #45a049;
   }
   
-  .reject-button_My_Offers {
+  .reject-button_MyOffer {
     background-color: #f44336; /* Red color for reject */
     color: #fff;
     border: none;
   }
   
-  .reject-button_My_Offers:hover {
+  .reject-button_MyOffer:hover {
     background-color: #e53935;
   }
+  
+.my-offers-container_MyOffer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.my-offers-container_MyOffer h2 {
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 24px;
+}
+
+.offers-grid_MyOffer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.offer-card_MyOffer {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.offer-content_MyOffer {
+  display: flex;
+  align-items: stretch;
+}
+
+.property-info_MyOffer {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex: 1;
+  border-right: 1px solid #eee;
+}
+
+.property-image_MyOffer {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.property-details_MyOffer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.property-details_MyOffer h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.property-location_MyOffer {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.property-price_MyOffer {
+  color: #2c5282;
+  font-weight: 600;
+  margin: 0;
+}
+
+.offer-details_MyOffer {
+  padding: 20px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offer-info_MyOffer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.offer-info_MyOffer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.status_MyOffer {
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.status_MyOffer.pending_MyOffer {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status_MyOffer.accepted_MyOffer {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status_MyOffer.rejected_MyOffer {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.view-property-btn_MyOffer {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.view-property-btn_MyOffer:hover {
+  background-color: #0056b3;
+}
+
+.loading-spinner_MyOffer {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.error-message_MyOffer {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.no-offers_MyOffer {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.back-button_MyOffer {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.back-button_MyOffer:hover {
+  background-color: #5a6268;
+}
+
+@media (max-width: 768px) {
+  .offer-content_MyOffer {
+    flex-direction: column;
+  }
+
+  .property-info_MyOffer {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .property-image_MyOffer {
+    width: 100%;
+    height: 200px;
+  }
+
+  .offer-details_MyOffer {
+    min-width: auto;
+  }
+}
   

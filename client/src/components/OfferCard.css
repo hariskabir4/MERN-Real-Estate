@@ -1,18 +1,20 @@
 /* OfferCard - Horizontal Layout */
 .offer-card {
-  width: 97%;
-  max-width: 900px;
-  height: 180px; /* Reduced height */
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  margin: 10px auto;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   display: flex;
-  flex-direction: row; /* Change layout to horizontal */
-  align-items: center;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  justify-content: space-between; /* Add spacing between elements */
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Offer Image */
@@ -25,51 +27,141 @@
 
 /* Offer Info */
 .offer-info {
-  flex-grow: 1; /* Makes the info section expand to use available space */
-  margin-left: 20px;
+  flex: 1;
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.buyer-name {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.accepted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
 }
 
 /* Offer Details */
 .offer-details {
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Increased gap between text */
+  gap: 1rem;
+}
+
+.amount-details {
+  display: flex;
+  gap: 2rem;
+}
+
+.amount-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.amount-item label {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.amount-item .amount {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.time-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.time-details label {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.time-details span {
+  color: #2c3e50;
 }
 
 /* Offer Actions */
 .offer-actions {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 0.75rem;
 }
 
 /* Buttons */
 .offer-actions button {
-  width: 120px;
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
 }
 
 .accept-button {
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
+  background-color: #28a745;
+  color: white;
 }
 
 .accept-button:hover {
-  background-color: #45a049;
+  background-color: #218838;
 }
 
 .reject-button {
-  background-color: #f44336; /* Red color for reject */
-  color: #fff;
-  border: none;
+  background-color: #dc3545;
+  color: white;
 }
 
 .reject-button:hover {
-  background-color: #e53935;
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .offer-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .amount-details {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .offer-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .offer-actions button {
+    flex: 1;
+  }
 }

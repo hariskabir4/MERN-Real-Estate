@@ -42,7 +42,7 @@ app.use('/uploads', express.static('uploads'));
 // Routes
 app.use('/api/chat', chatRoutes);
 app.use('/api/agent', agentRoutes);
-app.use('/', authRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/properties/search', searchRoutes);
 app.use('/api/property', propertyDetailsRoutes);
