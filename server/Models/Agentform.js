@@ -9,6 +9,7 @@ const AgentSchema = new mongoose.Schema({
     issuingAuthority: { type: String, required: true },
     experience: { type: String, required: true },
     specialization: { type: [String], required: true },
+    city: { type: String, required: true  },
 
     // Optional Fields
     companyName: { type: String, default: null },

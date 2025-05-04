@@ -42,6 +42,11 @@
     margin-bottom: 15px;
 }
 
+/* Each field inside grid (optional tighter spacing) */
+.inspection-grid_onsite_insp_report p {
+    margin: 0;
+}
+
 /* Final Remarks */
 .inspection-remarks_onsite_insp_report {
     font-size: 14px;

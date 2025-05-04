@@ -2,9 +2,12 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Agent = require("../Models/Agentform");
+const Agent = require("../models/Agentform");
+ // Load environment variables
 
-const JWT_SECRET = "your_secret_key"; // Replace with a secure secret in .env
+ const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
+
+
 
 // Agent Signup Route
 router.post("/signup", async (req, res) => {
@@ -12,7 +15,7 @@ router.post("/signup", async (req, res) => {
         let {
             fullName, email, phoneNumber, password, confirmPassword, licenseNumber,
             issuingAuthority, experience, specialization, companyName, officeAddress,
-            website, profilePicture, licenseCopy, businessLogo, certifications
+            website, profilePicture, licenseCopy, businessLogo, certifications, city
         } = req.body;
 
         // Convert empty strings to null
@@ -32,6 +35,7 @@ router.post("/signup", async (req, res) => {
         licenseCopy = licenseCopy || null;
         businessLogo = businessLogo || null;
         certifications = certifications && certifications.length > 0 ? certifications : [];
+        city = city?.trim() || null; // Ensure city is not empty
 
         console.log("Received request body:", req.body);
 
@@ -46,6 +50,7 @@ router.post("/signup", async (req, res) => {
         if (!issuingAuthority) missingFields.push("issuingAuthority");
         if (!experience) missingFields.push("experience");
         if (!specialization) missingFields.push("specialization");
+        if (!city) missingFields.push("city");
 
         if (missingFields.length > 0) {
             console.log("Missing required fields:", missingFields);
@@ -90,7 +95,8 @@ router.post("/signup", async (req, res) => {
             profilePicture,
             licenseCopy,
             businessLogo,
-            certifications
+            certifications,
+            city
         });
 
         await newAgent.save();
@@ -102,7 +108,7 @@ router.post("/signup", async (req, res) => {
     }
 });
 
-// Agent Login Route
+// ✅ Agent Login Route
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -121,10 +127,12 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ message: "Invalid email or password" });
         }
 
-        // Generate JWT token
-        const token = jwt.sign({ id: agent._id, email: agent.email }, JWT_SECRET, {
-            expiresIn: "7d"
-        });
+        // ✅ Generate JWT token with agent_id, email, and city
+        const token = jwt.sign(
+            { agent_id: agent._id, email: agent.email, city: agent.city },
+            JWT_SECRET, // ✅ Now using environment variable
+            { expiresIn: "7d" }
+        );
 
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {

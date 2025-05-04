@@ -10,6 +10,7 @@ const AgentReg = () => {
         phoneNumber: "",
         password: "",
         confirmPassword: "",
+        city: "",
         licenseNumber: "",
         issuingAuthority: "",
         experience: "",
@@ -100,9 +101,10 @@ const AgentReg = () => {
                             <input type="password" name="confirmPassword" placeholder="Confirm your password" onChange={handleChange} required />
                         </div>
                         <div className="form-group">
-                            <label>Phone Number</label>
-                            <input type="tel" name="phoneNumber" placeholder="Enter your phone number" onChange={handleChange} required />
-                        </div>
+    <label>City</label>
+    <input type="text" name="city" placeholder="Enter your city" onChange={handleChange} required />
+</div>
+
                         <div className="form-group">
                             <label>Real Estate License Number</label>
                             <input type="text" name="licenseNumber" placeholder="Enter your license number" onChange={handleChange} required />

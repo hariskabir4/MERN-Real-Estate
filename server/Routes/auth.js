@@ -1,28 +1,25 @@
-// token with name
 const express = require("express");
 const router = express.Router();
 const User = require("../models/Userschema");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authenticateToken = require("../middleware/jwtAuth"); // Import middleware
+const authenticateToken = require("../middleware/jwtAuth"); // Middleware for protected routes
 
-// JWT Secret
+// JWT Secret Key
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";
 
-// Signup Route
+// ✅ **Signup Route**
 router.post("/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Validation checks
+    // **Validation**
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
     if (password.length < 5) {
-      return res
-        .status(400)
-        .json({ message: "Password must be at least 5 characters long" });
+      return res.status(400).json({ message: "Password must be at least 5 characters long" });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,18 +27,17 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Invalid email address" });
     }
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    // **Convert email to lowercase before checking in the database**
+    const existingUser = await User.findOne({ email: email.trim().toLowerCase() });
+
     if (existingUser) {
-      return res
-        .status(400)
-        .json({ message: "User with this email already exists" });
+      return res.status(400).json({ message: "User with this email already exists" });
     }
 
-    // Hash password before saving to the database
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // **Hash password before storing**
+    const hashedPassword = await bcrypt.hash(password.trim(), 10);
 
-    // Create new user
+    // **Create new user**
     const newUser = new User({
       username: username.trim(),
       email: email.trim().toLowerCase(),
@@ -57,46 +53,77 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Login Route
+// ✅ **Login Route**
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Validation checks
     if (!email || !password) {
       return res.status(400).json({ message: "Email and password are required" });
     }
 
-    // Find user by email
-    const user = await User.findOne({ email });
+    // **Convert email to lowercase for consistency**
+    const user = await User.findOne({ email: email.trim().toLowerCase() });
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Compare password
+    // **Compare password**
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Generate JWT including username
-    const token = jwt.sign({ id: user._id, email: user.email, name: user.username }, JWT_SECRET, {
-      expiresIn: "1h", // Token expires in 1 hour
-    });
+    // **Generate JWT including the user ID as ownerId**
+    const token = jwt.sign(
+      { ownerId: user._id, email: user.email, name: user.username },
+      JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
-    res.status(200).json({ message: "Login successful", token });
+    // ✅ **Send the token and user details in the response**
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user: {
+        ownerId: user._id, // ✅ Ensure `ownerId` is sent in response
+        name: user.username,
+        email: user.email,
+      },
+    });
   } catch (error) {
     console.error("Error in login:", error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
 
-// Protected Route
-router.post("/new-listing", authenticateToken, (req, res) => {
-  // If the user is logged in and the token is valid, proceed with creating the listing
-  // Your logic for creating a new listing here (e.g., saving it to the database)
+// ✅ **Protected Route: New Listing**
+router.post("/new-listing", authenticateToken, async (req, res) => {
+  try {
+    const { title, description, price } = req.body;
 
-  res.status(200).json({ message: "New listing created successfully" });
+    if (!title || !description || !price) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // ✅ Ensure user ID (ownerId) from token is used correctly
+    const ownerId = req.user.ownerId;
+
+    // Example logic to save listing (you need a Listing model)
+    // const newListing = new Listing({
+    //   title,
+    //   description,
+    //   price,
+    //   ownerId, // ✅ Attach the owner's ID
+    // });
+    // await newListing.save();
+
+    res.status(201).json({ message: "New listing created successfully", ownerId });
+  } catch (error) {
+    console.error("Error creating listing:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 module.exports = router;

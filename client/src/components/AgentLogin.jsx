@@ -1,19 +1,43 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./AgentLogin.css";
 
 const AgentLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("User logged in with:", { email, password });
+        setError("");
+
+        try {
+            const response = await fetch("http://localhost:5000/api/agent/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem("agentToken", data.token);
+                console.log("Login successful, redirecting...");
+                navigate("/AgentPortal/Home"); // Redirects to Home page
+            } else {
+                setError(data.message || "Login failed. Please try again.");
+            }
+        } catch (error) {
+            setError("An error occurred. Please try again.");
+        }
     };
 
     return (
         <div className="login-container-agentlogin">
-
             <div className="agent-portal-header-agentlogin">
                 <img src="/icons8-home.svg" alt="Real Estate" className="agent-portal-icon-agentlogin" />
                 <span className="agent-portal-title-agentlogin">Bunyaad Agent Portal</span>
@@ -21,6 +45,7 @@ const AgentLogin = () => {
 
             <div className="login-box-agentlogin">
                 <h2>Agent Login</h2>
+                {error && <p className="error-message">{error}</p>}
                 <form onSubmit={handleSubmit}>
                     <div className="input-group-agentlogin">
                         <label>Email</label>
@@ -44,10 +69,6 @@ const AgentLogin = () => {
                     </div>
                     <button type="submit" className="submit-btn-agentlogin">Login</button>
                 </form>
-                <p>
-                    Join our trusted network of real estate professionals{" "}
-                    <Link to="/AgentPortal/Registration" className="redirect-link-agentlogin">Register today!</Link>
-                </p>
             </div>
         </div>
     );
