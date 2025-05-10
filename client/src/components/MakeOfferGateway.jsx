@@ -131,9 +131,9 @@ const MakeOfferGateway = ({ onOfferMade }) => {
       // Check existing allowance
       const allowance = await pkrToken.allowance(address, EscrowAddress);
       if (allowance < tokenAmountWei) {
-        setStatus("Approving token transfer...");
+      setStatus("Approving token transfer...");
         const approveTx = await pkrToken.approve(EscrowAddress, tokenAmountWei);
-        await approveTx.wait();
+      await approveTx.wait();
       }
 
       setStatus("Making offer...");
@@ -153,7 +153,10 @@ const MakeOfferGateway = ({ onOfferMade }) => {
       
       const response = await fetch('http://localhost:5000/api/offers', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+        },
         body: JSON.stringify(offerData),
       });
 

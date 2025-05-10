@@ -4,6 +4,7 @@ const ResidentialSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   title: { type: String, required: true },
   owner: { type: String, required: true },
+  ownerAddress: { type: String, required: true }, // Ethereum address of the owner
   location: { type: String, required: true },
   price: { type: Number, required: true },
   size: { type: Number, required: true },
@@ -18,4 +19,4 @@ const ResidentialSchema = new mongoose.Schema({
   listedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Residential", ResidentialSchema);
+module.exports = mongoose.models.Residential || mongoose.model("Residential", ResidentialSchema);

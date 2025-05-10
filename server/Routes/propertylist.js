@@ -254,4 +254,20 @@ router.get('/test-auth', authenticateToken, (req, res) => {
   });
 });
 
+// Add this route to expose the propertyId mapping
+router.get('/property-id-map', async (req, res) => {
+  try {
+    const residentials = await Residential.find({});
+    const commercials = await Commercial.find({});
+    const allProperties = [...residentials, ...commercials];
+    const propertyIdMap = {};
+    allProperties.forEach((prop, idx) => {
+      propertyIdMap[prop._id.toString()] = idx + 1;
+    });
+    res.json(propertyIdMap);
+  } catch (error) {
+    res.status(500).json({ message: 'Error building propertyId map', error: error.message });
+  }
+});
+
 module.exports = router;

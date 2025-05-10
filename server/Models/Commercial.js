@@ -4,6 +4,7 @@ const CommercialSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },
   title: { type: String, required: true },
   owner: { type: String, required: true },
+  ownerAddress: { type: String, required: true }, // Ethereum address of the owner
   location: { type: String, required: true },
   price: { type: Number, required: true },
   size: { type: Number, required: true },
@@ -16,4 +17,4 @@ const CommercialSchema = new mongoose.Schema({
   listedAt: { type: Date, default: Date.now },
 });
 
-module.exports = mongoose.model("Commercial", CommercialSchema);
+module.exports = mongoose.models.Commercial || mongoose.model("Commercial", CommercialSchema);

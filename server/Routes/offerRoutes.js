@@ -23,6 +23,11 @@ router.get('/property/:propertyId', authenticateToken, async (req, res) => {
         const { propertyId } = req.params;
         const userId = req.user.id;
 
+        // Defensive check for propertyId
+        if (!propertyId || typeof propertyId !== 'string' || propertyId.length !== 24) {
+            return res.status(400).json({ message: 'Invalid propertyId' });
+        }
+
         // Check if user owns the property
         let property = await Residential.findById(propertyId);
         if (!property) {
