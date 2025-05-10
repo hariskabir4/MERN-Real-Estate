@@ -94,80 +94,90 @@ const MakeOfferGateway = ({ onOfferMade }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!account) {
-      setStatus("Please connect your wallet first");
-      return;
+        setStatus("Please connect your wallet first");
+        return;
     }
 
     // Validate offerAmount
     const offerAmountStr = offerAmount.trim();
     if (!offerAmountStr || isNaN(offerAmountStr) || Number(offerAmountStr) <= 0) {
-      setStatus("Please enter a valid positive offer amount");
-      return;
+        setStatus("Please enter a valid positive offer amount");
+        return;
     }
 
     setStatus("Processing your offer...");
     try {
-      const { signer, address } = await connectWallet();
-      setAccount(address);
-      const escrow = new ethers.Contract(EscrowAddress, Escrow.abi, signer);
-      const pkrToken = new ethers.Contract(PKRTokenAddress, PKRToken.abi, signer);
+        const { signer, address } = await connectWallet();
+        setAccount(address);
+        const escrow = new ethers.Contract(EscrowAddress, Escrow.abi, signer);
+        const pkrToken = new ethers.Contract(PKRTokenAddress, PKRToken.abi, signer);
 
-      // Convert propertyId to a number and ensure it's valid
-      const propertyIdNum = parseInt(propertyId);
-      if (isNaN(propertyIdNum)) {
-        throw new Error("Invalid property ID");
-      }
+        // Convert propertyId to a number and ensure it's valid
+        const propertyIdNum = parseInt(propertyId);
+        if (isNaN(propertyIdNum)) {
+            throw new Error("Invalid property ID");
+        }
 
-      // Calculate token amount (1% of offer amount)
-      const offerAmountWei = parseUnits(offerAmountStr, 18);
-      const tokenAmountWei = offerAmountWei / BigInt(100);
+        // Calculate token amount (1% of offer amount)
+        const offerAmountWei = parseUnits(offerAmountStr, 18);
+        const tokenAmountWei = offerAmountWei / BigInt(100);
 
-      // Check token balance
-      const balance = await pkrToken.balanceOf(address);
-      if (balance < tokenAmountWei) {
-        throw new Error("Insufficient PKR token balance");
-      }
+        // Check token balance
+        const balance = await pkrToken.balanceOf(address);
+        if (balance < tokenAmountWei) {
+            throw new Error("Insufficient PKR token balance");
+        }
 
-      // Check existing allowance
-      const allowance = await pkrToken.allowance(address, EscrowAddress);
-      if (allowance < tokenAmountWei) {
-        setStatus("Approving token transfer...");
-        const approveTx = await pkrToken.approve(EscrowAddress, tokenAmountWei);
-        await approveTx.wait();
-      }
+        // Check existing allowance
+        const allowance = await pkrToken.allowance(address, EscrowAddress);
+        if (allowance < tokenAmountWei) {
+            setStatus("Approving token transfer...");
+            const approveTx = await pkrToken.approve(EscrowAddress, tokenAmountWei);
+            await approveTx.wait();
+        }
 
-      setStatus("Making offer...");
-      const offerTx = await escrow.makeOffer(propertyIdNum, offerAmountWei, tokenAmountWei);
-      await offerTx.wait();
+        setStatus("Making offer...");
+        const offerTx = await escrow.makeOffer(propertyIdNum, offerAmountWei, tokenAmountWei);
+        await offerTx.wait();
 
-      // POST the offer to backend
-      const offerData = {
-        propertyId,
-        buyerId: user._id || user.id || user.email,
-        buyerName: user.username || user.email,
-        offerAmount: offerAmountStr,
-        status: 'Pending',
-        time: new Date().toLocaleString(),
-        tokenAmount: (Number(offerAmountStr) * 0.01).toString(),
-      };
-      
-      const response = await fetch('http://localhost:5000/api/offers', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(offerData),
-      });
+        // POST the offer to backend
+        const offerData = {
+            propertyId,
+            buyerId: user._id || user.id || user.email,
+            buyerName: user.username || user.email,
+            offerAmount: offerAmountStr,
+            status: 'Pending',
+            time: new Date().toLocaleString(),
+            tokenAmount: (Number(offerAmountStr) * 0.01).toString(),
+        };
 
-      if (!response.ok) {
-        throw new Error('Failed to save offer to database');
-      }
+        // Retrieve the token from localStorage
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            setStatus("Authentication token not found. Please log in again.");
+            return;
+        }
 
-      setStatus("Offer made successfully!");
-      if (onOfferMade) onOfferMade();
+        const response = await fetch('http://localhost:5000/api/offers', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(offerData),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to save offer to database');
+        }
+
+        setStatus("Offer made successfully!");
+        if (onOfferMade) onOfferMade();
     } catch (err) {
-      console.error("Offer error:", err);
-      setStatus("Error: " + (err.reason || err.message));
+        console.error("Offer error:", err);
+        setStatus("Error: " + (err.reason || err.message));
     }
-  };
+};
 
   // Add this new function to check PKR balance
   const checkPKRBalance = async (address) => {
