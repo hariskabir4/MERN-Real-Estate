@@ -141,6 +141,13 @@ const OfferContainer = () => {
   };
 
   const handleAccept = async (id) => {
+    // Prompt the property owner to provide their account address
+    const ownerAccount = prompt("Please enter your account address to receive the token amount:");
+    if (!ownerAccount) {
+      alert("Account address is required to accept the offer.");
+      return;
+    }
+
     try {
       const token = localStorage.getItem('authToken');
       const response = await fetch(`${API_BASE}/${id}/accept`, {
@@ -148,7 +155,8 @@ const OfferContainer = () => {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify({ ownerAccount }) // Send the owner's account address to the backend
       });
       
       if (!response.ok) {

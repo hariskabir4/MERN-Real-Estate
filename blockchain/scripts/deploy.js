@@ -1,5 +1,7 @@
 const { ethers } = require("hardhat");
 const { testAccounts } = require("../config/accounts");
+const fs = require("fs");
+const path = require("path");
 
 async function main() {
     // Deploy PKRToken
@@ -40,6 +42,17 @@ async function main() {
     console.log(`Contract Address: ${pkrToken.target}`);
     console.log("Symbol: PKR");
     console.log("Decimals: 18");
+
+    // === New Logic to Save Escrow Address to config.json ===
+    const configPath = path.join(__dirname, "..", "config.json");
+    const config = {
+        escrowAddress: escrow.target, // Save the Escrow contract address
+        pkrTokenAddress: pkrToken.target, // Save the PKRToken contract address
+        propertyNFTAddress: propertyNFT.target // Save the PropertyNFT contract address
+    };
+
+    fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+    console.log(`\nContract addresses saved to ${configPath}`);
 }
 
 main().catch((error) => {

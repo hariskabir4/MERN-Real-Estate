@@ -25,6 +25,7 @@ contract Escrow {
     }
 
     function makeOffer(uint256 propertyId, uint256 offerAmount, uint256 tokenAmount) external {
+        require(tokenAmount > 0, "Token amount must be greater than zero");
         IERC20(tokenAddress).transferFrom(msg.sender, address(this), tokenAmount);
         propertyOffers[propertyId].push(Offer(msg.sender, offerAmount, tokenAmount, false));
     }
@@ -32,6 +33,8 @@ contract Escrow {
     function acceptOffer(uint256 propertyId, uint256 offerIndex) external {
         require(msg.sender == propertyOwner, "Only owner can accept offer");
         Offer[] storage offers = propertyOffers[propertyId];
+        require(offerIndex < offers.length, "Invalid offer index");
+
         for (uint i = 0; i < offers.length; i++) {
             if (i == offerIndex) {
                 IERC20(tokenAddress).transfer(propertyOwner, offers[i].tokenAmount);
