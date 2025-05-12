@@ -53,6 +53,17 @@ async function main() {
 
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
     console.log(`\nContract addresses saved to ${configPath}`);
+
+    // === New Feature: Update contractAddresses.js ===
+    const contractAddressesPath = path.join(__dirname, "..", "..", "client", "src", "blockchain", "contractAddresses.js");
+
+    const contractAddressesContent = `// filepath: c:\\Users\\Haris Kabir\\Desktop\\proj\\client\\src\\blockchain\\contractAddresses.js
+export const PKRTokenAddress = "${pkrToken.target}"; // from deploy output
+export const EscrowAddress = "${escrow.target}";
+export const PropertyNFTAddress = "${propertyNFT.target}";`;
+
+    fs.writeFileSync(contractAddressesPath, contractAddressesContent, "utf8");
+    console.log(`\nContract addresses updated in ${contractAddressesPath}`);
 }
 
 main().catch((error) => {
