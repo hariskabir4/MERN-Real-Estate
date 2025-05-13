@@ -243,6 +243,10 @@ const Navbar = () => {
             <Link to="/services" className="nav-link">Services</Link>
           </li>
           <li className="nav-item">
+  <div className="nav-link" onClick={HandleAgentLogin}>Agent Portal</div>
+</li>
+
+          <li className="nav-item">
             <Link to="/contact" className="nav-link">Contact</Link>
           </li>
           <li className="nav-item">

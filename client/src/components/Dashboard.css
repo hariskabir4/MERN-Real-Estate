@@ -1,163 +1,184 @@
-/* Reset some default styles */
+/* Reset & base styles */
 body, h2, p, div {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  .App {
-    background-color: #f5f7fa;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Container below fixed navbar */
-  .home-container {
-    padding-top: 4rem; /* Adjust to navbar height */
-    padding-left: 2rem;
-    padding-right: 2rem;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: calc(100vh - 4rem); /* Full height minus navbar */
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.App {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main container */
+.dashboardContainer {
+  width: 80%;
+  margin: 20px auto;
+  background-color: #f7f8fc;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+.dashboardHeading {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Inspection cards */
+.inspectionCard {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+/* Property details */
+.inspectionDetails p {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.inspectionDetails b {
+  font-weight: bold;
+}
+
+/* Button group */
+.inspectionActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Buttons */
+.acceptBtn,
+.rejectBtn,
+.fillFormBtn,
+.chat-button {
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease;
+  width: 180px;
+  text-align: center;
+}
+
+/* Accept */
+.acceptBtn {
+  background-color: #28a745;
+  color: white;
+  margin-right: 1%;
+}
+.acceptBtn:hover {
+  background-color: #218838;
+}
+
+/* Reject */
+.rejectBtn {
+  background-color: #dc3545;
+  color: white;
+  margin-right: -20%;
+}
+.rejectBtn:hover {
+  background-color: #c82333;
+}
+
+/* Fill form */
+.fillFormBtn {
+  background-color: #f39c12;
+  color: white;
+  margin-top: 1%;
+  margin-right: -20%;
+  width: 17%;
+  margin-bottom: 1%;
+}
+.fillFormBtn:hover {
+  background-color: #e67e22;
+}
+
+/* Chat */
+.chat-button {
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-button:hover {
+  background-color: #0056b3;
+}
+.chat-button svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+}
+
+/* Accepted tag */
+.acceptedTag {
+  color: white;
+  background-color: #45a049;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Accepted container */
+.Accepted {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* No requests */
+.noRequests {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Footer */
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #888;
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .dashboardContainer {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    padding: 2rem;
-    width: 100%;
-    max-width: 1000px;
-    margin-top: 1rem;
+    width: 95%;
   }
-  
-  .dashboardHeading {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  .inspectionList {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  
-  .inspectionCard {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1.5rem;
-    background-color: #fafafa;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    transition: all 0.3s ease;
-  }
-  
-  .inspectionCard:hover {
-    transform: scale(1.01);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  }
-  
-  .inspectionDetails p {
-    margin-bottom: 0.5rem;
-    color: #444;
-    line-height: 1.5;
-  }
-  
-  /* EVENLY SPACED BUTTONS */
+
   .inspectionActions {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    width: 100%;
+    flex-direction: column;
   }
-  
-  /* Uniform button styles */
+
   .acceptBtn,
   .rejectBtn,
   .fillFormBtn,
   .chat-button {
-    flex: 1 1 120px;
-    min-width: 120px;
-    text-align: center;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    width: 100%;
   }
-  
-  .acceptBtn {
-    background-color: #4caf50;
-    color: white;
-  }
-  .rejectBtn {
-    background-color: #f44336;
-    color: white;
-  }
-  .chat-button {
-    background-color: #2196f3;
-    color: white;
-  }
-  .fillFormBtn {
-    background-color: #ff9800;
-    color: white;
-  }
-  
-  .acceptBtn:hover {
-    background-color: #43a047;
-  }
-  .rejectBtn:hover {
-    background-color: #e53935;
-  }
-  .chat-button:hover {
-    background-color: #1976d2;
-  }
-  .fillFormBtn:hover {
-    background-color: #fb8c00;
-  }
-  
-  .acceptedTag {
-    display: inline-block;
-    padding: 0.4rem 0.8rem;
-    background-color: #4caf50;
-    color: white;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 600;
-  }
-  
-  .Accepted {
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  
-  .noRequests {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #777;
-    margin-top: 2rem;
-  }
-  
-  footer {
-    margin-top: auto;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    color: #888;
-    background-color: #fff;
-    border-top: 1px solid #eee;
-  }
-  
+}

@@ -36,7 +36,7 @@ const AgentReportsPage = () => {
 
           return (
             <div key={report._id || index}>
-              <h3>Request ID: {report.request_id}</h3>
+            
               <OnsiteInspectionReport
                 inspectionDate={
                   report.inspectionDate

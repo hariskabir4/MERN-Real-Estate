@@ -2,8 +2,8 @@
 
 const express = require('express');
 const router = express.Router();
-const OwnerRequest = require('../models/Onsite_req_form');
-const AcceptedPropertyForm = require('../models/AcceptedPropertyForm');
+const OwnerRequest = require('../Models/Onsite_req_form');
+const AcceptedPropertyForm = require('../Models/AcceptedPropertyForm');
 const authenticateToken = require('../middleware/jwtAuth');
 
 // GET /api/owner/requests-with-reports
