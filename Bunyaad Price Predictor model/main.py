@@ -66,6 +66,7 @@ class PropertyInput(BaseModel):
     location: str
     location_city: str
     type: str
+    property_type: str = "Residential"
     classified_purpose: str = "Sale"
 
     model_config = {
@@ -78,6 +79,7 @@ class PropertyInput(BaseModel):
                     "location": "Bahria Town Phase 4",
                     "location_city": "Rawalpindi",
                     "type": "House",
+                    "property_type": "Residential",
                     "classified_purpose": "Sale"
                 },
                 {
@@ -87,6 +89,7 @@ class PropertyInput(BaseModel):
                     "location": "DHA Phase 6",
                     "location_city": "Lahore",
                     "type": "House",
+                    "property_type": "Commercial",
                     "classified_purpose": "Sale"
                 }
             ]
@@ -164,10 +167,18 @@ async def predict_property_price(property_input: PropertyInput):
 
         # 5. Inverse Transform and convert to native Python float
         predicted_price = np.expm1(predicted_price_log) if predicted_price_log > 0 else 0
+        
+        # 6. Apply Commercial Property Adjustment
+        if property_input.property_type.lower() == "commercial":
+            # Add 60 lacs (6,000,000 PKR) for commercial properties
+            commercial_adjustment = 6_000_000
+            predicted_price += commercial_adjustment
+            print(f"Applied commercial property adjustment: +{commercial_adjustment:,} PKR")
+        
         predicted_price = round(float(predicted_price), 2)  # Convert to native float and round
         print(f"Final predicted price (PKR): {predicted_price}")
 
-        # 6. Return Prediction
+        # 7. Return Prediction
         return {"predicted_price_pkr": predicted_price}
 
     except ValueError as ve:
