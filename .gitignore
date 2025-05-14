@@ -75,3 +75,9 @@ wheels/
 
 /node_modules
 server/node_modules
+
+# Chatbot specific
+bunyaad_property_index.faiss
+bunyaad_processed_data.pkl
+ChatbotData.xlsx
+bunyaad_env/
