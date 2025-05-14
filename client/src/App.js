@@ -36,7 +36,7 @@ import { UserProvider } from './Usercontext'; // Import UserProvider
 import AIPropertyEstimation from './components/AIPropertyEstimation';
 import PropertyUpdateForm from './components/PropertyUpdateForm';
 import MakeOfferGateway from './components/MakeOfferGateway';
-
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
@@ -104,6 +104,13 @@ function App() {
           <Route path='/signup' element={
             <>
               <Signup />
+            </>
+          } />
+          <Route path='/chatbot' element={
+            <>
+              <Navbar />
+              <Chatbot />
+              <Footer />
             </>
           } />
 
