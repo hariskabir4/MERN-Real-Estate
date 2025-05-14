@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-interface IERC20 {
-    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
-    function transfer(address recipient, uint256 amount) external returns (bool);
-}
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Escrow {
     address public propertyOwner;
-    address public tokenAddress;
+    IERC20 public token;
 
     struct Offer {
         address buyer;
@@ -19,15 +16,31 @@ contract Escrow {
 
     mapping(uint256 => Offer[]) public propertyOffers;
 
-    constructor(address _tokenAddress) {
+    event OfferMade(address indexed buyer, uint256 propertyId, uint256 offerAmount);
+
+    constructor(address tokenAddress) {
         propertyOwner = msg.sender;
-        tokenAddress = _tokenAddress;
+        token = IERC20(tokenAddress);
     }
 
-    function makeOffer(uint256 propertyId, uint256 offerAmount, uint256 tokenAmount) external {
+    function makeOffer(uint256 propertyId, uint256 offerAmount, uint256 tokenAmount) public {
+        require(propertyId > 0, "Invalid property ID");
+        require(offerAmount > 0, "Offer amount must be greater than zero");
         require(tokenAmount > 0, "Token amount must be greater than zero");
-        IERC20(tokenAddress).transferFrom(msg.sender, address(this), tokenAmount);
+
+        uint256 allowance = token.allowance(msg.sender, address(this));
+        require(allowance >= tokenAmount, "Insufficient allowance");
+
+        uint256 balance = token.balanceOf(msg.sender);
+        require(balance >= tokenAmount, "Insufficient token balance");
+
+        // Transfer tokens from buyer to escrow
+        bool success = token.transferFrom(msg.sender, address(this), tokenAmount);
+        require(success, "Token transfer failed");
+
         propertyOffers[propertyId].push(Offer(msg.sender, offerAmount, tokenAmount, false));
+
+        emit OfferMade(msg.sender, propertyId, offerAmount);
     }
 
     function acceptOffer(uint256 propertyId, uint256 offerIndex) external {
@@ -37,9 +50,9 @@ contract Escrow {
 
         for (uint i = 0; i < offers.length; i++) {
             if (i == offerIndex) {
-                IERC20(tokenAddress).transfer(propertyOwner, offers[i].tokenAmount);
+                token.transfer(propertyOwner, offers[i].tokenAmount);
             } else if (!offers[i].refunded) {
-                IERC20(tokenAddress).transfer(offers[i].buyer, offers[i].tokenAmount);
+                token.transfer(offers[i].buyer, offers[i].tokenAmount);
                 offers[i].refunded = true;
             }
         }
