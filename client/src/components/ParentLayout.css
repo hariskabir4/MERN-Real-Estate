@@ -1,0 +1,48 @@
+/* Parent container for Filter and ResultCard components */
+.layout-container {
+  display: flex;
+  justify-content: space-between; /* Align components side by side */
+  align-items: flex-start; /* Align components to the top */
+  margin: 20px;
+  border:none;
+  box-shadow: none;
+} 
+
+/* Filter container styling */
+.filter-container {
+  /* width: 85%; Adjust width for Filter */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Add a subtle single border */
+  /* margin-left: 45%  ; */
+  margin-left: 35%  ;
+  width: 64%;  /* 50% of the parent element’s width */
+  height: 50%;
+  
+}
+
+/* ResultCard container styling */
+.result-container {
+  width: 50%; /* Adjust width for ResultCard */
+  background-color: white;
+  margin-right: 16%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Add the same single border */
+  display: flex;
+  flex-direction: column; /* For stacking multiple ResultCards */
+  gap: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column; /* Stack components vertically on smaller screens */
+    align-items: center;
+  }
+  .filter-container, .result-container {
+    width: 90%; /* Expand width for mobile view */
+    margin-bottom: 20px;
+  }
+}

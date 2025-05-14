@@ -1,0 +1,81 @@
+/* ResultCard.css */
+
+/* Main container */
+.result-card-ResultCard {
+  display: flex;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Remove shadows and retain a single subtle border */
+  padding: 15px;
+  height: 120px; /* Set a fixed height */
+  transition: transform 0.3s;
+}
+
+/* Remove hover effects if unnecessary */
+.result-card-ResultCard:hover {
+  transform: none; /* No hover scale effect */
+}
+
+/* Image container */
+.image-container-ResultCard {
+  flex: 0 0 100px; /* Fixed width for the image */
+  margin-right: 15px;
+}
+
+.image-ResultCard {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Details container */
+.details-container-ResultCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Top section */
+.top-section-ResultCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.price-ResultCard {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e53935;
+}
+
+.date-ResultCard {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* Title */
+.title-ResultCard {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+/* Description */
+.description-ResultCard {
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* Location */
+.location-ResultCard {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+
+
+

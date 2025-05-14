@@ -1,0 +1,167 @@
+/* OfferCard - Horizontal Layout */
+.offer-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Offer Image */
+.offer-image {
+  width: 120px; /* Width for the image */
+  height: 120px; /* Height for the image */
+  object-fit: cover; /* Ensures the image maintains its aspect ratio */
+  border-radius: 8px;
+}
+
+/* Offer Info */
+.offer-info {
+  flex: 1;
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.buyer-name {
+  font-size: 1.25rem;
+  color: #2c3e50;
+  margin: 0;
+  font-weight: 600;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.accepted {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-badge.rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Offer Details */
+.offer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.amount-details {
+  display: flex;
+  gap: 2rem;
+}
+
+.amount-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.amount-item label {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.amount-item .amount {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.time-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.time-details label {
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.time-details span {
+  color: #2c3e50;
+}
+
+/* Offer Actions */
+.offer-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.offer-actions button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.accept-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.accept-button:hover {
+  background-color: #218838;
+}
+
+.reject-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.reject-button:hover {
+  background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+  .offer-card {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .amount-details {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .offer-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .offer-actions button {
+    flex: 1;
+  }
+}

@@ -1,0 +1,14 @@
+.properties-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: space-between; /* This will distribute space evenly */
+}
+
+.card {
+  flex: 0 0 calc(33.333% - 20px); /* Takes up roughly one-third of container width minus gap */
+  max-width: 400px;
+  margin-bottom: 20px;
+} 

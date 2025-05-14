@@ -1,0 +1,147 @@
+.chatbot_container_chatbot_Bunyaad {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 62px); /* Adjust based on actual Navbar + Footer height */
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f7f7f8;
+    overflow: hidden;
+  }
+  
+  /* Sidebar (chat history) */
+  .sidebar_chatbot_Bunyaad {
+    width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+    flex-shrink: 0;
+    background-color: #1e1e2f;
+    color: #fff;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
+  .newchat_btn_chatbot_Bunyaad {
+    padding: 10px 15px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+  
+  .chat_list_chatbot_Bunyaad {
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  
+  .chat_item_chatbot_Bunyaad {
+    padding: 12px;
+    margin-bottom: 10px;
+    background-color: #2c2c3f;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .chat_item_chatbot_Bunyaad:hover,
+  .active_chatbot_Bunyaad {
+    background-color: #3d3d5a;
+  }
+  
+  .chat_title_chatbot_Bunyaad {
+    font-weight: bold;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+  }
+  
+  .chat_time_chatbot_Bunyaad {
+    font-size: 12px;
+    color: #a0a0a0;
+  }
+  
+  /* Chat main area */
+  .chat_area_chatbot_Bunyaad {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .welcome_msg_chatbot_Bunyaad {
+    margin: auto;
+    font-size: 24px;
+    color: #555;
+    text-align: center;
+  }
+  
+  /* Scrollable messages area */
+  .messages_chatbot_Bunyaad {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 80px; /* prevent overlap with input */
+  }
+  
+  /* Individual message blocks */
+  .message_block_chatbot_Bunyaad {
+    margin-bottom: 16px;
+  }
+  
+  .user_msg_chatbot_Bunyaad {
+    background-color: #e0f7fa;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 80%;
+    align-self: flex-start;
+  }
+  
+  .bot_msg_chatbot_Bunyaad {
+    background-color: #f0f0f0;
+    padding: 10px 14px;
+    border-radius: 10px;
+    max-width: 80%;
+    align-self: flex-end;
+    margin-top: 8px;
+  }
+  
+  /* Input area fixed at bottom of chat */
+  .input_area_chatbot_Bunyaad {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    padding: 16px;
+    gap: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fafafa;
+  }
+  
+  .input_chatbot_Bunyaad {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .send_btn_chatbot_Bunyaad {
+    padding: 12px 18px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

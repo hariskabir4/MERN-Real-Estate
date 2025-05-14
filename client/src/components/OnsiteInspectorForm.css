@@ -1,0 +1,97 @@
+.onsite-inspector-form-wrapper * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure body takes full height without disturbing navbar/footer */
+.onsite-inspector-form-wrapper body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+/* Navbar Styling (Ensures it's not affected) */
+.onsite-inspector-form-wrapper .navbar {
+    width: 100%;
+    height: 60px; /* Adjust to match original navbar height */
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+/* Footer Styling (Ensures it's not affected) */
+.onsite-inspector-form-wrapper .footer {
+    width: 100%;
+    /* height: 50px; Adjust to match original footer height */
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+
+/* Form Container (Fits Between Navbar & Footer) */
+.onsite-inspector-form-wrapper .form-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Form Box (Keeps it within available space) */
+.onsite-inspector-form-wrapper .form-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 900px;
+}
+
+/* Form Grid (Responsive Layout) */
+.onsite-inspector-form-wrapper .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* Input and Textarea Styling */
+.onsite-inspector-form-wrapper input,
+.onsite-inspector-form-wrapper select,
+.onsite-inspector-form-wrapper textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.onsite-inspector-form-wrapper textarea {
+    height: 60px;
+    resize: none;
+}
+
+/* Submit Button */
+.onsite-inspector-form-wrapper .submit-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.onsite-inspector-form-wrapper .submit-btn:hover {
+    background-color: #45a049;
+}

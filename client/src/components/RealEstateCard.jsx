@@ -1,9 +1,17 @@
 import React from 'react';
 import './RealEstateCard.css';
+import { useNavigate } from "react-router-dom";
 
 const RealEstateCard = (props) => {
+
+  const navigate = useNavigate();
+
+  const handlePropertyDetails = () => {
+    navigate(`/property/${props.id}`);
+  }
+
   return (
-    <div className="card">
+    <div onClick={handlePropertyDetails} className="card">
       <div className="card-image">
         <img src={props.imageSrc} alt="Real Estate" />
         <button className="favorite-btn">&#x2661;</button>

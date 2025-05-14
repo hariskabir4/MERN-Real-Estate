@@ -1,0 +1,103 @@
+/* Container for Full Page */
+.container_onsite_insp_req_form {
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url("../../public/req\ tr-3.jpg") no-repeat center center/cover;
+    position: relative;
+    overflow: hidden; /* Prevents scrolling */
+  }
+  
+  /* Dark Overlay for Better Visibility */
+  .container_onsite_insp_req_form::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Dark overlay for contrast */
+    z-index: 1;
+  }
+  
+  /* Form Styling */
+  .form_onsite_insp_req_form {
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.25); /* Transparent White */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(3px); /* Glassmorphism Effect */
+    width: 350px;
+    text-align: center;
+  }
+  
+  /* Form Heading */
+  .form_onsite_insp_req_form h2 {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Input Fields */
+  .form_onsite_insp_req_form input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 16px;
+    outline: none;
+  }
+  
+  /* Input Placeholder Styling */
+  .form_onsite_insp_req_form input::placeholder {
+    color: #555;
+    font-weight: 500;
+  }
+  
+  /* Submit Button */
+  .form_onsite_insp_req_form button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #000, #333);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .form_onsite_insp_req_form button:hover {
+    background: linear-gradient(to right, #333, #555);
+  }
+  
+  /* Navbar & Footer Styling */
+  .navbar_onsite_insp_req_form,
+  .footer_onsite_insp_req_form {
+    width: 100%;
+    padding: 15px;
+    background: #222;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    position: absolute;
+  }
+  
+  .navbar_onsite_insp_req_form {
+    top: 0;
+  }
+  
+  .footer_onsite_insp_req_form {
+    bottom: 0;
+  }
+  

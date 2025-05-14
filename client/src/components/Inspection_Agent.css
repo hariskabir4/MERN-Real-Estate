@@ -1,0 +1,78 @@
+.inspection-container_agentPortal {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.inspection-request-box_agentPortal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+}
+
+.inspection-request-box_agentPortal:hover {
+    transform: scale(1.02);
+}
+
+.inspection-details_agentPortal {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.inspection-details_agentPortal p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.inspection-actions_agentPortal {
+    display: flex;
+    gap: 10px;
+}
+
+.accept-btn_agentPortal,
+.reject-btn_agentPortal,
+.chat-btn_agentPortal {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.accept-btn_agentPortal {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.accept-btn_agentPortal:hover {
+    background-color: #45a049;
+}
+
+.reject-btn_agentPortal {
+    background-color: #d9534f;
+    color: #fff;
+}
+
+.reject-btn_agentPortal:hover {
+    background-color: #c9302c;
+}
+
+.chat-btn_agentPortal {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.chat-btn_agentPortal:hover {
+    background-color: #0056b3;
+}
