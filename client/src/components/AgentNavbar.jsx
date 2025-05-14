@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAgentContext } from "../Agentcontext";
+import { useAgentContext } from "../Agentcontext"; // ensure correct path to context
 import "./AgentNavbar.css";
 
 const AgentNavbar = () => {
   const navigate = useNavigate();
-  const { agent, setAgent } = useAgentContext();
+  const { agent, setAgent, logout } = useAgentContext(); // added logout here
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -13,9 +13,21 @@ const AgentNavbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("agentToken");
-    setAgent(null);
-    navigate("/");
+    localStorage.removeItem("agentToken"); // Clear token from local storage
+    logout(); // Reset user state
+    navigate('/'); // Navigate to home page
+  };
+
+  const handlehandleVeiwOffers = () => {
+    navigate("/veiw-offers");
+  };
+
+  const handlehandleVeiwMyOffers = () => {
+    navigate("/my-offers");
+  };
+
+  const HandleAgentLogin = () => {
+    navigate("/AgentPortal");
   };
 
   return (

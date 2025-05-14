@@ -9,7 +9,7 @@ const AgentReportsPage = () => {
     const fetchAgentReports = async () => {
       try {
         const token = localStorage.getItem("agentToken"); // Use agent token
-        const response = await axios.get("/api/agent/my-submitted-reports", {
+        const response = await axios.get("http://localhost:5000/api/agent/reports/my-submitted-reports", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

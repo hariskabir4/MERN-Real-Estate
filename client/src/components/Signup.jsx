@@ -24,7 +24,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       // Send user data to the backend
-      const response = await axios.post("http://localhost:5000/signup", formData);
+      const response = await axios.post("http://localhost:5000/api/auth/signup", formData);
       alert(response.data.message);
 
       navigate("/login");

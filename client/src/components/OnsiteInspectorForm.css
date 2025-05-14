@@ -1,97 +1,90 @@
-/* Main wrapper for the form */
-.onsite-inspector-form-wrapper {
+/* Global Reset for Wrapper */
+.form-container_eval_form * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Wrapper Styles */
+.form-container_eval_form {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 100vh;
+    background-color: #f4f4f9;
+    min-height: calc(100vh - 120px); /* leave space for navbar & footer */
 }
 
-/* Form container styling */
-.form-container {
-    width: 100%;
-    max-width: 600px;
-    background-color: white;
+/* Form Box Styles */
+.form-box_eval_form {
+    background-color: #fff;
     padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 900px;
 }
 
-/* Heading styling */
-h2 {
+/* Heading */
+.form-box_eval_form h2 {
     text-align: center;
-    font-size: 1.8rem;
     margin-bottom: 20px;
+    font-size: 1.6rem;
     color: #333;
 }
 
-/* Styling for the form fields */
-.form-box {
-    display: flex;
-    flex-direction: column;
+/* Grid Layout */
+.form-grid_eval_form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
 }
 
-/* Form field styling */
-.form-box input,
-.form-box select,
-.form-box textarea {
+/* Form Inputs */
+.form-grid_eval_form input,
+.form-grid_eval_form select,
+.form-grid_eval_form textarea {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.form-box input[type="date"] {
+    border-radius: 6px;
     font-size: 1rem;
 }
 
-.form-box textarea {
-    height: 100px;
+.form-grid_eval_form textarea {
     resize: vertical;
+    min-height: 60px;
 }
 
-/* Placeholder styling */
-.form-box input::placeholder,
-.form-box textarea::placeholder {
-    color: #888;
-}
-
-/* Styling for select dropdowns */
-.form-box select {
-    background-color: #fff;
-    cursor: pointer;
-}
-
-/* Error message styling */
+/* Error Messages */
 .error {
     color: red;
     font-size: 0.875rem;
+    margin-top: -10px;
     margin-bottom: 10px;
 }
 
-/* Button styling */
+/* Submit Button */
 .submit-btn {
-    background-color: #007bff;
-    color: white;
-    font-size: 1.1rem;
+    width: 100%;
     padding: 12px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     border-radius: 5px;
+    font-size: 1rem;
     cursor: pointer;
+    margin-top: 20px;
     transition: background-color 0.3s;
 }
 
 .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
-/* Responsive layout */
+/* Responsive Fix */
 @media (max-width: 768px) {
-    .form-container {
-        width: 90%;
+    .form-box_eval_form {
+        padding: 20px;
     }
 }

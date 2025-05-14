@@ -13,7 +13,7 @@ export const AgentProvider = ({ children }) => {
       if (!token) return;
 
       try {
-        const res = await axios.get("http://localhost:5000/api/agent-details", {
+        const res = await axios.get("http://localhost:5000/api/agent/agent-details", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setAgent(res.data); // set agent name, email, city

@@ -60,7 +60,7 @@ router.get("/", async (req, res) => {
 
         let properties = [];
         
-        // Handle property type with Land type consideration
+        // Handle property type with improved Land type search
         if (type) {
             if (type === "Workplace") {
                 properties = await Commercial.find(queryObject)
@@ -69,8 +69,21 @@ router.get("/", async (req, res) => {
                 properties = await Residential.find(queryObject)
                     .select("title location price size bedrooms bathrooms city state images listedAt");
             } else if (type === "Land") {
-                // Return empty array for Land type as it's not in DB
-                properties = [];
+                // Search for land-related keywords in both collections
+                const landQueryObject = {
+                    ...queryObject,
+                    $or: [
+                        { title: { $regex: /land|plot|acre|kanal|marla/i } },
+                        { description: { $regex: /land|plot|acre|kanal|marla/i } }
+                    ]
+                };
+                
+                const residentialLands = await Residential.find(landQueryObject)
+                    .select("title location price size city state images listedAt");
+                const commercialLands = await Commercial.find(landQueryObject)
+                    .select("title location price size city state images listedAt");
+                    
+                properties = [...residentialLands, ...commercialLands];
             }
         } else {
             // If no type specified, search both collections

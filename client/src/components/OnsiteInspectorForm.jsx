@@ -126,11 +126,6 @@
 
 
 
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import './OnsiteInspectorForm.css';
@@ -209,29 +204,15 @@ const OnsiteInspectorForm = () => {
     };
 
     return (
-        <div className="onsite-inspector-form-wrapper">
-            <div className="form-container">
-                <form className="form-box" onSubmit={handleSubmit}>
+        <>
+            {/* Form */}
+            <div className="form-container_eval_form">
+                <form className="form-box_eval_form" onSubmit={handleSubmit}>
                     <h2>Onsite Property Evaluation</h2>
 
-                    <div className="form-grid">
-                        {/* Form Fields */}
-                        <input
-                            type="date"
-                            name="inspectionDate"
-                            value={formData.inspectionDate}
-                            onChange={handleChange}
-                            required
-                        />
-                        {errors.inspectionDate && <p className="error">{errors.inspectionDate}</p>}
-
-                        <input
-                            type="text"
-                            name="locationPrice"
-                            placeholder="Estimated Price"
-                            value={formData.locationPrice}
-                            onChange={handleChange}
-                        />
+                    <div className="form-grid_eval_form">
+                        <input type="date" name="inspectionDate" value={formData.inspectionDate} onChange={handleChange} required />
+                        <input type="text" name="locationPrice" placeholder="Estimated Price" value={formData.locationPrice} onChange={handleChange} />
                         <select name="propertyType" value={formData.propertyType} onChange={handleChange} required>
                             <option value="">Select Property Type</option>
                             <option value="House">House</option>
@@ -312,10 +293,12 @@ const OnsiteInspectorForm = () => {
                         />
                     </div>
 
-                    <button type="submit" className="submit-btn">Submit Evaluation</button>
+  <button type="submit" className="submit-btn">Submit Evaluation</button>
+
+                  
                 </form>
             </div>
-        </div>
+        </>
     );
 };
 

@@ -37,6 +37,44 @@
 // //import PropertyUpdateForm from './components/PropertyUpdateForm';
 // //import OwnerReportsPage from './components//OnsiteInspectionReport';
 // import OwnerReportsPage from './components/ownerreportpage';
+import './App.css';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Signup from './components/Signup';
+import HeaderComponent from './components/HeaderComponent';
+import RealEstateCard from './components/RealEstateCard';
+import About from './components/About';
+import Contact from './components/Contact';
+import Services from './components/Services';
+import Login from './components/Login';
+import Filter from './components/Filter';
+import ResultCard from './components/ResultCard';
+import ResultsTab from './components/ResultsTab';
+import ParentLayout from './components/ParentLayout';
+import PropertyListingForm from './components/PropertyListingForm';
+import ChatPage_1 from './components/ChatPage_1';
+import MyListing from './components/MyListing';
+import OfferContainer from './components/OfferContainer';
+import MakeOffer from './components/MakeOffer';
+import PropertyDetail from './components/PropertyDetails';
+import AgentLogin from './components/AgentLogin';
+import AgentReg from './components/AgentReg';
+import MyOfferContainer from './components/MyOfferContainer';
+import Inspection_Agent from './components/Inspection_Agent';
+import OnsiteInspectorForm from './components/OnsiteInspectorForm'
+import TopProperties from './components/TopProperties';
+import Dashboard from './components/Dashboard';
+import AgentNavbar from './components/AgentNavbar';
+import OnsiteInspectionReport from './components/OnsiteInspectionReport';
+import sampleInspectionData from './components/sampleInspectionData';
+import AIPropertyInspection from './components/AIPropertyEstimation';
+import OnsiteInspectionRequestForm from './components/OnsiteInspectionRequestForm';
+import ProtectedRoute from './components/ProtectedRoute'; // Import the ProtectedRoute component
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { UserProvider } from './Usercontext'; // Import UserProvider
+import AIPropertyEstimation from './components/AIPropertyEstimation';
+import PropertyUpdateForm from './components/PropertyUpdateForm';
+import MakeOfferGateway from './components/MakeOfferGateway';
 
 // function App() {
 //   return (
@@ -444,44 +482,44 @@
 
 
 
-import "./App.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Signup from "./components/Signup";
-import HeaderComponent from "./components/HeaderComponent";
-import RealEstateCard from "./components/RealEstateCard";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Services from "./components/Services";
-import Login from "./components/Login";
-import Filter from "./components/Filter";
-import ResultCard from "./components/ResultCard";
-import ResultsTab from "./components/ResultsTab";
-import ParentLayout from "./components/ParentLayout";
-import PropertyListingForm from "./components/PropertyListingForm";
-import ChatPage_1 from "./components/ChatPage_1";
-import MyListing from "./components/MyListing";
-import OfferContainer from "./components/OfferContainer";
-import MakeOffer from "./components/MakeOffer";
-import PropertyDetail from "./components/PropertyDetails";
-import AgentLogin from "./components/AgentLogin";
-import AgentReg from "./components/AgentReg";
-import MyOfferContainer from "./components/MyOfferContainer";
-import Inspection_Agent from "./components/Inspection_Agent";
-import OnsiteInspectorForm from "./components/OnsiteInspectorForm";
-import TopProperties from "./components/TopProperties";
-import Dashboard from "./components/Dashboard";
-import AgentNavbar from "./components/AgentNavbar";
-import OnsiteInspectionReport from "./components/OnsiteInspectionReport";
-import sampleInspectionData from "./components/sampleInspectionData";
-import AIPropertyEstimation from "./components/AIPropertyEstimation";
-import OnsiteInspectionRequestForm from "./components/OnsiteInspectionRequestForm";
-import ProtectedRoute from "./components/ProtectedRoute";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { UserProvider } from "./Usercontext";
-import OwnerReportsPage from "./components/ownerreportpage";
-import { AgentProvider } from "./Agentcontext";
-import AgentReportPage from "./components/Agentreportpage";
+// import "./App.css";
+// import Navbar from "./components/Navbar";
+// import Footer from "./components/Footer";
+// import Signup from "./components/Signup";
+// import HeaderComponent from "./components/HeaderComponent";
+// import RealEstateCard from "./components/RealEstateCard";
+// import About from "./components/About";
+// import Contact from "./components/Contact";
+// import Services from "./components/Services";
+// import Login from "./components/Login";
+// import Filter from "./components/Filter";
+// import ResultCard from "./components/ResultCard";
+// import ResultsTab from "./components/ResultsTab";
+// import ParentLayout from "./components/ParentLayout";
+// import PropertyListingForm from "./components/PropertyListingForm";
+// import ChatPage_1 from "./components/ChatPage_1";
+// import MyListing from "./components/MyListing";
+// import OfferContainer from "./components/OfferContainer";
+// import MakeOffer from "./components/MakeOffer";
+// import PropertyDetail from "./components/PropertyDetails";
+// import AgentLogin from "./components/AgentLogin";
+// import AgentReg from "./components/AgentReg";
+// import MyOfferContainer from "./components/MyOfferContainer";
+// import Inspection_Agent from "./components/Inspection_Agent";
+// import OnsiteInspectorForm from "./components/OnsiteInspectorForm";
+// import TopProperties from "./components/TopProperties";
+// import Dashboard from "./components/Dashboard";
+// import AgentNavbar from "./components/AgentNavbar";
+// import OnsiteInspectionReport from "./components/OnsiteInspectionReport";
+// import sampleInspectionData from "./components/sampleInspectionData";
+// import AIPropertyEstimation from "./components/AIPropertyEstimation";
+// import OnsiteInspectionRequestForm from "./components/OnsiteInspectionRequestForm";
+// import ProtectedRoute from "./components/ProtectedRoute";
+// import { Routes, Route, Navigate } from "react-router-dom";
+// import { UserProvider } from "./Usercontext";
+ import OwnerReportsPage from "./components/ownerreportpage";
+ import { AgentProvider } from "./Agentcontext";
+ import AgentReportPage from "./components/Agentreportpage";
 
 // ✅ Agent layout wrapper
 const AgentLayout = ({ children }) => (
@@ -595,6 +633,16 @@ function App() {
                 </>
               }
             />
+
+
+                      <Route path='/make-offer/:propertyId' element={
+            <>
+              <Navbar />
+              <MakeOfferGateway />
+              <Footer />
+            </>
+          } />
+
             <Route
               path="/chat/:user1Id/chats"
               element={

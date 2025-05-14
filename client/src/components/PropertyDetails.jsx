@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./PropertyDetail.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { useUserContext } from "../Usercontext";
 
 const PropertyDetail = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [property, setProperty] = useState(null);
     const [loading, setLoading] = useState(true);
+    const { user } = useUserContext();
 
     useEffect(() => {
         const fetchPropertyDetails = async () => {
@@ -27,11 +29,31 @@ const PropertyDetail = () => {
         fetchPropertyDetails();
     }, [id]);
 
-    const handlechat = () => {
-        navigate("/chatpage");
-    }
+    const handleChat = (e) => {
+        e.preventDefault();
+        
+        if (!user || !user.id) {
+            console.log("User not authenticated, redirecting to login");
+            navigate('/login', { 
+                state: { 
+                    from: `/property/${id}`,
+                    intent: 'chat',
+                    propertyId: id
+                } 
+            });
+            return;
+        }
+
+        if (property && property.userId) {
+            console.log("Navigating to chat between viewer:", user.id, "and owner:", property.userId);
+            navigate(`/chat/${user.id}/${property.userId}`);
+        } else {
+            console.error('Property owner information not available');
+        }
+    };
+
     const handleMakeOffer = () => {
-        navigate("/make-offer");
+        navigate(`/make-offer/${id}`);
     }
 
     // Function to get image URL
@@ -100,7 +122,7 @@ const PropertyDetail = () => {
                     <span className="status">{property.purpose === "Rent" ? "For Rent" : "For Sale"}</span>
                 </div>
                 <div className="actions">
-                    <button onClick={handlechat} className="chat-button">
+                    <button onClick={handleChat} className="chat-button">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -116,7 +138,7 @@ const PropertyDetail = () => {
                                 d="M8.25 15h7.5M8.25 12h7.5m-10.5 9v-3.659a9.213 9.213 0 01-2.615-3.034A8.962 8.962 0 013 9.75C3 5.246 7.03 2.25 12 2.25s9 2.996 9 7.5-4.03 7.5-9 7.5c-.566 0-1.123-.039-1.667-.114A9.164 9.164 0 016.75 19.5z"
                             />
                         </svg>
-                        Chat
+                        Chat with Owner
                     </button>
                     <button onClick={handleMakeOffer} className="make-offer">Make an Offer</button>
                 </div>

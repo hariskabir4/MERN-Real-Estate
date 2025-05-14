@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PropertyListingForm.css";
 
@@ -20,6 +20,11 @@ const PropertyListingForm = () => {
   });
   const [images, setImages] = useState(null);
 
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    console.log('Stored token:', token);
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -37,29 +42,40 @@ const PropertyListingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formDataToSubmit = new FormData();
-    formDataToSubmit.append("propertyType", propertyType);
-
-    // Append other form fields
-    for (const key in formData) {
-      formDataToSubmit.append(key, formData[key]);
-    }
-
-    // Append images (if any)
-    if (images) {
-      Array.from(images).forEach((image) => {
-        formDataToSubmit.append("images", image);
-      });
-    }
-
+    
     try {
+      const token = localStorage.getItem('authToken');
+      
+      // Debug logging
+      console.log('Sending token:', token);
+      
+      if (!token) {
+        alert("Please login first");
+        return;
+      }
+
+      const formDataToSubmit = new FormData();
+      formDataToSubmit.append("propertyType", propertyType);
+
+      // Append other form fields
+      for (const key in formData) {
+        formDataToSubmit.append(key, formData[key]);
+      }
+
+      // Append images (if any)
+      if (images) {
+        Array.from(images).forEach((image) => {
+          formDataToSubmit.append("images", image);
+        });
+      }
+
       const response = await axios.post(
         "http://localhost:5000/api/properties/new-listing",
         formDataToSubmit,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": `Bearer ${token}` // Make sure Bearer prefix is added
           },
         }
       );
@@ -82,8 +98,16 @@ const PropertyListingForm = () => {
       });
       setImages(null);
     } catch (error) {
-      console.error("Error listing property:", error);
-      alert("Failed to list property.");
+      console.error("Token being used:", localStorage.getItem('authToken'));
+      console.error("Full error:", error);
+      
+      if (error.response?.status === 401) {
+        localStorage.removeItem('authToken'); // Clear invalid token
+        alert("Your session has expired. Please login again.");
+        window.location.href = '/login'; // Redirect to login page
+      } else {
+        alert("Failed to list property. Please try again.");
+      }
     }
   };
 
