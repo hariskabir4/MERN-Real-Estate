@@ -1,41 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './Chatbot.css';
 
 const Chatbot = () => {
-  const [chats, setChats] = useState([]);
-  const [currentChat, setCurrentChat] = useState(null);
+  const [conversations, setConversations] = useState([]);
+  const [currentConversation, setCurrentConversation] = useState(null);
   const [message, setMessage] = useState('');
-  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const generateTitle = (text) => {
-    return text.length > 20 ? text.substring(0, 20) + '...' : text || 'New Chat';
+  // Use the same token key as MyOffers.jsx
+  const token = localStorage.getItem('authToken');
+
+  useEffect(() => {
+    fetchConversations();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchConversations = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/chatbot/conversations', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setConversations(response.data);
+    } catch (error) {
+      console.error('Error fetching conversations:', error);
+    }
   };
 
-  const handleNewChat = () => {
-    const newChat = {
-      id: Date.now(),
-      title: 'New Chat',
-      timestamp: new Date().toLocaleString(),
-      messages: [],
-    };
-    setChats([newChat, ...chats]);
-    setCurrentChat(newChat);
-    setMessage('');
-    setResponse('');
+  const handleNewChat = async () => {
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/chatbot/conversations',
+        { title: 'New Chat' },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+      setConversations([response.data, ...conversations]);
+      setCurrentConversation(response.data);
+      setMessage('');
+    } catch (error) {
+      console.error('Error creating new chat:', error);
+    }
   };
 
-  const handleSend = () => {
-    if (!message.trim()) return;
-    const newMessage = { prompt: message, reply: 'This is a sample response.' };
-    const updatedChat = {
-      ...currentChat,
-      title: generateTitle(message),
-      messages: [...currentChat.messages, newMessage],
-    };
-    setChats(chats.map(chat => (chat.id === currentChat.id ? updatedChat : chat)));
-    setCurrentChat(updatedChat);
-    setResponse(newMessage.reply);
-    setMessage('');
+  const handleSend = async () => {
+    if (!message.trim() || !currentConversation) return;
+
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/chatbot/conversations/${currentConversation._id}/messages`,
+        { prompt: message },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      );
+
+      // Update conversations list with the new message
+      const updatedConversations = conversations.map(conv =>
+        conv._id === currentConversation._id ? response.data : conv
+      );
+      setConversations(updatedConversations);
+      setCurrentConversation(response.data);
+      setMessage('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
   };
 
   return (
@@ -45,27 +91,31 @@ const Chatbot = () => {
           + New Chat
         </button>
         <div className="chat_list_chatbot_Bunyaad">
-          {chats.map(chat => (
+          {conversations.map(conv => (
             <div
-              key={chat.id}
-              className={`chat_item_chatbot_Bunyaad ${chat.id === currentChat?.id ? 'active_chatbot_Bunyaad' : ''}`}
-              onClick={() => setCurrentChat(chat)}
+              key={conv._id}
+              className={`chat_item_chatbot_Bunyaad ${conv._id === currentConversation?._id ? 'active_chatbot_Bunyaad' : ''}`}
+              onClick={() => setCurrentConversation(conv)}
             >
-              <div className="chat_title_chatbot_Bunyaad">{chat.title}</div>
-              <div className="chat_time_chatbot_Bunyaad">{chat.timestamp}</div>
+              <div className="chat_title_chatbot_Bunyaad">
+                {conv.title}
+              </div>
+              <div className="chat_time_chatbot_Bunyaad">
+                {new Date(conv.createdAt).toLocaleString()}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       <div className="chat_area_chatbot_Bunyaad">
-        {currentChat ? (
+        {currentConversation ? (
           <>
             <div className="messages_chatbot_Bunyaad">
-              {currentChat.messages.map((msg, index) => (
+              {currentConversation.messages.map((msg, index) => (
                 <div key={index} className="message_block_chatbot_Bunyaad">
                   <div className="user_msg_chatbot_Bunyaad">{msg.prompt}</div>
-                  <div className="bot_msg_chatbot_Bunyaad">{msg.reply}</div>
+                  <div className="bot_msg_chatbot_Bunyaad">{msg.response}</div>
                 </div>
               ))}
             </div>
@@ -76,14 +126,22 @@ const Chatbot = () => {
                 placeholder="Type your message..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={handleKeyPress}
+                disabled={loading}
               />
-              <button className="send_btn_chatbot_Bunyaad" onClick={handleSend}>
-                Send
+              <button 
+                className="send_btn_chatbot_Bunyaad" 
+                onClick={handleSend}
+                disabled={loading}
+              >
+                {loading ? 'Sending...' : 'Send'}
               </button>
             </div>
           </>
         ) : (
-          <div className="welcome_msg_chatbot_Bunyaad">Click on "New Chat" to start!</div>
+          <div className="welcome_msg_chatbot_Bunyaad">
+            Click on "New Chat" to start a conversation!
+          </div>
         )}
       </div>
     </div>

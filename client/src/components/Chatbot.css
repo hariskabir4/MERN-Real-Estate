@@ -10,6 +10,9 @@
   /* Sidebar (chat history) */
   .sidebar_chatbot_Bunyaad {
     width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+    flex-shrink: 0;
     background-color: #1e1e2f;
     color: #fff;
     padding: 16px;
@@ -50,6 +53,10 @@
   .chat_title_chatbot_Bunyaad {
     font-weight: bold;
     margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
   }
   
   .chat_time_chatbot_Bunyaad {

@@ -209,6 +209,15 @@ function App() {
                 <Footer />
               </>
             } />
+
+            <Route path='/chatbot' element={
+              <>
+                <Navbar />
+                <Chatbot />
+                <Footer />
+              </>
+            } />
+
             <Route path='/my-listings' element={
               <>
                 <Navbar />
@@ -283,6 +292,7 @@ function App() {
                 <Footer />
               </>
             } />
+
           </Route>
 
           <Route path='/AgentPortal' element={

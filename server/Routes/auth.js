@@ -116,4 +116,17 @@ router.post("/new-listing", authenticateToken, (req, res) => {
   res.status(200).json({ message: "New listing created successfully" });
 });
 
+// Add this new route for token verification
+router.get("/verify", authenticateToken, (req, res) => {
+  // If we get here, the token is valid (authenticateToken middleware passed)
+  res.json({ 
+    message: "Token is valid",
+    user: {
+      id: req.user.id,
+      email: req.user.email,
+      name: req.user.name
+    }
+  });
+});
+
 module.exports = router;

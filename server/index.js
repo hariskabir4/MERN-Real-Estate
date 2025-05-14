@@ -13,6 +13,7 @@ const topPropertiesRoutes = require("./Routes/topProperties");
 const agentRoutes = require("./Routes/Agentroute");
 const chatRoutes = require("./Routes/chatRoutes");
 const offerRoutes = require('./Routes/offerRoutes');
+const chatbotRoutes = require('./Routes/chatbotRoutes');
 const { Server } = require('socket.io');
 
 const app = express();
@@ -40,6 +41,7 @@ app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
 
 // Routes
+app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/agent', agentRoutes);
 app.use('/api/auth', authRoutes);

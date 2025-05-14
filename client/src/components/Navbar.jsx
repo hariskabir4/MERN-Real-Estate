@@ -128,6 +128,7 @@ const Navbar = () => {
                       <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionRequestForm')}>Onsite Property <br /> Valuation</div>
                       <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionResult')}> View Onsite <br />Inspection<br />Result</div>
                       <div className="dropdown-item" onClick={() => navigate('/AIPropertyValuation')}>AI Property <br /> Valuation</div>
+                      <div className="dropdown-item" onClick={() => navigate('/chatbot')}>Chatbot</div>
                       <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
                       <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
                     </div>
@@ -150,6 +151,7 @@ const Navbar = () => {
                 <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionRequestForm')}>Onsite Property <br /> Valuation</div>
                 <div className="dropdown-item" onClick={() => navigate('/onsiteInspectionResult')}> View Onsite <br />Inspection<br />Result</div>
                 <div className="dropdown-item" onClick={() => navigate('/AIPropertyValuation')}>AI Property <br /> Valuation</div>
+                <div className="dropdown-item" onClick={() => navigate('/chatbot')}>Chatbot</div>
                 <div className="dropdown-item" onClick={HandleAgentLogin}>Agent Portal</div>
                 <div className="dropdown-item" onClick={handleLogout}>Log Out</div>
               </div>
